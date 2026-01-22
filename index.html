@@ -124,6 +124,18 @@
       <span class="command">sudo apt install curl</span>                    <span class="comment"># Install CURL</span>
       <span class="command">sudo apt install php -y</span>                  <span class="comment"># Install PHP</span>
       <span class="command">sudo apt install -y php-bcmath php-bz2 php-intl php-gd php-mbstring php-mcrypt php-mysql php-zip libapache2-mod-php </span>
+
+      <span class="section"># Install REDIS</span>
+      <span class="command">sudo apt update && sudo apt upgrade -y</span>   <span class="comment"># Update system packages</span>
+      <span class="command">sudo apt-get install -y lsb-release curl gpg</span> <span class="comment"># Install required dependencies</span>
+      <span class="command">curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg </span> <span class="comment"># Download and add Redis GPG key</span>
+      <span class="command">sudo chmod 644 /usr/share/keyrings/redis-archive-keyring.gpg</span> <span class="comment"># Set correct permissions for keyring</span>
+      <span class="command">echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list</span> <span class="comment"># Add Redis APT repository</span>
+      <span class="command">sudo apt-get update</span>                      <span class="comment"># Refresh package list after adding Redis repo</span>
+      <span class="command">sudo apt-get install -y redis</span>            <span class="comment"># Install Redis server</span>
+      <span class="command">sudo systemctl status redis-server</span>       <span class="comment"># Check Redis service status</span>
+
+
       
       <span class="section"># Check firewall application profiles</span>
       <span class="command">sudo ufw app list</span>
