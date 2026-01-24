@@ -2,7 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bash Cheat Sheet</title>
+
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link
       href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap"
@@ -20,6 +22,7 @@
         background: #0d0d0d;
         border-radius: 10px;
         padding: 20px;
+        padding-top: 60px;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
         overflow-x: auto;
         line-height: 1.6em;
@@ -45,32 +48,68 @@
         margin: 15px 0 5px 0;
         display: inline-flex;
       }
-      #search-cmd {
-        border: none;
-        border-bottom: 2px solid #333;
-        color: #d4d4d4;
-        font-family: "Fira Code", monospace;
-        font-size: 1.1em;
-        width: 100%;
-        margin-bottom: 10px;
-        padding: 5px;
-        outline: none;
-        position: fixed;
-        top: 50px;
-        background: #0d0d0d;
+     #search-cmd {
+      position: fixed;
+      top: 5%;
+      left: 50%;
+      transform: translateX(-50%);
+
+      z-index: 100;
+      align-items: center;
+
+      background-color: #0d0d0d;
+      border: none;
+      border-bottom: 2px solid #333;
+
+      color: #d4d4d4;
+      font-family: "Fira Code", monospace;
+      font-size: 1.1em;
+
+      width: 90%;
+      max-width: 900px; /* optional: prevents it from being too wide */
+
+      margin-bottom: 15px;
+      padding: 10px 5px;
+      outline: none;
+
+      box-shadow: 0 5px 10px rgba(0,0,0,0.8);
+    }
+
+      #search-cmd::placeholder {
+        color: #444;
       }
       #search-cmd:focus {
-        border-bottom-color: #6a9955;
+        border-bottom-color: #73706f;
       }
       .line {
         display: block;
         min-height: 1.6em; /* Preserve empty lines */
       }
       .active-match {
-        background-color: #6a9955;
+        background-color: #73706f;
         color: #0d0d0d;
         font-weight: bold;
       }
+       @media (max-width: 768px) {
+        body {
+          padding: 0px;
+          margin: 0px;
+        }
+        #search-cmd {
+         top: 12px;
+        }
+        .terminal {
+          padding: 0px;
+          padding-top: 12%;
+          font-size: 12px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        #search-cmd {
+        top: 3%;
+        }
+      } 
     </style>
   </head>
   <body>
