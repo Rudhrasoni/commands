@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>Bash Cheat Sheet</title>
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link
       href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap"
       rel="stylesheet"
@@ -45,11 +45,43 @@
         margin: 15px 0 5px 0;
         display: inline-flex;
       }
+      #search-cmd {
+        border: none;
+        border-bottom: 2px solid #333;
+        color: #d4d4d4;
+        font-family: "Fira Code", monospace;
+        font-size: 1.1em;
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 5px;
+        outline: none;
+        position: fixed;
+        top: 50px;
+        background: #0d0d0d;
+      }
+      #search-cmd:focus {
+        border-bottom-color: #6a9955;
+      }
+      .line {
+        display: block;
+        min-height: 1.6em; /* Preserve empty lines */
+      }
+      .active-match {
+        background-color: #6a9955;
+        color: #0d0d0d;
+        font-weight: bold;
+      }
     </style>
   </head>
   <body>
     <div class="terminal">
-      <pre>
+      <input
+        type="text"
+        id="search-cmd"
+        placeholder="$ Search commands..."
+        autofocus
+      />
+      <div id="terminal-code" style="white-space: pre;">
       <span class="section"># File & Directory</span>
       <span class="command">ls -lah</span>    <span class="comment"># List files (with size, perms, hidden)</span>
       <span class="command">pwd </span>    <span class="comment"># Show current directory</span>
@@ -349,6 +381,87 @@
       <span class="command">npm version minor  </span>  	<span class="comment"># Bump version (minor)</span>
       <span class="command">npm version major  </span>  	<span class="comment"># Bump version (major)</span>
       
+      <span class="section"># Install PM2</span>
+
+      <span class="command">npm install -g pm2</span>     <span class="comment"># Install PM2 globally</span>
+
+      <span class="command">pm2 --version</span>          <span class="comment"># Check PM2 version</span>
+
+
+      <span class="section"># Start Applications</span>
+
+      <span class="command">pm2 start app.js</span>       <span class="comment"># Start a Node.js app</span>
+
+      <span class="command">pm2 start app.js --name api</span>    <span class="comment"># Start app with custom name</span>
+
+      <span class="command">pm2 start npm --name frontend -- run start</span>    <span class="comment"># Start npm script using PM2</span>    
+      <span class="command">pm2 start ecosystem.config.js</span>    <span class="comment"># Start apps using ecosystem file</span>
+
+
+      <span class="section"># Process Management</span>
+
+      <span class="command">pm2 list</span>              <span class="comment"># List all running processes</span>
+
+      <span class="command">pm2 show api</span>              <span class="comment"># Show detailed info of a process</span>
+
+      <span class="command">pm2 restart api</span>              <span class="comment"># Restart a specific app</span>
+
+      <span class="command">pm2 restart all</span>              <span class="comment"># Restart all apps</span>
+
+      <span class="command">pm2 stop api</span>              <span class="comment"># Stop a specific app</span>
+
+      <span class="command">pm2 stop all</span>              <span class="comment"># Stop all apps</span>
+
+      <span class="command">pm2 delete api</span>              <span class="comment"># Remove app from PM2</span>
+
+      <span class="command">pm2 delete all</span>              <span class="comment"># Remove all apps from PM2</span>
+
+
+      <span class="section"># Logs & Monitoring</span>
+
+      <span class="command">pm2 logs</span>       <span class="comment"># Show logs of all apps</span>
+
+      <span class="command">pm2 logs api</span>       <span class="comment"># Show logs for a specific app</span>
+
+      <span class="command">pm2 monit</span>       <span class="comment"># Real-time CPU & memory monitoring</span>
+
+
+      <span class="section"># Startup & Auto-Restart (Production)</span>
+
+      <span class="command">pm2 startup</span>       <span class="comment"># Generate startup script for boot</span>
+
+      <span class="command">sudo env PATH=$PATH:/usr/bin pm2 startup systemd -u $USER --hp $HOME</span>       <span class="comment"># Fix startup path issues (recommended)</span>
+
+      <span class="command">pm2 save</span>       <span class="comment"># Save current process list for reboot restore</span>
+
+      <span class="command">pm2 resurrect</span>       <span class="comment"># Restore apps after reboot</span>
+
+
+      <span class="section"># Reload & Zero-Downtime</span>
+
+      <span class="command">pm2 reload api</span>       <span class="comment"># Zero-downtime reload (cluster mode)</span>
+
+      <span class="command">pm2 reload all</span>       <span class="comment"># Reload all apps</span>
+
+
+      <span class="section"># Ecosystem File</span>
+
+      <span class="command">pm2 init</span>       <span class="comment"># Create ecosystem.config.js</span>
+
+      <span class="command">pm2 start ecosystem.config.js --env production</span>       <span class="comment"># Start apps in production mode</span>
+
+
+      <span class="section"># Useful Maintenance Commands</span>
+
+      <span class="command">pm2 flush</span>       <span class="comment"># Clear all logs</span>
+
+      <span class="command">pm2 reloadLogs</span>       <span class="comment"># Reload log files without downtime</span>
+
+      <span class="command">pm2 kill</span>       <span class="comment"># Stop PM2 daemon completely</span>
+
+      <span class="command">pm2 update</span>       <span class="comment"># Update PM2 in-memory processes</span>
+
+
       <span class="section"># MYSQL</span>
       <span class="section"># Login to MySQL</span>
       <span class="command">mysql -u root -p</span>
@@ -529,7 +642,67 @@
       <span class="command">php artisan down   </span>	<span class="comment"># Maintenance mode</span>
       <span class="command">php artisan up   </span>  	<span class="comment"># Disable maintenance mode</span>
       
-    </pre>
     </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const pre = document.getElementById("terminal-code");
+        const lines = pre.innerHTML.split("\n");
+        // Wrap each line in a div
+        pre.innerHTML = lines
+          .map((line) => `<div class="line">${line}</div>`)
+          .join("");
+
+        const searchInput = document.getElementById("search-cmd");
+        let matches = [];
+        let currentMatchIndex = -1;
+
+        function clearHighlights() {
+          matches.forEach((el) => el.classList.remove("active-match"));
+        }
+
+        searchInput.addEventListener("input", (e) => {
+          const term = e.target.value.toLowerCase().trim();
+          clearHighlights();
+          matches = [];
+          currentMatchIndex = -1;
+
+          if (!term) return;
+
+          const domLines = pre.querySelectorAll(".line");
+          domLines.forEach((line) => {
+            if (line.textContent.toLowerCase().includes(term)) {
+              matches.push(line);
+            }
+          });
+
+          if (matches.length > 0) {
+            currentMatchIndex = 0;
+            highlightAndScroll();
+          }
+        });
+
+        searchInput.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" && matches.length > 0) {
+            e.preventDefault();
+            // Remove highlight from current
+            if (matches[currentMatchIndex]) {
+              matches[currentMatchIndex].classList.remove("active-match");
+            }
+            // Move to next
+            currentMatchIndex++;
+            if (currentMatchIndex >= matches.length) {
+              currentMatchIndex = 0;
+            }
+            highlightAndScroll();
+          }
+        });
+
+        function highlightAndScroll() {
+          const el = matches[currentMatchIndex];
+          el.classList.add("active-match");
+          el.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      });
+    </script>
   </body>
 </html>
