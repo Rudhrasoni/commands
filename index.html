@@ -151,6 +151,23 @@
       <span class="command">scp file.zip user@IP:/path  </span> <span class="comment"># Copy file to server</span>
       <span class="command">ssh-keygen      </span>	  <span class="comment"># Generate SSH key</span>
       <span class="command">ssh-copy-id user@IP </span>   <span class="comment"># Copy SSH key to server</span>
+
+      <span class="section"># Generate SSH key</span>
+      <span class="command">ssh-keygen -t ed25519 -C "your_email@example.com"</span>       <span class="comment"># Create a new SSH key (recommended algorithm)</span>
+      <span class="section"># Start SSH agent</span>
+      <span class="command">eval "$(ssh-agent -s)"</span>        <span class="comment"># Start the SSH authentication agent</span>
+      <span class="section"># Add SSH key to agent</span>   
+      <span class="command">ssh-add ~/.ssh/id_ed25519</span>         <span class="comment"># Add private key to SSH agent</span>
+      <span class="section"># Copy SSH public key</span>
+      <span class="command">cat ~/.ssh/id_ed25519.pub</span>      <span class="comment"># Copy this key and add it to GitHub/GitLab SSH settings</span>
+      <span class="section"># Test SSH connection (GitHub)</span>
+      <span class="command">ssh -T git@github.com</span>      <span class="comment"># Verify SSH authentication with GitHub</span>
+      <span class="section"># Clone repository using SSH</span>
+      <span class="command">git clone git@github.com:username/repository.git</span>      <span class="comment"># Clone repo without using HTTPS/password</span>
+      <span class="section"># Change existing repo remote to SSH</span>
+      <span class="command">git remote set-url origin git@github.com:username/repository.git</span>      <span class="comment"># Switch repository from HTTPS to SSH</span>
+      <span class="section"># Verify remote URL</span>
+      <span class="command">git remote -v</span>      <span class="comment"># Confirm SSH remote is set correctly</span>
       
       <span class="section"># Networking</span>
       <span class="command">ifconfig / ip a 	 </span> <span class="comment"># Show IP addresses</span>
