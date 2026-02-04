@@ -20,11 +20,12 @@
         display: flex;
         justify-content: center;
         gap: 30px;
+        
       }
       /* Sidebar styling - Static & Scrollable */
       #nav-sidebar {
         position: sticky;
-        top: 80px;
+        top: 18px;
         height: calc(100vh - 120px);
         width: 20%;
         min-width: 200px;
@@ -44,7 +45,7 @@
       #nav-sidebar a {
         color: #ffcc00;
         text-decoration: none;
-        font-size: 1em;
+        font-size: 0.75em;
         transition: all 0.2s;
         padding: 6px 10px;
         border-radius: 4px;
@@ -57,7 +58,7 @@
         background: rgba(255, 204, 0, 0.1);
       }
       #nav-sidebar .sidebar-title {
-        font-size: 1em;
+        font-size: 0.75em;
         color: #555;
         text-transform: uppercase;
         letter-spacing: 2px;
@@ -68,7 +69,7 @@
       .terminal {
         background: #0d0d0d;
         border-radius: 12px;
-        padding: 30px;
+        padding: 20px;
         padding-top: 60px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         flex-grow: 1;
@@ -85,19 +86,14 @@
         font-size: 14px;
         letter-spacing: 4px;
       }
-      .comment { color: #6a9955; }
-      .command { color: #4fc1ff;
-        font-size: 1.2em;
+      .comment { color: #6a9955; 
+        font-size: 0.8em;
       }
-      .fileText { 
-        display: block; 
-        color: #ce9178; 
-        background: rgba(206, 145, 120, 0.05);
-        border-left: 2px solid #ce9178;
-        padding: 10px 15px;
-        margin: 5px 0;
-        border-radius: 0 4px 4px 0;
+      .command { 
+        color: #4fc1ff;
+        font-size: 0.8em;
       }
+      
       .section {
         font-weight: bold;
         color: #ffcc00;
@@ -105,7 +101,7 @@
         display: block;
         border-bottom: 1px solid #222;
         padding-bottom: 4px;
-        font-size: 1em;
+        font-size: 0.8em;
       }
       .copy-btn {
         background: #222;
@@ -114,7 +110,7 @@
         cursor: pointer;
         padding: 2px 6px;
         border-radius: 4px;
-        font-size: 13px;
+        font-size: 9px;
         font-family: inherit;
         transition: all 0.2s;
         flex-shrink: 0;
@@ -187,571 +183,538 @@
         autofocus
       />
       <div id="terminal-code" style="white-space: pre;">
-      <span class="section"># File & Directory</span>
-      <span class="command">ls -lah</span>    <span class="comment"># List files (with size, perms, hidden)</span>
-      <span class="command">pwd </span>    <span class="comment"># Show current directory</span>
-      <span class="command">cd /path/to/dir</span>	  <span class="comment"># Change directory</span>
-      <span class="command">mkdir project </span> 	  <span class="comment"># Make directory</span>
-      <span class="command">rm -rf folder/ </span>	  <span class="comment"># Remove folder & contents</span>
-      <span class="command">cp file.txt /dir/</span>   <span class="comment"># Copy file</span>
-      <span class="command">mv old new  </span>   	  <span class="comment"># Move/Rename file/folder</span>
-      <span class="command">cat file.txt </span>  	   <span class="comment"># Show file content</span>
-      <span class="command">nano file.txt </span> 	   <span class="comment"># Edit file in nano</span>
-      <span class="command">tail -f log.txt</span>	   <span class="comment"># Live log watching</span>
-      <span class="command">find . -name "*.php"</span>      <span class="comment"># Search for files</span>
-      <span class="command">passwd </span>     <span class="comment"># change password</span>
-      <span class="section"># Permissions</span>
-      <span class="command">chmod 755 file</span> 	  <span class="comment"># rwxr-xr-x</span>
-      <span class="command">chmod 644 file</span> 	  <span class="comment"># rw-r--r--</span>
-      <span class="command">chown user:group file</span>   <span class="comment"># Change owner</span>
-      <span class="section"># Process & Services</span>
-      <span class="command">ps aux | grep php </span> 	 <span class="comment"># Show running processes</span>
-      <span class="command">top / htop  </span>   <span class="comment"># System monitor</span>
-      <span class="command">kill -9 PID </span>   <span class="comment"># Kill process</span>
-      
-      <span class="section"># Users & SSH</span>
-      <span class="command">whoami  </span>    <span class="comment"># Current user</span>
-      <span class="command">adduser devuser </span>	  <span class="comment"># Add new user</span>
-      <span class="command">passwd devuser  </span>	  <span class="comment"># Set password</span>
-      <span class="command">ssh user@IP   </span>  	  <span class="comment"># SSH login</span>
-      <span class="command">scp file.zip user@IP:/path  </span> <span class="comment"># Copy file to server</span>
-      <span class="command">ssh-keygen      </span>	  <span class="comment"># Generate SSH key</span>
-      <span class="command">ssh-copy-id user@IP </span>   <span class="comment"># Copy SSH key to server</span>
+<span class="section"># File & Directory</span>
+<span class="command">ls -lah</span>    <span class="comment"># List files (with size, perms, hidden)</span>
+<span class="command">pwd </span>    <span class="comment"># Show current directory</span>
+<span class="command">cd /path/to/dir</span>	  <span class="comment"># Change directory</span>
+<span class="command">mkdir project </span> 	  <span class="comment"># Make directory</span>
+<span class="command">rm -rf folder/ </span>	  <span class="comment"># Remove folder & contents</span>
+<span class="command">cp file.txt /dir/</span>   <span class="comment"># Copy file</span>
+<span class="command">mv old new  </span>   	  <span class="comment"># Move/Rename file/folder</span>
+<span class="command">cat file.txt </span>  	   <span class="comment"># Show file content</span>
+<span class="command">nano file.txt </span> 	   <span class="comment"># Edit file in nano</span>
+<span class="command">tail -f log.txt</span>	   <span class="comment"># Live log watching</span>
+<span class="command">find . -name "*.php"</span>      <span class="comment"># Search for files</span>
+<span class="command">passwd </span>     <span class="comment"># change password</span>
+<span class="section"># Permissions</span>
+<span class="command">chmod 755 file</span> 	  <span class="comment"># rwxr-xr-x</span>
+<span class="command">chmod 644 file</span> 	  <span class="comment"># rw-r--r--</span>
+<span class="command">chown user:group file</span>   <span class="comment"># Change owner</span>
+<span class="section"># Process & Services</span>
+<span class="command">ps aux | grep php </span> 	 <span class="comment"># Show running processes</span>
+<span class="command">top / htop  </span>   <span class="comment"># System monitor</span>
+<span class="command">kill -9 PID </span>   <span class="comment"># Kill process</span>
 
-      <span class="section"># Generate SSH key</span>
-      <span class="command">ssh-keygen -t ed25519 -C "your_email@example.com"</span>       <span class="comment"># Create a new SSH key (recommended algorithm)</span>
-      
-      <span class="section"># Start SSH agent</span>
-      <span class="command">eval "$(ssh-agent -s)"</span>        <span class="comment"># Start the SSH authentication agent</span>
-      
-      <span class="section"># Add SSH key to agent</span>   
-      <span class="command">ssh-add ~/.ssh/id_ed25519</span>         <span class="comment"># Add private key to SSH agent</span>
-      
-      <span class="section"># Copy SSH public key</span>
-      <span class="command">cat ~/.ssh/id_ed25519.pub</span>      <span class="comment"># Copy this key and add it to GitHub/GitLab SSH settings</span>
-     
-      <span class="section"># Test SSH connection (GitHub)</span>
-      <span class="command">ssh -T git@github.com</span>      <span class="comment"># Verify SSH authentication with GitHub</span>
-      
-      <span class="section"># Clone repository using SSH</span>
-      <span class="command">git clone git@github.com:username/repository.git</span>      <span class="comment"># Clone repo without using HTTPS/password</span>
-      
-      <span class="section"># Change existing repo remote to SSH</span>
-      <span class="command">git remote set-url origin git@github.com:username/repository.git</span>      <span class="comment"># Switch repository from HTTPS to SSH</span>
-      
-      <span class="section"># Verify remote URL</span>
-      <span class="command">git remote -v</span>      <span class="comment"># Confirm SSH remote is set correctly</span>
+<span class="section"># Users </span>
+<span class="command">whoami  </span>    <span class="comment"># Current user</span>
+<span class="command">adduser devuser </span>	  <span class="comment"># Add new user</span>
+<span class="command">passwd devuser  </span>	  <span class="comment"># Set password</span>
 
-      <span class="section"># Configure SSH to use custom key</span>
-      <span class="command">nano ~/.ssh/config        <span class="comment"># Create or edit SSH config file Force GitHub to use this SSH key</span>     
-      <span class="fileText">
-      Host github.com
-        IdentityFile ~/.ssh/id_ed25519_myname
-        IdentitiesOnly yes
-      </span>
-      
-      <span class="section"># Networking</span>
-      <span class="command">ifconfig / ip a 	 </span> <span class="comment"># Show IP addresses</span>
-      <span class="command">ping google.com 	 </span> <span class="comment"># Test connection</span>
-      <span class="command">curl -I website.com</span> <span class="comment"># Check headers</span>
-      <span class="command">netstat -tulpn  	 </span> <span class="comment"># Show open ports</span>
-      <span class="command">ufw status      	 </span> <span class="comment"># Firewall status</span>
-      <span class="command">ufw allow 22    	 </span> <span class="comment"># Allow SSH</span>
-      <span class="command">ufw allow 80    	 </span> <span class="comment"># Allow HTTP</span>
-      <span class="command">ufw allow 443   	 </span> <span class="comment"># Allow HTTPS</span>
-      
-      <span class="section"># Package Management</span>
-      <span class="command">sudo apt install package </span>     <span class="comment"># Install</span>
-      <span class="command">sudo apt remove package  </span> <span class="comment"># Remove</span>
-      <span class="command">dpkg -l | grep php     	 </span> <span class="comment"># List installed packages</span>
-      
-      <span class="section"># Disk & System</span>
-      <span class="command">df -h            </span> <span class="comment"># Show disk usage</span>
-      <span class="command">du -sh folder/	 </span> <span class="comment"># Folder size</span>
-      <span class="command">free -m          </span> <span class="comment"># Show memory usage</span>
-      <span class="command">uptime           </span> <span class="comment"># Server uptime/load</span>
-      <span class="command">reboot           </span> <span class="comment"># Restart server</span>
-      <span class="command">shutdown -h now  </span> <span class="comment"># Shutdown server</span>
-      
-      <span class="section"># Archives</span>
-      <span class="command">tar -czvf backup.tar.gz folder/	  </span>    <span class="comment"># Create tar.gz</span>
-      <span class="command">tar -xzvf backup.tar.gz           </span>    <span class="comment"># Extract tar.gz</span>
-      <span class="command">unzip file.zip   	                </span>    <span class="comment"># Extract zip</span>
-      <span class="command">zip -r backup.zip folder/      	  </span>    <span class="comment"># Create zip</span>
-      <span class="section"># Git & Deployment</span>
-      <span class="command">sudo git clone repo.git</span>
-      <span class="command">sudo git pull</span>
-      <span class="command">sudo git push</span>
-      <span class="command">sudo git merge branch_name</span>
-      <span class="command">sudo git checkout -b new-feature</span>
-      
-      <span class="section"># Install PHP APACHE MYSQL</span>
-      <span class="command">sudo apt update && sudo apt upgrade -y</span>   <span class="comment"># Update system</span>
-      <span class="command">sudo apt-get update</span>                      <span class="comment"># apt-get Older, low-level tool (stable since the 2000s).</span>
-      <span class="command">sudo apt update</span>                          <span class="comment"># apt Newer, user-friendly frontend (introduced in Ubuntu 16.04+).</span>
-      <span class="command">sudo apt install apache2</span>                 <span class="comment"># Install APACHE2  Apache config /etc/apache2/apache2.conf</span>
-      <span class="command">sudo apt install mysql-server</span>            <span class="comment"># Install MYSQL</span>
-      <span class="command">sudo apt install curl</span>                    <span class="comment"># Install CURL</span>
-      <span class="command">sudo apt install php -y</span>                  <span class="comment"># Install PHP</span>
-      <span class="command">sudo apt install -y php-bcmath php-bz2 php-intl php-gd php-mbstring php-mcrypt php-mysql php-zip libapache2-mod-php </span>
+<span class="section"># SSH </span>
+<span class="command">ssh user@IP   </span>  	  <span class="comment"># SSH login</span>
+<span class="command">ssh-keygen -t ed25519 -C "your_email@example.com"</span>       <span class="comment"># Create a new SSH key (recommended algorithm)</span>
+<span class="command">eval "$(ssh-agent -s)"</span>        <span class="comment"># Start the SSH authentication agent</span>
+<span class="command">ssh-add ~/.ssh/id_ed25519</span>         <span class="comment"># Add private key to SSH agent</span>
+<span class="command">cat ~/.ssh/id_ed25519.pub</span>      <span class="comment"># Copy this key and add it to GitHub/GitLab SSH settings</span>
+<span class="command">ssh -T git@github.com</span>      <span class="comment"># Verify SSH authentication with GitHub</span>
+<span class="command">git clone git@github.com:username/repository.git</span>      <span class="comment"># Clone repo without using HTTPS/password</span>
+<span class="command">git remote set-url origin git@github.com:username/repository.git</span>      <span class="comment"># Switch repository from HTTPS to SSH</span>
+<span class="command">git remote -v</span>      <span class="comment"># Confirm SSH remote is set correctly</span>
+<span class="command">nano ~/.ssh/config        <span class="comment"># Create or edit SSH config file Force GitHub to use this SSH key</span>     
+<span class="fileText" >
+Host github.com
+  IdentityFile ~/.ssh/id_ed25519_myname
+  IdentitiesOnly yes
+</span>
+<span class="command">scp file.zip user@IP:/path  </span> <span class="comment"># Copy file to server</span>
 
-      <span class="section"># Install REDIS</span>
-      <span class="command">sudo apt update && sudo apt upgrade -y</span>   <span class="comment"># Update system packages</span>
-      <span class="command">sudo apt-get install -y lsb-release curl gpg</span> <span class="comment"># Install required dependencies</span>
-      <span class="command">curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg </span> <span class="comment"># Download and add Redis GPG key</span>
-      <span class="command">sudo chmod 644 /usr/share/keyrings/redis-archive-keyring.gpg</span> <span class="comment"># Set correct permissions for keyring</span>
-      <span class="command">echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list</span> <span class="comment"># Add Redis APT repository</span>
-      <span class="command">sudo apt-get update</span>                      <span class="comment"># Refresh package list after adding Redis repo</span>
-      <span class="command">sudo apt-get install -y redis</span>            <span class="comment"># Install Redis server</span>
-      <span class="command">sudo systemctl status redis-server</span>       <span class="comment"># Check Redis service status</span>
-      
-      <span class="section"># Check firewall application profiles</span>
-      <span class="command">sudo ufw app list</span>
-      <span class="section"># Allow Apache traffic</span>
-      <span class="command">sudo ufw allow 'Apache Full' </span>	<span class="comment"># Apache Full → allows both port 80 (HTTP) and port 443 (HTTPS)</span>
-      <span class="command">sudo ufw allow 'Apache'  </span>    	<span class="comment"># Apache → only allows port 80 (HTTP)</span>
-      <span class="command">sudo ufw allow 'Apache Secure' </span>  <span class="comment"># Apache Secure → only allows port 443 (HTTPS)</span>
-      
-      <span class="section"># Install Composer</span>
-      <span class="command">sudo apt install php-cli unzip curl -y</span>
-      <span class="command">curl -sS https://getcomposer.org/installer | php</span>
-      <span class="command">sudo mv composer.phar /usr/local/bin/composer</span>
-      
-      <span class="section"># In Folder</span>
-      <span class="command">composer install</span> <span class="comment"># Composer reads composer.json and downloads all required PHP packages into the vendor/ folder.</span>
-      
-      <span class="section"># Install Node Version Manager (NVM):</span>
-      <span class="command">curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash</span>
-      <span class="command">source ~/.bashrc</span>
-      
-      <span class="section"># Install Node</span>
-      <span class="command">sudo apt install nodejs</span>
-      <span class="command">nvm install 20</span>
-      <span class="command">nvm use 20</span>
-      
-      <span class="section"># Alternative Node.js install</span>
-      <span class="command">curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -</span>
-      <span class="command">sudo apt install -y nodejs</span>
-      
-      <span class="section"># Force install ignoring engine checks</span>
-      <span class="command">npm install --ignore-engines</span>
-      
-      <span class="section"># Reinstall dependencies:</span>
-      <span class="command">rm -rf node_modules package-lock.json</span>
-      <span class="command">npm install</span>
-      
-      <span class="section"># VERSIONS</span>
-      <span class="command">php -v</span>
-      <span class="command">node -v</span>
-      <span class="command">npm -v</span>
-      <span class="command">composer -v</span>
-      
-      <span class="section"># Start And enable installed services</span>
-      <span class="command">sudo systemctl start / enable / restart status apache2.service</span>
-      <span class="command">sudo systemctl start / enable / restart status mysql.service</span>
-      <span class="command">sudo /etc/init.d/apache2 restart</span>
-      
-      <span class="section"># Install phpMyAdmin</span>
-      <span class="command">sudo apt-get install phpmyadmin php-mbstring php-gettext</span>
-      
-      <span class="section"># Enable necessary PHP extensions</span>
-      <span class="command">sudo phpenmod mcrypt</span>
-      <span class="command">sudo phpenmod mbstring</span>
-      
-      <span class="section"># Edit Apache virtual host config</span>
-      <span class="command">sudo nano /etc/apache2/sites-available/000-default.conf</span>
-      <span class="fileText">
-      <pre>
-        &lt;VirtualHost *:80&gt;
-            ServerName mywebsite.com
-            ServerAlias www.mywebsite.com
-            DocumentRoot /var/www/html/project
-            &lt;Directory /var/www/html/project&gt;
-          Options Indexes FollowSymLinks
-          AllowOverride All
-          Require all granted
-            &lt;/Directory&gt;
-            ErrorLog ${APACHE_LOG_DIR}/project_error.log
-            CustomLog ${APACHE_LOG_DIR}/project_access.log combined
-        &lt;/VirtualHost&gt;
-      </pre></span>
- 
-      <span class="section"># Create an</span>
-      <span class="command">sudo mkdir -p /var/www/mywebsite</span>
-      <span class="command">sudo chown -R $USER:$USER /var/www/mywebsite</span>
-      
-      <span class="section"># Edit Config</span>
-      <span class="command">sudo nano /etc/apache2/sites-available/project.conf</span>
-      
-      <span class="section"># ENABLE site</span>
-      <span class="command">sudo a2ensite project.conf</span>
-      <span class="command">sudo systemctl reload apache2</span>
-      
-      <span class="section"># Disable Site</span>
-      <span class="command">sudo a2dissite 000-default.conf</span>
-      <span class="command">sudo systemctl reload apache2</span>
-      
-      <span class="section"># Test Apache config:</span>
-      <span class="command">sudo apache2ctl configtest</span>
-      
-      <span class="section"># reload apache2</span>
-      
-      <span class="section"># SSH</span>
-      <span class="command">ssh keygen</span> <span class="comment"># generate key in you own system for practice</span>
-      
-      <span class="section"># Go to pem file directory</span>
-      <span class="command">sudo chmod 400 file.pem</span>
-      <span class="command">sudo ssh -i file.pem ubuntu@0.0.0.0</span>
-      
-      <span class="section"># Addition ---------------------------------</span>
-      <span class="section"># SSL / HTTPS (Let's Encrypt)</span>
-      <span class="command">sudo apt install certbot python3-certbot-apache -y</span>
-      <span class="command">sudo certbot --apache</span>
-      <span class="command">sudo certbot renew --dry-run</span>   <span class="comment"># Test auto-renewal</span>
-      
-      <span class="section"># CRON JOBS (Scheduled Tasks)</span>
-      <span class="command">crontab -e</span>
-      <span class="section"># Example entries:</span>
-      <span class="command">* * * * * php /var/www/project/artisan schedule:run >> /dev/null 2>&1	</span><span class="comment"># Laravel scheduler</span>
-      <span class="command">0 2 * * * mysqldump -u root -p dbname > /home/backup/dbname_$(date +\%F).sql   </span>
-      
-      <span class="section"># Daily DB backup</span>
-      <span class="command">0 3 * * 0 rsync -a /var/www/project/ /home/backup/project/</span>   <span class="comment"># Weekly project backup</span>
-      
-      <span class="section"># SUPERVISOR (Keep Laravel Queue Running)</span>
-      <span class="command">sudo apt install supervisor -y</span>
-      <span class="command">sudo nano /etc/supervisor/conf.d/laravel-worker.conf</span>
-      
-      <span class="section"># Example supervisor config:</span>
-      <span class="section"># [program:laravel-worker]</span>
-      <span class="section"># process_name=%(program_name)s_%(process_num)02d</span>
-      <span class="section"># command=php /var/www/project/artisan queue:work --sleep=3 --tries=3 --max-time=3600</span>
-      <span class="section"># autostart=true</span>
-      <span class="section"># autorestart=true</span>
-      <span class="section"># stopasgroup=true</span>
-      <span class="section"># killasgroup=true</span>
-      <span class="section"># user=www-data</span>
-      <span class="section"># numprocs=1</span>
-      <span class="section"># redirect_stderr=true</span>
-      <span class="section"># stdout_logfile=/var/www/project/storage/logs/worker.log</span>
-      
-      <span class="command">sudo supervisorctl reread</span>
-      <span class="command">sudo supervisorctl update</span>
-      <span class="command">sudo supervisorctl start laravel-worker:*</span>
-      
-      <span class="section"># LOGS & MONITORING</span>
-      <span class="command">journalctl -u apache2 -f</span>    	<span class="comment"># Apache live logs</span>
-      <span class="command">journalctl -u mysql -f  </span>    	<span class="comment"># MySQL logs</span>
-      <span class="command">tail -f /var/www/project/storage/logs/laravel.log</span>   <span class="comment"># Laravel logs</span>
-      <span class="command">df -h </span> 	<span class="comment"># Disk usage</span>
-      <span class="command">htop  </span> 	<span class="comment"># Process monitor</span>
-      
-      <span class="section"># BACKUPS (Manual + Cron)</span>
-      <span class="section"># MySQL backup</span>
-      <span class="command">mysqldump -u root -p dbname > /home/backup/dbname_$(date +%F).sql</span>
-      
-      <span class="section"># All databases</span>
-      <span class="command">mysqldump -u root -p --all-databases > /home/backup/all_$(date +%F).sql</span>
-      
-      <span class="section"># Rsync project files</span>
-      <span class="command">rsync -avz /var/www/project/ /home/backup/project_$(date +%F)/</span>
-      
-      <span class="section"># Add cron for automatic backups</span>
-      <span class="command">crontab -e</span>
-      
-      <span class="section"># 0 1 * * * mysqldump -u root -p'password' dbname > /home/backup/dbname_$(date +\%F).sql</span>
-      
-      <span class="section"># 0 2 * * * rsync -avz /var/www/project/ /home/backup/project_$(date +\%F)/</span>
-      
-      <span class="section"># Node</span>
-      <span class="section"># NPM BASICS</span>
-      <span class="command">npm -v	</span> <span class="comment"># Check npm version</span>
-      <span class="command">npm init -y </span>  	<span class="comment"># Create package.json (default)</span>
-      <span class="command">npm init </span>     	<span class="comment"># Create package.json (interactive)</span>
-      
-      <span class="section"># INSTALL PACKAGES</span>
-      <span class="command">npm install -- pkg --    </span>	<span class="comment"># Install locally (default)</span>
-      <span class="command">npm install -- pkg --@1.2.3 </span> <span class="comment"># Install specific version</span>
-      <span class="command">npm install -g -- pkg -- </span>	<span class="comment"># Install globally</span>
-      <span class="command">npm install   </span>	<span class="comment"># Install deps from package.json</span>
-      <span class="command">npm ci </span>	<span class="comment"># Clean install (faster, from package-lock.json)</span>
-      
-      <span class="section"># REMOVE / UPDATE</span>
-      <span class="command">npm uninstall -- pkg -- </span>	<span class="comment"># Remove package</span>
-      <span class="command">npm update -- pkg --   </span> 	<span class="comment"># Update package</span>
-      <span class="command">npm update   </span>	<span class="comment"># Update all packages</span>
-      <span class="command">npm outdated </span>	<span class="comment"># Check outdated packages</span>
-      
-      <span class="section"># RUNNING SCRIPTS</span>
-      <span class="command">npm run -- script --  </span>  	<span class="comment"># Run script from package.json</span>
-      <span class="command">npm run build</span>	<span class="comment"># Common script</span>
-      <span class="command">npm run dev  </span>	<span class="comment"># Common script</span>
-      <span class="command">npm test     </span>	<span class="comment"># Run "test" script</span>
-      <span class="command">npm start    </span>	<span class="comment"># Run "start" script</span>
-      
-      <span class="section"># PACKAGE INFO</span>
-      <span class="command">npm list    </span> 	<span class="comment"># List local deps</span>
-      <span class="command">npm list -g --depth=0 </span>  <span class="comment"># List global deps</span>
-      <span class="command">npm view -- pkg --  </span>    	<span class="comment"># Info about a package</span>
-      <span class="command">npm view -- pkg -- versions</span> <span class="comment"># List all versions</span>
-      <span class="command">npm search -- pkg -- </span>   	<span class="comment"># Search npm registry</span>
-      
-      <span class="section"># NPX (Run without install)</span>
-      <span class="command">npx -- pkg --   </span> 	<span class="comment"># Run a package directly</span>
-      <span class="command">npx create-react-app myapp</span>
-      <span class="command">npx laravel-vite-plugin</span>
-      
-      <span class="section"># CACHE & CONFIG</span>
-      <span class="command">npm cache clean --force </span> <span class="comment"># Clear npm cache</span>
-      <span class="command">npm config list      </span>	<span class="comment"># Show npm configs</span>
-      <span class="command">npm config set registry https://registry.npmjs.org/</span>
-      
-      <span class="section"># PACKAGE LOCK & AUDIT</span>
-      <span class="command">npm audit   </span> 	<span class="comment"># Scan for vulnerabilities</span>
-      <span class="command">npm audit fix	</span><span class="comment"># Auto-fix issues</span>
-      <span class="command">npm shrinkwrap  </span>    	<span class="comment"># Lock exact versions (like package-lock.json)</span>
-      
-      <span class="section"># PUBLISH (if making packages)</span>
-      <span class="command">npm login    </span> 	<span class="comment"># Login to npm</span>
-      <span class="command">npm publish   </span>	<span class="comment"># Publish package</span>
-      <span class="command">npm version patch  </span>  	<span class="comment"># Bump version (patch)</span>
-      <span class="command">npm version minor  </span>  	<span class="comment"># Bump version (minor)</span>
-      <span class="command">npm version major  </span>  	<span class="comment"># Bump version (major)</span>
-      
-      <span class="section"># Install PM2</span>
+<span class="section"># Networking</span>
+<span class="command">ifconfig / ip a 	 </span> <span class="comment"># Show IP addresses</span>
+<span class="command">ping google.com 	 </span> <span class="comment"># Test connection</span>
+<span class="command">curl -I website.com</span> <span class="comment"># Check headers</span>
+<span class="command">netstat -tulpn  	 </span> <span class="comment"># Show open ports</span>
+<span class="command">ufw status      	 </span> <span class="comment"># Firewall status</span>
+<span class="command">ufw allow 22    	 </span> <span class="comment"># Allow SSH</span>
+<span class="command">ufw allow 80    	 </span> <span class="comment"># Allow HTTP</span>
+<span class="command">ufw allow 443   	 </span> <span class="comment"># Allow HTTPS</span>
 
-      <span class="command">npm install -g pm2</span>     <span class="comment"># Install PM2 globally</span>
+<span class="section"># Package Management</span>
+<span class="command">sudo apt install package </span>     <span class="comment"># Install</span>
+<span class="command">sudo apt remove package  </span> <span class="comment"># Remove</span>
+<span class="command">dpkg -l | grep php     	 </span> <span class="comment"># List installed packages</span>
 
-      <span class="command">pm2 --version</span>          <span class="comment"># Check PM2 version</span>
+<span class="section"># Disk & System</span>
+<span class="command">df -h            </span> <span class="comment"># Show disk usage</span>
+<span class="command">du -sh folder/	 </span> <span class="comment"># Folder size</span>
+<span class="command">free -m          </span> <span class="comment"># Show memory usage</span>
+<span class="command">uptime           </span> <span class="comment"># Server uptime/load</span>
+<span class="command">reboot           </span> <span class="comment"># Restart server</span>
+<span class="command">shutdown -h now  </span> <span class="comment"># Shutdown server</span>
 
+<span class="section"># Archives</span>
+<span class="command">tar -czvf backup.tar.gz folder/	  </span>    <span class="comment"># Create tar.gz</span>
+<span class="command">tar -xzvf backup.tar.gz           </span>    <span class="comment"># Extract tar.gz</span>
+<span class="command">unzip file.zip   	                </span>    <span class="comment"># Extract zip</span>
+<span class="command">zip -r backup.zip folder/      	  </span>    <span class="comment"># Create zip</span>
+<span class="section"># Git & Deployment</span>
+<span class="command">sudo git clone repo.git</span>
+<span class="command">sudo git pull</span>
+<span class="command">sudo git push</span>
+<span class="command">sudo git merge branch_name</span>
+<span class="command">sudo git checkout -b new-feature</span>
 
-      <span class="section"># Start Applications</span>
+<span class="section"># Install PHP APACHE MYSQL</span>
+<span class="command">sudo apt update && sudo apt upgrade -y</span>   <span class="comment"># Update system</span>
+<span class="command">sudo apt-get update</span>                      <span class="comment"># apt-get Older, low-level tool (stable since the 2000s).</span>
+<span class="command">sudo apt update</span>                          <span class="comment"># apt Newer, user-friendly frontend (introduced in Ubuntu 16.04+).</span>
+<span class="command">sudo apt install apache2</span>                 <span class="comment"># Install APACHE2  Apache config /etc/apache2/apache2.conf</span>
+<span class="command">sudo apt install mysql-server</span>            <span class="comment"># Install MYSQL</span>
+<span class="command">sudo apt install curl</span>                    <span class="comment"># Install CURL</span>
+<span class="command">sudo apt install php -y</span>                  <span class="comment"># Install PHP</span>
+<span class="command">sudo apt install -y php-bcmath php-bz2 php-intl php-gd php-mbstring php-mcrypt php-mysql php-zip libapache2-mod-php </span>
 
-      <span class="command">pm2 start app.js</span>       <span class="comment"># Start a Node.js app</span>
+<span class="section"># Install REDIS</span>
+<span class="command">sudo apt update && sudo apt upgrade -y</span>   <span class="comment"># Update system packages</span>
+<span class="command">sudo apt-get install -y lsb-release curl gpg</span> <span class="comment"># Install required dependencies</span>
+<span class="command">curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg </span> <span class="comment"># Download and add Redis GPG key</span>
+<span class="command">sudo chmod 644 /usr/share/keyrings/redis-archive-keyring.gpg</span> <span class="comment"># Set correct permissions for keyring</span>
+<span class="command">echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list</span> <span class="comment"># Add Redis APT repository</span>
+<span class="command">sudo apt-get update</span>                      <span class="comment"># Refresh package list after adding Redis repo</span>
+<span class="command">sudo apt-get install -y redis</span>            <span class="comment"># Install Redis server</span>
+<span class="command">sudo systemctl status redis-server</span>       <span class="comment"># Check Redis service status</span>
 
-      <span class="command">pm2 start app.js --name api</span>    <span class="comment"># Start app with custom name</span>
+<span class="section"># Check firewall application profiles</span>
+<span class="command">sudo ufw app list</span>
+<span class="section"># Allow Apache traffic</span>
+<span class="command">sudo ufw allow 'Apache Full' </span>	<span class="comment"># Apache Full → allows both port 80 (HTTP) and port 443 (HTTPS)</span>
+<span class="command">sudo ufw allow 'Apache'  </span>    	<span class="comment"># Apache → only allows port 80 (HTTP)</span>
+<span class="command">sudo ufw allow 'Apache Secure' </span>  <span class="comment"># Apache Secure → only allows port 443 (HTTPS)</span>
 
-      <span class="command">pm2 start npm --name frontend -- run start</span>    <span class="comment"># Start npm script using PM2</span>    
-      <span class="command">pm2 start ecosystem.config.js</span>    <span class="comment"># Start apps using ecosystem file</span>
+<span class="section"># Install Composer</span>
+<span class="command">sudo apt install php-cli unzip curl -y</span>
+<span class="command">curl -sS https://getcomposer.org/installer | php</span>
+<span class="command">sudo mv composer.phar /usr/local/bin/composer</span>
 
+<span class="section"># In Folder</span>
+<span class="command">composer install</span> <span class="comment"># Composer reads composer.json and downloads all required PHP packages into the vendor/ folder.</span>
 
-      <span class="section"># Process Management</span>
+<span class="section"># Install Node Version Manager (NVM):</span>
+<span class="command">curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash</span>
+<span class="command">source ~/.bashrc</span>
 
-      <span class="command">pm2 list</span>              <span class="comment"># List all running processes</span>
-      <span class="command">pm2 show api</span>              <span class="comment"># Show detailed info of a process</span>
-      <span class="command">pm2 restart api</span>              <span class="comment"># Restart a specific app</span>
-      <span class="command">pm2 restart all</span>              <span class="comment"># Restart all apps</span>
-      <span class="command">pm2 stop api</span>              <span class="comment"># Stop a specific app</span>
-      <span class="command">pm2 stop all</span>              <span class="comment"># Stop all apps</span>
-      <span class="command">pm2 delete api</span>              <span class="comment"># Remove app from PM2</span>
-      <span class="command">pm2 delete all</span>              <span class="comment"># Remove all apps from PM2</span>
+<span class="section"># Install Node</span>
+<span class="command">sudo apt install nodejs</span>
+<span class="command">nvm install 20</span>
+<span class="command">nvm use 20</span>
 
-      <span class="section"># Logs & Monitoring</span>
-      <span class="command">pm2 logs</span>       <span class="comment"># Show logs of all apps</span>
-      <span class="command">pm2 logs api</span>       <span class="comment"># Show logs for a specific app</span>
-      <span class="command">pm2 monit</span>       <span class="comment"># Real-time CPU & memory monitoring</span>
+<span class="section"># Alternative Node.js install</span>
+<span class="command">curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -</span>
+<span class="command">sudo apt install -y nodejs</span>
 
-      <span class="section"># Startup & Auto-Restart (Production)</span>
-      <span class="command">pm2 startup</span>       <span class="comment"># Generate startup script for boot</span>
-      <span class="command">sudo env PATH=$PATH:/usr/bin pm2 startup systemd -u $USER --hp $HOME</span>       <span class="comment"># Fix startup path issues (recommended)</span>
-      <span class="command">pm2 save</span>       <span class="comment"># Save current process list for reboot restore</span>
-      <span class="command">pm2 resurrect</span>       <span class="comment"># Restore apps after reboot</span>
+<span class="section"># Force install ignoring engine checks</span>
+<span class="command">npm install --ignore-engines</span>
 
-      <span class="section"># Reload & Zero-Downtime</span>
-      <span class="command">pm2 reload api</span>       <span class="comment"># Zero-downtime reload (cluster mode)</span>
-      <span class="command">pm2 reload all</span>       <span class="comment"># Reload all apps</span>
+<span class="section"># Reinstall dependencies:</span>
+<span class="command">rm -rf node_modules package-lock.json</span>
+<span class="command">npm install</span>
 
-      <span class="section"># Ecosystem File</span>
-      <span class="command">pm2 init</span>       <span class="comment"># Create ecosystem.config.js</span>
-      <span class="command">pm2 start ecosystem.config.js --env production</span>       <span class="comment"># Start apps in production mode</span>
+<span class="section"># VERSIONS</span>
+<span class="command">php -v</span>
+<span class="command">node -v</span>
+<span class="command">npm -v</span>
+<span class="command">composer -v</span>
 
-      <span class="section"># Useful Maintenance Commands</span>
-      <span class="command">pm2 flush</span>       <span class="comment"># Clear all logs</span>
-      <span class="command">pm2 reloadLogs</span>       <span class="comment"># Reload log files without downtime</span>
-      <span class="command">pm2 kill</span>       <span class="comment"># Stop PM2 daemon completely</span>
-      <span class="command">pm2 update</span>       <span class="comment"># Update PM2 in-memory processes</span>
+<span class="section"># Start And enable installed services</span>
+<span class="command">sudo systemctl start / enable / restart status apache2.service</span>
+<span class="command">sudo systemctl start / enable / restart status mysql.service</span>
+<span class="command">sudo /etc/init.d/apache2 restart</span>
 
-      <span class="section"># Login to MySQL</span>
-      <span class="command">mysql -u root -p</span>
-      
-      <span class="section"># Reset Password  </span>
-      <span class="section"># 1 Stop Mysql</span>
-      <span class="command">sudo systemctl stop mysql </span>
-      
-      <span class="section"># 2 Start MySQL without authentication</span>
-      <span class="command">sudo mysqld_safe --skip-grant-tables & </span>   <span class="comment"># Grant Access Tologin without</span>
-      
-      <span class="section"># if error  mysqld_safe Directory '/var/run/mysqld' for UNIX socket file don't exists.</span>
-      
-      <span class="section"># Create the directory manually</span>
-      <span class="command">sudo mkdir -p /var/run/mysqld</span>
-      <span class="command">sudo chown mysql:mysql /var/run/mysqld</span>
-      <span class="section"># then Try again from 1</span>
-      
+<span class="section"># Install phpMyAdmin</span>
+<span class="command">sudo apt-get install phpmyadmin php-mbstring php-gettext</span>
 
-      <span class="section"># 3 login</span>
-      <span class="command">mysql -u root</span>
-      
-      <span class="section"># Inside MySQL prompt, run</span>
-      <span class="command">FLUSH PRIVILEGES;</span>
-      <span class="command">ALTER USER 'root'@'localhost' IDENTIFIED BY 'YourNewPassword';</span>
-      
-      <span class="section"># If ALTER USER gives an error, try: </span>
-      <span class="command">SET PASSWORD FOR 'root'@'localhost' = PASSWORD('YourNewPassword');</span>
-      
-      <span class="section"># Exit MySQL:</span>
-      <span class="command">exit;</span>
-      
-      <span class="section"># Restart</span>
-      <span class="command">sudo systemctl stop mysql</span>
-      <span class="command">sudo systemctl start mysql</span>
-      
-      
-      <span class="section"># Create Database</span>
-      <span class="command">CREATE DATABASE database_name</span>
-      
-      <span class="section"># All tables</span>
-      <span class="command">SHOW TABLES;</span>
-      
-      <span class="section"># All database</span>
-      <span class="command">SHOW DATABASES;</span>
-      
-      <span class="section"># Go in database</span>
-      <span class="command">USE database_name</span>
-      
-      <span class="section"># CREATE TABLE, SELECT, INSERT, UPDATE, DELETE</span>
-      <span class="fileText">
-        CREATE TABLE users (
-          id INT AUTO_INCREMENT PRIMARY KEY,
-          name VARCHAR(100),
-          email VARCHAR(100),
-          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      );
-      </span>
+<span class="section"># Enable necessary PHP extensions</span>
+<span class="command">sudo phpenmod mcrypt</span>
+<span class="command">sudo phpenmod mbstring</span>
 
-      <span class="command">SELECT * FROM users;</span>
-      
-      <span class="command">INSERT INTO users (name, email) VALUES ('name', 'email');</span>
-      
-      <span class="command">UPDATE users SET name = 'name', email = 'email'</span>
-      
-      <span class="command">DELETE FROM users WHERE id = 1</span>
-      
-      <span class="command">EXIT;</span>
-      
-      <span class="section"># Import Database -- Restore from Backup</span>
-      <span class="section">#  Import .sql file</span>
-      <span class="command">mysql -u username -p database_name /path/to/file.sql</span>
-      
-      <span class="section"># Import from a .zip file</span>
-      <span class="command">unzip -p /var/www/backup.zip | mysql -u username -p database_name</span><span class="comment"># one step</span>
-      <span class="command">unzip backup.zip</span>
-      <span class="command">mysql -u username -p database_name  backup.sql</span>
-      
-      <span class="section"># Export from database</span>
-      <span class="command">mysqldump -u root -p --all-databases > all-databases.sql</span> <span class="comment"># all database</span>
-      <span class="command">mysqldump -u root -p database_name > /home/myuser/database-dump.sql</span> <span class="comment"># database</span>
-      <span class="command">mysqldump -u root -p database_name table_name > users-table.sql</span> <span class="comment"># table</span>
-      <span class="command">mysqldump -u root -p --no-data database_name > schema.sql</span> <span class="comment"># only schema</span>
-      
-      <span class="section"># LARAVEL</span>
-      <span class="section"># Install Laravel globally</span>
-      <span class="command">composer global require laravel/installer</span>
-      
-      <span class="section"># Add composer global bin path to system PATH</span>
-      <span class="command">echo 'export PATH="$HOME/.composer/vendor/bin:$PATH"' >> ~/.bashrc</span>
-      <span class="command">source ~/.bashrc</span>
-      
-      <span class="section"># Verify installation</span>
-      <span class="command">laravel --version</span>
-      
-      <span class="section"># Create a project</span>
-      <span class="command">laravel new blog</span>
-      
-      <span class="section"># Move inside project</span>
-      <span class="command">cd blog</span>
-      <span class="command">php artisan serve</span>
-      
-      <span class="section"># Create Laravel project without installing Laravel</span>
-      <span class="command">composer create-project laravel/laravel blog2</span>
-      
-      <span class="section"># Move inside project</span>
-      <span class="command">cd blog2</span>
-      <span class="command">php artisan serve</span>
-      
-      <span class="section"># Commands</span>
-      <span class="section"># Show all commands</span>
-      <span class="command">php artisan list</span>
-      
-      <span class="section"># Help for specific command</span>
-      <span class="command">php artisan help serve </span>
-      
-      <span class="section"># App Key</span>
-      <span class="command">php artisan key:generate</span>
-      
-      <span class="section"># Cache / Config / Route</span>
-      <span class="command">php artisan cache:clear</span>
-      <span class="command">php artisan config:clear</span>
-      <span class="command">php artisan route:clear</span>
-      <span class="command">php artisan view:clear</span>
-      <span class="command">php artisan optimize</span>
-      
-      <span class="section"># Migrate</span>
-      <span class="command">php artisan migrate</span>
-      <span class="command">php artisan migrate:rollback  </span> 	<span class="comment"># Undo last batch</span>
-      <span class="command">php artisan migrate:reset      </span>	<span class="comment"># Undo all</span>
-      <span class="command">php artisan migrate:fresh     </span> 	<span class="comment"># Drop all tables & re-run all migrations</span>
-      <span class="command">php artisan migrate:status    </span> 	<span class="comment"># Show migration status</span>
-      
-      <span class="section"># Seed database</span>
-      <span class="command">php artisan db:seed</span>
-      <span class="command">php artisan db:seed --class=UserSeeder</span>
-      
-      <span class="section"># Make Migration</span>
-      <span class="command">php artisan make:migration create_users_table</span>
-      <span class="command">php artisan make:migration add_status_to_orders_table --table=orders</span>
-      
-      <span class="section"># Make model</span>
-      <span class="command">php artisan make:model modal_name</span>
-      <span class="command">php artisan make:model modal_name -m	</span><span class="comment"># with migration</span>
-      <span class="command">php artisan make:model modal_name -mc </span>  <span class="comment"># with migration + controller</span>
-      
-      <span class="section"># Make Controller</span>
-      <span class="command">php artisan make:controller NameController</span>
-      <span class="command">php artisan make:controller NameController --resource</span>
-      <span class="command">php artisan make:controller Api/NameController --api</span>
-      
-      <span class="section"># Middleware</span>
-      <span class="command">php artisan make:middleware CheckUser</span>
-      <span class="command">php artisan make:request StoreUserRequest</span>
-      <span class="command">php artisan make:job ProcessOrder</span>
-      <span class="command">php artisan make:event OrderCreated</span>
-      <span class="command">php artisan make:listener SendEmailNotification</span>
-      <span class="command">php artisan make:seeder UserSeeder</span>
-      <span class="command">php artisan make:factory UserFactory</span>
-      
-      <span class="section"># Routing Debuging</span>
-      <span class="command">php artisan route:list   </span>  	<span class="comment"># Show all routes</span>
-      <span class="command">php artisan route:list --name=api</span>
-      <span class="command">php artisan tinker  </span>	<span class="comment"># Interactive shell for Laravel</span>
-      <span class="command">php artisan db:show </span>	<span class="comment"># Show DB info (Laravel 10+)</span>
-      
-      <span class="section"># Queue Jobs</span>
-      <span class="command">php artisan queue:work</span>
-      <span class="command">php artisan queue:listen</span>
-      <span class="command">php artisan queue:restart</span>
-      
-      <span class="section"># Testing</span>
-      <span class="command">php artisan test</span>
-      <span class="command">php artisan test --filter UserTest</span>
-      
-      <span class="section"># More</span>
-      <span class="command">composer update   </span> 	<span class="comment"># Update dependencies</span>
-      <span class="command">composer install  </span> 	<span class="comment"># Install dependencies</span>
-      <span class="command">php artisan storage:link </span> 	<span class="comment"># Link storage to public</span>
-      <span class="command">php artisan down   </span>	<span class="comment"># Maintenance mode</span>
-      <span class="command">php artisan up   </span>  	<span class="comment"># Disable maintenance mode</span>
-      
+<span class="section"># Edit Apache virtual host config</span>
+<span class="command">sudo nano /etc/apache2/sites-available/000-default.conf</span>
+<span class="fileText" >
+<pre>
+  &lt;VirtualHost *:80&gt;
+      ServerName mywebsite.com
+      ServerAlias www.mywebsite.com
+      DocumentRoot /var/www/html/project
+      &lt;Directory /var/www/html/project&gt;
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+      &lt;/Directory&gt;
+      ErrorLog ${APACHE_LOG_DIR}/project_error.log
+      CustomLog ${APACHE_LOG_DIR}/project_access.log combined
+  &lt;/VirtualHost&gt;
+</pre></span>
+
+<span class="section"># Create an</span>
+<span class="command">sudo mkdir -p /var/www/mywebsite</span>
+<span class="command">sudo chown -R $USER:$USER /var/www/mywebsite</span>
+
+<span class="section"># Edit Config</span>
+<span class="command">sudo nano /etc/apache2/sites-available/project.conf</span>
+
+<span class="section"># ENABLE site</span>
+<span class="command">sudo a2ensite project.conf</span>
+<span class="command">sudo systemctl reload apache2</span>
+
+<span class="section"># Disable Site</span>
+<span class="command">sudo a2dissite 000-default.conf</span>
+<span class="command">sudo systemctl reload apache2</span>
+
+<span class="section"># Test Apache config:</span>
+<span class="command">sudo apache2ctl configtest</span>
+
+<span class="section"># reload apache2</span>
+
+<span class="section"># SSH</span>
+<span class="command">ssh keygen</span> <span class="comment"># generate key in you own system for practice</span>
+
+<span class="section"># Go to pem file directory</span>
+<span class="command">sudo chmod 400 file.pem</span>
+<span class="command">sudo ssh -i file.pem ubuntu@0.0.0.0</span>
+
+<span class="section"># Addition ---------------------------------</span>
+<span class="section"># SSL / HTTPS (Let's Encrypt)</span>
+<span class="command">sudo apt install certbot python3-certbot-apache -y</span>
+<span class="command">sudo certbot --apache</span>
+<span class="command">sudo certbot renew --dry-run</span>   <span class="comment"># Test auto-renewal</span>
+
+<span class="section"># CRON JOBS (Scheduled Tasks)</span>
+<span class="command">crontab -e</span>
+<span class="section"># Example entries:</span>
+<span class="command">* * * * * php /var/www/project/artisan schedule:run >> /dev/null 2>&1	</span><span class="comment"># Laravel scheduler</span>
+<span class="command">0 2 * * * mysqldump -u root -p dbname > /home/backup/dbname_$(date +\%F).sql   </span>
+
+<span class="section"># Daily DB backup</span>
+<span class="command">0 3 * * 0 rsync -a /var/www/project/ /home/backup/project/</span>   <span class="comment"># Weekly project backup</span>
+
+<span class="section"># SUPERVISOR (Keep Laravel Queue Running)</span>
+<span class="command">sudo apt install supervisor -y</span>
+<span class="command">sudo nano /etc/supervisor/conf.d/laravel-worker.conf</span>
+
+<span class="section"># Example supervisor config:</span>
+<span class="section"># [program:laravel-worker]</span>
+<span class="section"># process_name=%(program_name)s_%(process_num)02d</span>
+<span class="section"># command=php /var/www/project/artisan queue:work --sleep=3 --tries=3 --max-time=3600</span>
+<span class="section"># autostart=true</span>
+<span class="section"># autorestart=true</span>
+<span class="section"># stopasgroup=true</span>
+<span class="section"># killasgroup=true</span>
+<span class="section"># user=www-data</span>
+<span class="section"># numprocs=1</span>
+<span class="section"># redirect_stderr=true</span>
+<span class="section"># stdout_logfile=/var/www/project/storage/logs/worker.log</span>
+
+<span class="command">sudo supervisorctl reread</span>
+<span class="command">sudo supervisorctl update</span>
+<span class="command">sudo supervisorctl start laravel-worker:*</span>
+
+<span class="section"># LOGS & MONITORING</span>
+<span class="command">journalctl -u apache2 -f</span>    	<span class="comment"># Apache live logs</span>
+<span class="command">journalctl -u mysql -f  </span>    	<span class="comment"># MySQL logs</span>
+<span class="command">tail -f /var/www/project/storage/logs/laravel.log</span>   <span class="comment"># Laravel logs</span>
+<span class="command">df -h </span> 	<span class="comment"># Disk usage</span>
+<span class="command">htop  </span> 	<span class="comment"># Process monitor</span>
+
+<span class="section"># BACKUPS (Manual + Cron)</span>
+<span class="section"># MySQL backup</span>
+<span class="command">mysqldump -u root -p dbname > /home/backup/dbname_$(date +%F).sql</span>
+
+<span class="section"># All databases</span>
+<span class="command">mysqldump -u root -p --all-databases > /home/backup/all_$(date +%F).sql</span>
+
+<span class="section"># Rsync project files</span>
+<span class="command">rsync -avz /var/www/project/ /home/backup/project_$(date +%F)/</span>
+
+<span class="section"># Add cron for automatic backups</span>
+<span class="command">crontab -e</span>
+
+<span class="section"># 0 1 * * * mysqldump -u root -p'password' dbname > /home/backup/dbname_$(date +\%F).sql</span>
+<span class="section"># 0 2 * * * rsync -avz /var/www/project/ /home/backup/project_$(date +\%F)/</span>
+
+<span class="section"># Node</span>
+<span class="section"># NPM BASICS</span>
+<span class="command">npm -v	</span> <span class="comment"># Check npm version</span>
+<span class="command">npm init -y </span>  	<span class="comment"># Create package.json (default)</span>
+<span class="command">npm init </span>     	<span class="comment"># Create package.json (interactive)</span>
+
+<span class="section"># INSTALL PACKAGES</span>
+<span class="command">npm install -- pkg --    </span>	<span class="comment"># Install locally (default)</span>
+<span class="command">npm install -- pkg --@1.2.3 </span> <span class="comment"># Install specific version</span>
+<span class="command">npm install -g -- pkg -- </span>	<span class="comment"># Install globally</span>
+<span class="command">npm install   </span>	<span class="comment"># Install deps from package.json</span>
+<span class="command">npm ci </span>	<span class="comment"># Clean install (faster, from package-lock.json)</span>
+
+<span class="section"># REMOVE / UPDATE</span>
+<span class="command">npm uninstall -- pkg -- </span>	<span class="comment"># Remove package</span>
+<span class="command">npm update -- pkg --   </span> 	<span class="comment"># Update package</span>
+<span class="command">npm update   </span>	<span class="comment"># Update all packages</span>
+<span class="command">npm outdated </span>	<span class="comment"># Check outdated packages</span>
+
+<span class="section"># RUNNING SCRIPTS</span>
+<span class="command">npm run -- script --  </span>  	<span class="comment"># Run script from package.json</span>
+<span class="command">npm run build</span>	<span class="comment"># Common script</span>
+<span class="command">npm run dev  </span>	<span class="comment"># Common script</span>
+<span class="command">npm test     </span>	<span class="comment"># Run "test" script</span>
+<span class="command">npm start    </span>	<span class="comment"># Run "start" script</span>
+
+<span class="section"># PACKAGE INFO</span>
+<span class="command">npm list    </span> 	<span class="comment"># List local deps</span>
+<span class="command">npm list -g --depth=0 </span>  <span class="comment"># List global deps</span>
+<span class="command">npm view -- pkg --  </span>    	<span class="comment"># Info about a package</span>
+<span class="command">npm view -- pkg -- versions</span> <span class="comment"># List all versions</span>
+<span class="command">npm search -- pkg -- </span>   	<span class="comment"># Search npm registry</span>
+
+<span class="section"># NPX (Run without install)</span>
+<span class="command">npx -- pkg --   </span> 	<span class="comment"># Run a package directly</span>
+<span class="command">npx create-react-app myapp</span>
+<span class="command">npx laravel-vite-plugin</span>
+
+<span class="section"># CACHE & CONFIG</span>
+<span class="command">npm cache clean --force </span> <span class="comment"># Clear npm cache</span>
+<span class="command">npm config list      </span>	<span class="comment"># Show npm configs</span>
+<span class="command">npm config set registry https://registry.npmjs.org/</span>
+
+<span class="section"># PACKAGE LOCK & AUDIT</span>
+<span class="command">npm audit   </span> 	<span class="comment"># Scan for vulnerabilities</span>
+<span class="command">npm audit fix	</span><span class="comment"># Auto-fix issues</span>
+<span class="command">npm shrinkwrap  </span>    	<span class="comment"># Lock exact versions (like package-lock.json)</span>
+
+<span class="section"># PUBLISH (if making packages)</span>
+<span class="command">npm login    </span> 	<span class="comment"># Login to npm</span>
+<span class="command">npm publish   </span>	<span class="comment"># Publish package</span>
+<span class="command">npm version patch  </span>  	<span class="comment"># Bump version (patch)</span>
+<span class="command">npm version minor  </span>  	<span class="comment"># Bump version (minor)</span>
+<span class="command">npm version major  </span>  	<span class="comment"># Bump version (major)</span>
+
+<span class="section"># Install PM2</span>
+
+<span class="command">npm install -g pm2</span>     <span class="comment"># Install PM2 globally</span>
+<span class="command">pm2 --version</span>          <span class="comment"># Check PM2 version</span>
+
+<span class="section"># Start Applications</span>
+<span class="command">pm2 start app.js</span>       <span class="comment"># Start a Node.js app</span>
+<span class="command">pm2 start app.js --name api</span>    <span class="comment"># Start app with custom name</span>
+<span class="command">pm2 start npm --name frontend -- run start</span>    <span class="comment"># Start npm script using PM2</span>    
+<span class="command">pm2 start ecosystem.config.js</span>    <span class="comment"># Start apps using ecosystem file</span>
+
+<span class="section"># Process Management</span>
+
+<span class="command">pm2 list</span>              <span class="comment"># List all running processes</span>
+<span class="command">pm2 show api</span>              <span class="comment"># Show detailed info of a process</span>
+<span class="command">pm2 restart api</span>              <span class="comment"># Restart a specific app</span>
+<span class="command">pm2 restart all</span>              <span class="comment"># Restart all apps</span>
+<span class="command">pm2 stop api</span>              <span class="comment"># Stop a specific app</span>
+<span class="command">pm2 stop all</span>              <span class="comment"># Stop all apps</span>
+<span class="command">pm2 delete api</span>              <span class="comment"># Remove app from PM2</span>
+<span class="command">pm2 delete all</span>              <span class="comment"># Remove all apps from PM2</span>
+
+<span class="section"># Logs & Monitoring</span>
+<span class="command">pm2 logs</span>       <span class="comment"># Show logs of all apps</span>
+<span class="command">pm2 logs api</span>       <span class="comment"># Show logs for a specific app</span>
+<span class="command">pm2 monit</span>       <span class="comment"># Real-time CPU & memory monitoring</span>
+
+<span class="section"># Startup & Auto-Restart (Production)</span>
+<span class="command">pm2 startup</span>       <span class="comment"># Generate startup script for boot</span>
+<span class="command">sudo env PATH=$PATH:/usr/bin pm2 startup systemd -u $USER --hp $HOME</span>       <span class="comment"># Fix startup path issues (recommended)</span>
+<span class="command">pm2 save</span>       <span class="comment"># Save current process list for reboot restore</span>
+<span class="command">pm2 resurrect</span>       <span class="comment"># Restore apps after reboot</span>
+
+<span class="section"># Reload & Zero-Downtime</span>
+<span class="command">pm2 reload api</span>       <span class="comment"># Zero-downtime reload (cluster mode)</span>
+<span class="command">pm2 reload all</span>       <span class="comment"># Reload all apps</span>
+
+<span class="section"># Ecosystem File</span>
+<span class="command">pm2 init</span>       <span class="comment"># Create ecosystem.config.js</span>
+<span class="command">pm2 start ecosystem.config.js --env production</span>       <span class="comment"># Start apps in production mode</span>
+
+<span class="section"># Useful Maintenance Commands</span>
+<span class="command">pm2 flush</span>       <span class="comment"># Clear all logs</span>
+<span class="command">pm2 reloadLogs</span>       <span class="comment"># Reload log files without downtime</span>
+<span class="command">pm2 kill</span>       <span class="comment"># Stop PM2 daemon completely</span>
+<span class="command">pm2 update</span>       <span class="comment"># Update PM2 in-memory processes</span>
+
+<span class="section"># Login to MySQL</span>
+<span class="command">mysql -u root -p</span>
+
+<span class="section"># Reset Password  </span>
+<span class="section"># 1 Stop Mysql</span>
+<span class="command">sudo systemctl stop mysql </span>
+
+<span class="section"># 2 Start MySQL without authentication</span>
+<span class="command">sudo mysqld_safe --skip-grant-tables & </span>   <span class="comment"># Grant Access Tologin without</span>
+
+<span class="section"># if error  mysqld_safe Directory '/var/run/mysqld' for UNIX socket file don't exists.</span>
+
+<span class="section"># Create the directory manually</span>
+<span class="command">sudo mkdir -p /var/run/mysqld</span>
+<span class="command">sudo chown mysql:mysql /var/run/mysqld</span>
+<span class="section"># then Try again from 1</span>
+
+<span class="section"># 3 login</span>
+<span class="command">mysql -u root</span>
+
+<span class="section"># Inside MySQL prompt, run</span>
+<span class="command">FLUSH PRIVILEGES;</span>
+<span class="command">ALTER USER 'root'@'localhost' IDENTIFIED BY 'YourNewPassword';</span>
+
+<span class="section"># If ALTER USER gives an error, try: </span>
+<span class="command">SET PASSWORD FOR 'root'@'localhost' = PASSWORD('YourNewPassword');</span>
+
+<span class="command">EXIT;</span> <span class="comment"># Exit MySQL:</span>
+
+<span class="section"># Mysql Server </span>
+
+<span class="command">sudo systemctl stop mysql</span> <span class="comment"># Stop Mysql Server</span>
+<span class="command">sudo systemctl start mysql</span> <span class="comment"># Start Mysql Server</span>
+
+<span class="section"># Mysql Database </span>
+
+<span class="command">CREATE DATABASE database_name</span>    <span class="comment"># Create Database</span>
+
+<span class="command">SHOW TABLES;</span>   <span class="comment"># All tables</span>
+
+<span class="command">SHOW DATABASES;</span>    <span class="comment"># All database</span>
+
+<span class="command">USE database_name</span>    <span class="comment"># Go in database</span>
+
+<span class="section"># CREATE TABLE, SELECT, INSERT, UPDATE, DELETE</span>
+<span class="fileText" >
+  CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+</span>
+
+<span class="command">SELECT * FROM users;</span>
+<span class="command">INSERT INTO users (name, email) VALUES ('name', 'email');</span>
+<span class="command">UPDATE users SET name = 'name', email = 'email'</span>
+<span class="command">DELETE FROM users WHERE id = 1</span>
+<span class="command">EXIT;</span>
+
+<span class="section"># Import Database -- Restore from Backup</span>
+<span class="section">#  Import .sql file</span>
+<span class="command">mysql -u username -p database_name /path/to/file.sql</span>
+
+<span class="section"># Import from a .zip file</span>
+<span class="command">unzip -p /var/www/backup.zip | mysql -u username -p database_name</span> <span class="comment"># one step</span>
+<span class="command">unzip backup.zip</span>
+<span class="command">mysql -u username -p database_name  backup.sql</span>
+
+<span class="section"># Export from database</span>
+<span class="command">mysqldump -u root -p --all-databases > all-databases.sql</span>             <span class="comment"># all database</span>
+<span class="command">mysqldump -u root -p database_name > /home/myuser/database-dump.sql</span>    <span class="comment"># database</span>
+<span class="command">mysqldump -u root -p database_name table_name > users-table.sql</span>        <span class="comment"># table</span>
+<span class="command">mysqldump -u root -p --no-data database_name > schema.sql</span>            <span class="comment"># only schema</span>
+
+<span class="section"># LARAVEL</span>
+<span class="section"># Install Laravel globally</span>
+<span class="command">composer global require laravel/installer</span>
+
+<span class="section"># Add composer global bin path to system PATH</span>
+<span class="command">echo 'export PATH="$HOME/.composer/vendor/bin:$PATH"' >> ~/.bashrc</span>
+<span class="command">source ~/.bashrc</span>
+
+<span class="section"># Verify installation</span>
+<span class="command">laravel --version</span>
+
+<span class="section"># Create a project</span>
+<span class="command">laravel new blog</span>
+
+<span class="section"># Move inside project</span>
+<span class="command">cd blog</span>
+<span class="command">php artisan serve</span>
+
+<span class="section"># Create Laravel project without installing Laravel</span>
+<span class="command">composer create-project laravel/laravel blog2</span>
+
+<span class="section"># Move inside project</span>
+<span class="command">cd blog2</span>
+<span class="command">php artisan serve</span>
+
+<span class="section"># Commands</span>
+<span class="section"># Show all commands</span>
+<span class="command">php artisan list</span>
+
+<span class="section"># Help for specific command</span>
+<span class="command">php artisan help serve </span>
+
+<span class="section"># App Key</span>
+<span class="command">php artisan key:generate</span>
+
+<span class="section"># Cache / Config / Route</span>
+<span class="command">php artisan cache:clear</span>
+<span class="command">php artisan config:clear</span>
+<span class="command">php artisan route:clear</span>
+<span class="command">php artisan view:clear</span>
+<span class="command">php artisan optimize</span>
+
+<span class="section"># Migrate</span>
+<span class="command">php artisan migrate</span>
+<span class="command">php artisan migrate:rollback  </span> 	<span class="comment"># Undo last batch</span>
+<span class="command">php artisan migrate:reset      </span>	<span class="comment"># Undo all</span>
+<span class="command">php artisan migrate:fresh     </span> 	<span class="comment"># Drop all tables & re-run all migrations</span>
+<span class="command">php artisan migrate:status    </span> 	<span class="comment"># Show migration status</span>
+
+<span class="section"># Seed database</span>
+<span class="command">php artisan db:seed</span>
+<span class="command">php artisan db:seed --class=UserSeeder</span>
+
+<span class="section"># Make Migration</span>
+<span class="command">php artisan make:migration create_users_table</span>
+<span class="command">php artisan make:migration add_status_to_orders_table --table=orders</span>
+
+<span class="section"># Make model</span>
+<span class="command">php artisan make:model modal_name</span>
+<span class="command">php artisan make:model modal_name -m	</span><span class="comment"># with migration</span>
+<span class="command">php artisan make:model modal_name -mc </span>  <span class="comment"># with migration + controller</span>
+
+<span class="section"># Make Controller</span>
+<span class="command">php artisan make:controller NameController</span>
+<span class="command">php artisan make:controller NameController --resource</span>
+<span class="command">php artisan make:controller Api/NameController --api</span>
+
+<span class="section"># Middleware</span>
+<span class="command">php artisan make:middleware CheckUser</span>
+<span class="command">php artisan make:request StoreUserRequest</span>
+<span class="command">php artisan make:job ProcessOrder</span>
+<span class="command">php artisan make:event OrderCreated</span>
+<span class="command">php artisan make:listener SendEmailNotification</span>
+<span class="command">php artisan make:seeder UserSeeder</span>
+<span class="command">php artisan make:factory UserFactory</span>
+
+<span class="section"># Routing Debuging</span>
+<span class="command">php artisan route:list   </span>  	<span class="comment"># Show all routes</span>
+<span class="command">php artisan route:list --name=api</span>
+<span class="command">php artisan tinker  </span>	<span class="comment"># Interactive shell for Laravel</span>
+<span class="command">php artisan db:show </span>	<span class="comment"># Show DB info (Laravel 10+)</span>
+
+<span class="section"># Queue Jobs</span>
+<span class="command">php artisan queue:work</span>
+<span class="command">php artisan queue:listen</span>
+<span class="command">php artisan queue:restart</span>
+
+<span class="section"># Testing</span>
+<span class="command">php artisan test</span>
+<span class="command">php artisan test --filter UserTest</span>
+
+<span class="section"># More</span>
+<span class="command">composer update   </span> 	<span class="comment"># Update dependencies</span>
+<span class="command">composer install  </span> 	<span class="comment"># Install dependencies</span>
+<span class="command">php artisan storage:link </span> 	<span class="comment"># Link storage to public</span>
+<span class="command">php artisan down   </span>	<span class="comment"># Maintenance mode</span>
+<span class="command">php artisan up   </span>  	<span class="comment"># Disable maintenance mode</span>
+      </div>
     </div>
   </body>
     <script>
@@ -762,6 +725,7 @@
         
         pre.innerHTML = lines
           .map((line) => {
+            if(!line.trim()) return;
             // Support Copy for both Command and FileText
             if (line.includes('class="command"') ) {
               return `<div class="line">
@@ -818,7 +782,7 @@
           if (e.target.classList.contains('copy-btn')) {
             const line = e.target.closest('.line');
             // Try command first, then fileText
-            const targetEl = line.querySelector('.command') || line.querySelector('.fileText');
+            const targetEl = line.querySelector('.command') ;
             if (targetEl) {
               const text = targetEl.innerText.trim();
               try {
