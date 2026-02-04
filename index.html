@@ -12,100 +12,166 @@
     />
     <style>
       body {
-        background: #1e1e1e;
+        background: #0f0f12;
         color: #d4d4d4;
         font-family: "Fira Code", monospace;
         margin: 0;
-        padding: 20px;
+        padding: 40px;
+        display: flex;
+        justify-content: center;
+        gap: 30px;
       }
+      /* Sidebar styling - Static & Scrollable */
+      #nav-sidebar {
+        position: sticky;
+        top: 80px;
+        height: calc(100vh - 120px);
+        width: 20%;
+        min-width: 200px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        background: rgba(20, 20, 25, 0.5);
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid #333;
+        backdrop-filter: blur(10px);
+        overflow-y: auto;
+      }
+      #nav-sidebar::-webkit-scrollbar { width: 4px; }
+      #nav-sidebar::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+
+      #nav-sidebar a {
+        color: #ffcc00;
+        text-decoration: none;
+        font-size: 1em;
+        transition: all 0.2s;
+        padding: 6px 10px;
+        border-radius: 4px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: block;
+      }
+      #nav-sidebar a:hover {
+        color: #fff;
+        background: rgba(255, 204, 0, 0.1);
+      }
+      #nav-sidebar .sidebar-title {
+        font-size: 1em;
+        color: #555;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 12px;
+        font-weight: bold;
+      }
+
       .terminal {
         background: #0d0d0d;
-        border-radius: 10px;
-        padding: 20px;
+        border-radius: 12px;
+        padding: 30px;
         padding-top: 60px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
-        overflow-x: auto;
-        line-height: 1.6em;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        flex-grow: 1;
+        max-width: 75%;
+        position: relative;
+        border: 1px solid #333;
       }
-      .comment {
-        color: #6a9955;
+      .terminal::before {
+        content: '● ● ●';
+        position: absolute;
+        top: 18px;
+        left: 20px;
+        color: #555;
+        font-size: 14px;
+        letter-spacing: 4px;
       }
-      .command {
-        color: #4fc1ff;
+      .comment { color: #6a9955; }
+      .command { color: #4fc1ff;
+        font-size: 1.2em;
       }
-      .option {
-        color: #dcdcaa;
-      }
-      .path {
-        color: #ce9178;
-      }
-      .keyword {
-        color: #c586c0;
+      .fileText { 
+        display: block; 
+        color: #ce9178; 
+        background: rgba(206, 145, 120, 0.05);
+        border-left: 2px solid #ce9178;
+        padding: 10px 15px;
+        margin: 5px 0;
+        border-radius: 0 4px 4px 0;
       }
       .section {
         font-weight: bold;
         color: #ffcc00;
-        margin: 15px 0 5px 0;
-        display: inline-flex;
+        margin: 25px 0 10px 0;
+        display: block;
+        border-bottom: 1px solid #222;
+        padding-bottom: 4px;
+        font-size: 1em;
       }
-     #search-cmd {
-      position: fixed;
-      top: 5%;
-      left: 50%;
-      transform: translateX(-50%);
-
-      z-index: 100;
-      align-items: center;
-
-      background-color: #0d0d0d;
-      border: none;
-      border-bottom: 2px solid #333;
-
-      color: #d4d4d4;
-      font-family: "Fira Code", monospace;
-      font-size: 1.1em;
-
-      width: 90%;
-      max-width: 900px; /* optional: prevents it from being too wide */
-
-      margin-bottom: 15px;
-      padding: 10px 5px;
-      outline: none;
-
-      box-shadow: 0 5px 10px rgba(0,0,0,0.8);
-    }
-
-      #search-cmd::placeholder {
-        color: #444;
+      .copy-btn {
+        background: #222;
+        border: 1px solid #444;
+        color: #888;
+        cursor: pointer;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 13px;
+        font-family: inherit;
+        transition: all 0.2s;
+        flex-shrink: 0;
       }
-      #search-cmd:focus {
-        border-bottom-color: #73706f;
+      .copy-btn:hover { background: #333; color: #fff; }
+      .copy-btn::after { content: 'COPY'; }
+      .copy-btn.copied { background: #1a331a; color: #6a9955; }
+      .copy-btn.copied::after { content: 'DONE'; }
+
+      #search-cmd {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        background: rgba(13, 13, 13, 0.95);
+        border: 1px solid #333;
+        border-radius: 6px;
+        color: #fff;
+        font-family: "Fira Code", monospace;
+        font-size: 1.2em;
+        width: 30%;
+        min-width: 250px;
+        padding: 8px 15px;
+        outline: none;
+        backdrop-filter: blur(10px);
       }
       .line {
-        display: block;
-        min-height: 1.6em; /* Preserve empty lines */
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        min-height: 1.8em;
+        padding: 4px 8px;
+        border-radius: 4px;
       }
-      .active-match {
-        background-color: #73706f;
-        color: #0d0d0d;
-        font-weight: bold;
-      }
-       @media (max-width: 768px) {
-        body {
-          padding: 0px;
-          margin: 0px;
-        }
-        #search-cmd {
-         top: 12px;
-        }
-        .terminal {
-          padding: 0px;
-          padding-top: 12%;
-          font-size: 12px;
-        }
+      .line:hover { background: rgba(255, 255, 255, 0.03); }
+      
+      .content-wrapper { 
+        display: inline;
+        white-space: pre-wrap; 
+        word-break: break-all;
       }
 
-      @media (max-width: 480px) {
+      .active-match {
+        background-color: rgba(79, 193, 255, 0.25);
+      }
+
+      @media (max-width: 1100px) {
+        #nav-sidebar { display: none; }
+        .terminal { max-width: 100%; }
+        #search-cmd { width: 80%; }
+      }
+      @media (max-width: 768px) {
+        body { padding: 15px; }
+        .terminal { padding: 20px; padding-top: 50px; font-size: 11px; }
+        .line { gap: 8px; }
+      }      @media (max-width: 480px) {
         #search-cmd {
         top: 3%;
         }
@@ -177,15 +243,12 @@
       <span class="command">git remote -v</span>      <span class="comment"># Confirm SSH remote is set correctly</span>
 
       <span class="section"># Configure SSH to use custom key</span>
-      <span class="command">nano ~/.ssh/config</span>
-      
-      <span class="comment"># Create or edit SSH config file</span>
-      <span class="command">
+      <span class="command">nano ~/.ssh/config        <span class="comment"># Create or edit SSH config file Force GitHub to use this SSH key</span>     
+      <span class="fileText">
       Host github.com
         IdentityFile ~/.ssh/id_ed25519_myname
         IdentitiesOnly yes
       </span>
-      <span class="comment"># Force GitHub to use this SSH key</span>
       
       <span class="section"># Networking</span>
       <span class="command">ifconfig / ip a 	 </span> <span class="comment"># Show IP addresses</span>
@@ -297,21 +360,21 @@
       
       <span class="section"># Edit Apache virtual host config</span>
       <span class="command">sudo nano /etc/apache2/sites-available/000-default.conf</span>
-      <span class="command">
+      <span class="fileText">
       <pre>
- &lt;VirtualHost *:80&gt;
-     ServerName mywebsite.com
-     ServerAlias www.mywebsite.com
-     DocumentRoot /var/www/html/project
-     &lt;Directory /var/www/html/project&gt;
-  Options Indexes FollowSymLinks
-  AllowOverride All
-  Require all granted
-     &lt;/Directory&gt;
-     ErrorLog ${APACHE_LOG_DIR}/project_error.log
-     CustomLog ${APACHE_LOG_DIR}/project_access.log combined
- &lt;/VirtualHost&gt;
- </pre></span>
+        &lt;VirtualHost *:80&gt;
+            ServerName mywebsite.com
+            ServerAlias www.mywebsite.com
+            DocumentRoot /var/www/html/project
+            &lt;Directory /var/www/html/project&gt;
+          Options Indexes FollowSymLinks
+          AllowOverride All
+          Require all granted
+            &lt;/Directory&gt;
+            ErrorLog ${APACHE_LOG_DIR}/project_error.log
+            CustomLog ${APACHE_LOG_DIR}/project_access.log combined
+        &lt;/VirtualHost&gt;
+      </pre></span>
  
       <span class="section"># Create an</span>
       <span class="command">sudo mkdir -p /var/www/mywebsite</span>
@@ -475,68 +538,39 @@
       <span class="section"># Process Management</span>
 
       <span class="command">pm2 list</span>              <span class="comment"># List all running processes</span>
-
       <span class="command">pm2 show api</span>              <span class="comment"># Show detailed info of a process</span>
-
       <span class="command">pm2 restart api</span>              <span class="comment"># Restart a specific app</span>
-
       <span class="command">pm2 restart all</span>              <span class="comment"># Restart all apps</span>
-
       <span class="command">pm2 stop api</span>              <span class="comment"># Stop a specific app</span>
-
       <span class="command">pm2 stop all</span>              <span class="comment"># Stop all apps</span>
-
       <span class="command">pm2 delete api</span>              <span class="comment"># Remove app from PM2</span>
-
       <span class="command">pm2 delete all</span>              <span class="comment"># Remove all apps from PM2</span>
 
-
       <span class="section"># Logs & Monitoring</span>
-
       <span class="command">pm2 logs</span>       <span class="comment"># Show logs of all apps</span>
-
       <span class="command">pm2 logs api</span>       <span class="comment"># Show logs for a specific app</span>
-
       <span class="command">pm2 monit</span>       <span class="comment"># Real-time CPU & memory monitoring</span>
 
-
       <span class="section"># Startup & Auto-Restart (Production)</span>
-
       <span class="command">pm2 startup</span>       <span class="comment"># Generate startup script for boot</span>
-
       <span class="command">sudo env PATH=$PATH:/usr/bin pm2 startup systemd -u $USER --hp $HOME</span>       <span class="comment"># Fix startup path issues (recommended)</span>
-
       <span class="command">pm2 save</span>       <span class="comment"># Save current process list for reboot restore</span>
-
       <span class="command">pm2 resurrect</span>       <span class="comment"># Restore apps after reboot</span>
 
-
       <span class="section"># Reload & Zero-Downtime</span>
-
       <span class="command">pm2 reload api</span>       <span class="comment"># Zero-downtime reload (cluster mode)</span>
-
       <span class="command">pm2 reload all</span>       <span class="comment"># Reload all apps</span>
 
-
       <span class="section"># Ecosystem File</span>
-
       <span class="command">pm2 init</span>       <span class="comment"># Create ecosystem.config.js</span>
-
       <span class="command">pm2 start ecosystem.config.js --env production</span>       <span class="comment"># Start apps in production mode</span>
 
-
       <span class="section"># Useful Maintenance Commands</span>
-
       <span class="command">pm2 flush</span>       <span class="comment"># Clear all logs</span>
-
       <span class="command">pm2 reloadLogs</span>       <span class="comment"># Reload log files without downtime</span>
-
       <span class="command">pm2 kill</span>       <span class="comment"># Stop PM2 daemon completely</span>
-
       <span class="command">pm2 update</span>       <span class="comment"># Update PM2 in-memory processes</span>
 
-
-      <span class="section"># MYSQL</span>
       <span class="section"># Login to MySQL</span>
       <span class="command">mysql -u root -p</span>
       
@@ -586,12 +620,14 @@
       <span class="command">USE database_name</span>
       
       <span class="section"># CREATE TABLE, SELECT, INSERT, UPDATE, DELETE</span>
-      <span class="command">CREATE TABLE users (</span>
-      <span class="command">  id INT AUTO_INCREMENT PRIMARY KEY,</span>
-      <span class="command">  name VARCHAR(100),</span>
-      <span class="command">  email VARCHAR(100),</span>
-      <span class="command">  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP</span>
-      <span class="command">);</span>
+      <span class="fileText">
+        CREATE TABLE users (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          name VARCHAR(100),
+          email VARCHAR(100),
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+      </span>
 
       <span class="command">SELECT * FROM users;</span>
       
@@ -717,14 +753,84 @@
       <span class="command">php artisan up   </span>  	<span class="comment"># Disable maintenance mode</span>
       
     </div>
+  </body>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const pre = document.getElementById("terminal-code");
-        const lines = pre.innerHTML.split("\n");
-        // Wrap each line in a div
+        const rawContent = pre.innerHTML;
+        const lines = rawContent.split("\n");
+        
         pre.innerHTML = lines
-          .map((line) => `<div class="line">${line}</div>`)
+          .map((line) => {
+            // Support Copy for both Command and FileText
+            if (line.includes('class="command"') ) {
+              return `<div class="line">
+                <button class="copy-btn" title="Copy text"></button>
+                <div class="content-wrapper">${line}</div>
+              </div>`;
+            }
+            if (line.includes('class="section"')) {
+                const id = "sec-" + line.replace(/<[^>]*>/g, '').replace(/[^a-z0-9]/gi, '-').toLowerCase();
+                return `<div class="line" id="${id}">${line}</div>`;
+            }
+            return `<div class="line">${line}</div>`;
+          })
           .join("");
+
+        const sidebar = document.createElement('div');
+        sidebar.id = 'nav-sidebar';
+        sidebar.innerHTML = '<div class="sidebar-title">NAVIGATION</div>';
+        
+        // Define key sections to show in sidebar
+        const keySections = [
+          "File & Directory",
+          "Permissions",
+          "SSH",
+          "Networking",
+          "Package Management",
+          "Git & Deployment",
+          "Install PHP APACHE MYSQL",
+          "Node",
+          "MYSQL",
+          "LARAVEL"
+        ];
+
+        pre.querySelectorAll('.line').forEach(line => {
+          const section = line.querySelector('.section');
+          if (section) {
+            const title = section.textContent.replace('#', '').trim();
+            if (keySections.some(ks => title.includes(ks))) {
+              const link = document.createElement('a');
+              link.href = "#" + line.id;
+              link.textContent = title;
+              link.onclick = (e) => {
+                  e.preventDefault();
+                  line.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              };
+              sidebar.appendChild(link);
+            }
+          }
+        });
+        document.body.prepend(sidebar);
+
+        // Handle copy event
+        pre.addEventListener('click', async (e) => {
+          if (e.target.classList.contains('copy-btn')) {
+            const line = e.target.closest('.line');
+            // Try command first, then fileText
+            const targetEl = line.querySelector('.command') || line.querySelector('.fileText');
+            if (targetEl) {
+              const text = targetEl.innerText.trim();
+              try {
+                await navigator.clipboard.writeText(text);
+                e.target.classList.add('copied');
+                setTimeout(() => e.target.classList.remove('copied'), 2000);
+              } catch (err) {
+                console.error('Failed to copy!', err);
+              }
+            }
+          }
+        });
 
         const searchInput = document.getElementById("search-cmd");
         let matches = [];
@@ -758,11 +864,9 @@
         searchInput.addEventListener("keydown", (e) => {
           if (e.key === "Enter" && matches.length > 0) {
             e.preventDefault();
-            // Remove highlight from current
             if (matches[currentMatchIndex]) {
               matches[currentMatchIndex].classList.remove("active-match");
             }
-            // Move to next
             currentMatchIndex++;
             if (currentMatchIndex >= matches.length) {
               currentMatchIndex = 0;
@@ -778,5 +882,4 @@
         }
       });
     </script>
-  </body>
 </html>
