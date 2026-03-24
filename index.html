@@ -22,7 +22,7 @@
 
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
       rel="stylesheet"
     />
     <script type="application/ld+json">
@@ -49,545 +49,278 @@
         "keywords": "bash, linux, terminal, ssh, git, mysql, laravel, npm, pm2, redis, devops"
       }
     </script>
-    <style>
+        <style>
       :root {
-        --bg: #0a0a0a;
-        --bg-grid: rgba(255, 255, 255, 0.06);
-        --panel: rgba(16, 16, 16, 0.95);
-        --panel-solid: #0f0f0f;
-        --border: #303030;
-        --text: #ececec;
-        --text-dim: #a3a3a3;
-        --title: #ffffff;
-        --accent: #f2f2f2;
-        --accent-2: #d7d7d7;
-        --cmd: #ffffff;
-        --comment: #9f9f9f;
-        --line-hover: rgba(255, 255, 255, 0.05);
-        --active-match: rgba(255, 255, 255, 0.12);
-        --shadow: 0 16px 35px rgba(0, 0, 0, 0.55);
+        --bg: #000;
+        --border: #27272a;
+        --text: #a1a1aa;
+        --text-dim: #71717a;
+        --title: #fff;
+        --accent: #fff;
+        --accent-2: #71717a;
+        --cmd: #fff;
+        --comment: #52525b;
+        --line-hover: #09090b;
+        --active-match: #18181b;
       }
 
-      * {
-        box-sizing: border-box;
-      }
+      * { box-sizing: border-box; }
 
       body {
-        background:
-          radial-gradient(circle at 12% 8%, rgba(255, 255, 255, 0.06), transparent 35%),
-          radial-gradient(circle at 85% 18%, rgba(255, 255, 255, 0.05), transparent 30%),
-          linear-gradient(180deg, #090909 0%, #050505 100%);
-        background-attachment: fixed;
+        background-color: var(--bg);
         color: var(--text);
-        font-family: "Space Mono", "Fira Code", monospace;
+        font-family: "Inter", sans-serif;
         margin: 0;
         min-height: 100vh;
       }
 
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        background-image:
-          linear-gradient(to right, var(--bg-grid) 1px, transparent 1px),
-          linear-gradient(to bottom, var(--bg-grid) 1px, transparent 1px);
-        background-size: 42px 42px;
-        opacity: 0.22;
-        z-index: 0;
-      }
-
       .app-shell {
         position: relative;
-        z-index: 1;
-        width: min(1400px, 100% - 40px);
-        margin: 26px auto;
+        width: 100%;
+        margin: 0;
         display: flex;
-        gap: 22px;
-        align-items: flex-start;
+        align-items: stretch;
       }
 
-      /* Sidebar styling - Static & Scrollable */
+      /* Sidebar */
       #nav-sidebar {
         position: sticky;
-        top: 20px;
-        height: calc(100vh - 40px);
-        width: 260px;
-        min-width: 260px;
+        top: 0;
+        height: 100vh;
+        width: 288px;
+        min-width: 288px;
         display: flex;
         flex-direction: column;
-        gap: 0;
-        background: var(--panel);
-        padding: 0;
-        border-radius: 14px;
-        border: 1px solid var(--border);
-        backdrop-filter: blur(8px);
-        overflow: hidden;
-        box-shadow: var(--shadow);
-        transition: width 0.3s ease, min-width 0.3s ease;
+        background: var(--bg);
+        border: none;
+        border-right: 1px solid var(--border);
+        border-radius: 0;
+        transition: none;
       }
 
       #nav-sidebar .sidebar-scroll {
         flex: 1;
         overflow-y: auto;
         overflow-x: hidden;
-        padding: 4px 12px 14px;
+        padding: 32px 32px;
       }
+      
+      #nav-sidebar .sidebar-scroll::-webkit-scrollbar { width: 4px; }
+      #nav-sidebar .sidebar-scroll::-webkit-scrollbar-thumb { background: #27272a; }
 
-      #nav-sidebar .sidebar-scroll::-webkit-scrollbar { width: 3px; }
-      #nav-sidebar .sidebar-scroll::-webkit-scrollbar-track { background: transparent; }
-      #nav-sidebar .sidebar-scroll::-webkit-scrollbar-thumb { background: #3a3a3a; border-radius: 10px; }
-      #nav-sidebar .sidebar-scroll::-webkit-scrollbar-thumb:hover { background: #555; }
-
-      #nav-sidebar.collapsed {
-        width: 52px;
-        min-width: 52px;
-      }
-
-      /* Toggle button — icon-based, pinned at top */
       .sidebar-toggle {
+        display: none;
         width: 100%;
         border: none;
         border-bottom: 1px solid var(--border);
-        background: rgba(20, 20, 20, 0.9);
+        background: #09090b;
         color: var(--title);
-        padding: 12px 14px;
-        font-size: 0;
+        padding: 16px 20px;
         font-family: inherit;
         cursor: pointer;
-        display: flex;
         align-items: center;
         gap: 10px;
-        flex-shrink: 0;
-        transition: background 0.2s;
-      }
-
-      .sidebar-toggle:hover {
-        background: rgba(35, 35, 35, 0.95);
-      }
-
-      .sidebar-toggle .toggle-icon {
-        width: 22px;
-        height: 22px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-      }
-
-      .sidebar-toggle .toggle-icon svg {
-        width: 18px;
-        height: 18px;
-        stroke: var(--accent-2);
-        transition: transform 0.3s ease;
-      }
-
-      #nav-sidebar.collapsed .sidebar-toggle .toggle-icon svg {
-        transform: rotate(180deg);
-      }
-
-      .sidebar-toggle .toggle-label {
-        font-size: 0.68rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        color: var(--text-dim);
         font-weight: 700;
-        white-space: nowrap;
-        overflow: hidden;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-size: 0.85rem;
       }
+      .sidebar-toggle .toggle-icon { width: 18px; display: flex; align-items: center; }
+      .sidebar-toggle .toggle-icon svg { width: 100%; stroke: var(--title); transition: transform 0.3s ease; }
+      #nav-sidebar.collapsed .sidebar-toggle .toggle-icon svg { transform: rotate(180deg); }
 
-      #nav-sidebar.collapsed .toggle-label {
-        display: none;
-      }
-
-      /* Sidebar inner content */
       #nav-sidebar .sidebar-inner {
         display: flex;
         flex-direction: column;
-        gap: 6px;
+        gap: 0;
       }
+      
+      .sidebar-help { display: none; }
 
-      #nav-sidebar.collapsed .sidebar-inner {
-        display: none;
-      }
-
-      #nav-sidebar nav {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-      }
-
-      #nav-sidebar .sidebar-help {
-        color: var(--text-dim);
-        font-size: 0.68rem;
-        line-height: 1.5;
-        margin: 0 0 6px;
-        padding: 0 2px;
-      }
-
-      /* Nav group — collapsible */
+      /* Nav Groups */
       #nav-sidebar .nav-group {
-        border: 1px solid #2a2a2a;
-        border-radius: 8px;
-        overflow: hidden;
-        background: rgba(18, 18, 18, 0.6);
+        margin-bottom: 8px;
+        border: none;
+        background: transparent;
       }
 
       #nav-sidebar .nav-group-title {
-        color: var(--accent-2);
-        font-size: 0.67rem;
+        color: var(--title);
+        font-size: 0.75rem;
+        font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 1.2px;
-        padding: 8px 10px;
-        background: rgba(28, 28, 28, 0.8);
+        letter-spacing: 0.05em;
+        padding: 8px 0;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: space-between;
         user-select: none;
-        transition: background 0.2s, color 0.2s;
-        border-bottom: 1px solid transparent;
+        background: transparent;
       }
 
-      #nav-sidebar .nav-group-title:hover {
-        background: rgba(40, 40, 40, 0.9);
-        color: var(--title);
-      }
-
-      #nav-sidebar .nav-group-title .group-arrow {
-        width: 14px;
-        height: 14px;
-        transition: transform 0.25s ease;
-        opacity: 0.5;
-        flex-shrink: 0;
-      }
-
-      #nav-sidebar .nav-group.collapsed-group .group-arrow {
-        transform: rotate(-90deg);
-      }
-
-      #nav-sidebar .nav-group-title .group-count {
-        font-size: 0.6rem;
-        color: var(--comment);
-        margin-left: auto;
-        margin-right: 6px;
-        font-weight: 400;
-      }
+      #nav-sidebar .nav-group-title .group-arrow { width: 14px; height: 14px; opacity: 0.5; transition: transform 0.2s; }
+      #nav-sidebar .nav-group.collapsed-group .group-arrow { transform: rotate(-90deg); }
+      #nav-sidebar .nav-group-title .group-count { display: none; }
 
       #nav-sidebar .nav-group-links {
-        display: flex;
-        flex-direction: column;
-        padding: 3px 0;
-        max-height: 600px;
-        overflow: hidden;
-        transition: max-height 0.3s ease, padding 0.3s ease;
+        display: flex; flex-direction: column; overflow: hidden; padding: 0;
       }
-
-      #nav-sidebar .nav-group.collapsed-group .nav-group-links {
-        max-height: 0;
-        padding: 0;
-      }
+      #nav-sidebar .nav-group.collapsed-group .nav-group-links { max-height: 0; }
 
       #nav-sidebar a {
         color: var(--accent-2);
         text-decoration: none;
-        font-size: 0.7rem;
-        transition: all 0.15s ease;
-        padding: 5px 10px 5px 12px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        font-size: 0.85rem;
+        transition: all 0.2s;
+        padding: 6px 12px;
+        border-left: 1px solid var(--border);
         display: block;
-        border-left: 2px solid transparent;
       }
 
-      #nav-sidebar a:hover {
+      #nav-sidebar a:hover, #nav-sidebar a.active {
         color: var(--title);
-        background: rgba(255, 255, 255, 0.07);
-        border-left-color: rgba(255, 255, 255, 0.2);
-      }
-
-      #nav-sidebar a.active {
-        border-left-color: var(--accent);
-        color: var(--title);
-        background: rgba(255, 255, 255, 0.1);
+        background-color: #09090b;
+        border-left-color: var(--title);
       }
 
       .sidebar-links {
-        border-top: 1px solid #2a2a2a;
-        padding: 10px 2px 4px;
+        border-top: 1px solid var(--border);
+        padding-top: 16px;
+        margin-top: 16px;
         display: flex;
         flex-direction: column;
-        gap: 4px;
+        gap: 8px;
       }
 
-      .sidebar-links a {
-        white-space: normal;
-        font-size: 0.68rem !important;
-        opacity: 0.7;
-      }
-
-      .sidebar-links a:hover {
-        opacity: 1;
-      }
-
-      #nav-sidebar .sidebar-title {
-        display: none;
-      }
-
+      /* Main content */
       .terminal {
-        background: linear-gradient(180deg, var(--panel-solid), #070707 130%);
-        border-radius: 14px;
-        padding: 20px;
-        padding-top: 24px;
-        box-shadow: var(--shadow);
+        background: var(--bg);
         flex-grow: 1;
-        max-width: 77%;
-        position: relative;
-        border: 1px solid var(--border);
-        overflow: hidden;
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
       }
 
-      .terminal::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #f5f5f5, #8f8f8f, #f5f5f5);
-        opacity: 0.8;
+      .terminal-container { 
+        max-width: 56rem;
+        margin: 0 auto;
+        padding: 64px 32px;
+        width: 100%;
       }
+
+      /* Desktop hidden items */
+      .terminal::before, .terminal-topbar, .eyebrow { display: none; }
 
       .terminal-header {
-        margin: 4px 0 14px;
-        padding: 2px 4px 10px;
-        border-bottom: 1px dashed #3a3a3a;
-      }
-
-      .terminal-topbar {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-        margin-bottom: 14px;
-      }
-
-      .dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 999px;
-        background: #8b8b8b;
-      }
-
-      .dot:nth-child(1) { background: #b2b2b2; }
-      .dot:nth-child(2) { background: #969696; }
-      .dot:nth-child(3) { background: #737373; }
-
-      .eyebrow {
-        margin: 0 0 5px;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        color: var(--text-dim);
-        font-size: 0.72rem;
+        margin-bottom: 32px;
+        padding-bottom: 32px;
+        border-bottom: 1px solid #27272a;
       }
 
       h1 {
         margin: 0;
         color: var(--title);
-        font-family: "Fira Code", monospace;
-        font-size: clamp(1.3rem, 2vw, 1.9rem);
-        letter-spacing: 0.4px;
+        font-size: 2.75rem;
+        font-weight: 700;
+        letter-spacing: -0.05em;
+        text-transform: uppercase;
+        line-height: 1.3;
       }
 
       .terminal-intro {
-        margin: 8px 0 0;
-        color: var(--text-dim);
-        font-size: 0.78rem;
-        max-width: 86ch;
-        line-height: 1.5;
+        margin: 16px 0 0;
+        color: var(--text);
+        font-size: 1rem;
+        line-height: 1.8;
       }
 
-      .search-meta {
-        margin-top: 8px;
-        font-size: 0.72rem;
-        color: var(--comment);
-      }
-
-      .meta-links {
-        margin-top: 8px;
-        padding-top: 8px;
-        border-top: 1px dashed #3a3a3a;
-        display: flex;
-        gap: 14px;
-        flex-wrap: wrap;
-        font-size: 0.74rem;
-      }
-
-      .meta-links a {
-        color: var(--accent-2);
-        text-decoration: none;
-      }
-
-      .meta-links a:hover {
-        color: var(--title);
-        text-decoration: underline;
-      }
-
-      .comment { color: #6a9955; 
-        font-size: 0.8em;
-      }
-      .command { 
-        color: var(--cmd);
-        font-size: 0.8em;
-      }
-      
-      .section {
-        font-weight: bold;
-        color: var(--accent);
-        margin: 25px 0 10px 0;
-        display: block;
-        border-bottom: 1px solid #303030;
-        padding-bottom: 4px;
-        font-size: 0.8em;
-      }
-      .copy-btn {
-        background: #161616;
-        border: 1px solid #3e3e3e;
-        color: #d2d2d2;
-        cursor: pointer;
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-size: 9px;
-        font-family: inherit;
-        transition: all 0.2s;
-        flex-shrink: 0;
-      }
-      .copy-btn:hover { background: #262626; color: #ffffff; }
-      .copy-btn::after { content: 'COPY'; }
-      .copy-btn.copied { background: #2b2b2b; color: #ffffff; }
-      .copy-btn.copied::after { content: 'DONE'; }
+      .search-meta { margin-top: 8px; font-size: 0.85rem; color: var(--comment); }
 
       #search-cmd {
         position: sticky;
-        top: 12px;
+        top: 24px;
         z-index: 100;
-        background: rgba(13, 13, 13, 0.95);
-        border: 1px solid #3a3a3a;
-        border-radius: 8px;
+        background: #000;
+        border: 1px solid var(--border);
+        border-radius: 6px;
         color: var(--title);
-        font-family: "Fira Code", monospace;
+        font-family: inherit;
         font-size: 0.95rem;
-        width: min(640px, 100%);
-        padding: 10px 14px;
+        width: 100%;
+        padding: 14px 20px;
         outline: none;
-        backdrop-filter: blur(8px);
+        margin-bottom: 32px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.8);
       }
 
-      #search-cmd::placeholder {
-        color: #9a9a9a;
-      }
+      #search-cmd:focus { border-color: #71717a; }
 
-      #search-cmd:focus {
-        border-color: #efefef;
-        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.14);
+      #terminal-code {
+        font-family: 'Space Mono', 'Fira Code', monospace;
+        font-size: 0.85rem;
       }
-
+      
       .line {
         display: flex;
         align-items: flex-start;
         gap: 12px;
-        min-height: 1.8em;
-        padding: 4px 8px;
+        padding: 6px 12px;
         border-radius: 4px;
       }
       .line:hover { background: var(--line-hover); }
+
+      .content-wrapper { display: inline; white-space: pre-wrap; word-break: break-all; line-height: 1.6; color: #d4d4d8; }
       
-      .content-wrapper { 
-        display: inline;
-        white-space: pre-wrap; 
-        word-break: break-all;
+      .section {
+        color: var(--title);
+        font-family: "Inter", sans-serif;
+        font-size: 1.25rem;
+        margin: 48px 0 16px 0;
+        display: block;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 8px;
+        letter-spacing: -0.025em;
+        font-weight: 700;
       }
 
-      .active-match {
-        background-color: var(--active-match);
+      .command { color: #fff; }
+      .comment { color: #52525b; font-family: "Inter", sans-serif; font-size: 0.8rem; }
+
+      .active-match { background-color: var(--active-match); border-left: 2px solid var(--title); }
+
+      .copy-btn {
+        background: #09090b; border: 1px solid var(--border); color: #71717a; cursor: pointer;
+        padding: 4px 8px; border-radius: 4px; font-size: 10px; flex-shrink: 0;
+        font-family: 'Inter', sans-serif; font-weight: 600; text-transform: uppercase;
       }
+      .copy-btn:hover { background: #18181b; color: #fff; }
+      .copy-btn::after { content: 'COPY'; }
+      .copy-btn.copied { background: #27272a; color: #fff; }
+      .copy-btn.copied::after { content: 'DONE'; }
 
-      .sr-only {
-        border: 0;
-        clip: rect(0 0 0 0);
-        height: 1px;
-        margin: -1px;
-        overflow: hidden;
-        padding: 0;
-        position: absolute;
-        width: 1px;
-      }
+      .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; }
 
-      @media (max-width: 1100px) {
-        .app-shell {
-          width: min(1180px, calc(100% - 24px));
-        }
-
+      @media (max-width: 1024px) {
+        .app-shell { flex-direction: column; }
         #nav-sidebar {
-          min-width: 210px;
-          width: 28%;
-        }
-
-        .terminal { max-width: 72%; }
-      }
-
-      @media (max-width: 768px) {
-        .app-shell {
-          width: calc(100% - 18px);
-          margin: 10px auto 16px;
-          flex-direction: column;
-          gap: 12px;
-        }
-
-        #nav-sidebar {
-          position: relative;
-          top: 0;
+          width: 100%;
+          min-width: 100%;
           height: auto;
-          width: 100% !important;
-          min-width: 0 !important;
+          position: relative;
+          border-right: none;
+          border-bottom: 1px solid var(--border);
         }
-
-        #nav-sidebar.collapsed {
-          width: 100% !important;
-          min-width: 0 !important;
-        }
-
-        #nav-sidebar .sidebar-scroll {
-          max-height: 50vh;
-        }
-
-        .terminal {
-          max-width: 100%;
-          padding: 16px;
-          font-size: 11px;
-        }
-
-        .terminal-header {
-          padding-bottom: 8px;
-        }
-
-        h1 {
-          font-size: 1.15rem;
-        }
-
-        .line { gap: 8px; }
-      }
-
-      @media (max-width: 480px) {
-        #search-cmd {
-          top: 6px;
-          padding: 9px 10px;
-          font-size: 0.85rem;
-        }
-
-        .terminal-intro {
-          font-size: 0.73rem;
-        }
+        .sidebar-toggle { display: flex; }
+        #nav-sidebar .sidebar-scroll { max-height: 50vh; padding: 16px 20px; }
+        #nav-sidebar.collapsed .sidebar-inner { display: none; }
+        #nav-sidebar.collapsed .sidebar-scroll { display: none; }
+        
+        .terminal-container { padding: 32px 20px; }
+        h1 { font-size: 2rem; }
       }
     </style>
   </head>
@@ -615,6 +348,7 @@
       </aside>
 
       <main class="terminal">
+      <div class="terminal-container">
       <div class="terminal-topbar" aria-hidden="true">
         <span class="dot"></span>
         <span class="dot"></span>
@@ -1174,6 +908,7 @@ Host github.com
 <span class="command">php artisan storage:link </span> 	<span class="comment"># Link storage to public</span>
 <span class="command">php artisan down   </span>	<span class="comment"># Maintenance mode</span>
 <span class="command">php artisan up   </span>  	<span class="comment"># Disable maintenance mode</span>
+      </div>
       </div>
       </main>
     </div>
