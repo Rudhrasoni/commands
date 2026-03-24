@@ -1,0 +1,2026 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agentic AI & Automation Guidebook</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"]
+            },
+            colors: {
+              mono: {
+                50: "#fafafa",
+                100: "#f4f4f5",
+                200: "#e4e4e7",
+                300: "#d4d4d8",
+                400: "#a1a1aa",
+                500: "#71717a",
+                600: "#52525b",
+                700: "#3f3f46",
+                800: "#27272a",
+                900: "#18181b",
+                950: "#09090b"
+              }
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      body {
+        background-color: #000000;
+        color: #fff;
+        font-family: "Inter", sans-serif;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #000;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+
+      .prose h1,
+      .prose h2,
+      .prose h3,
+      .prose h4 {
+        color: #fff;
+        font-weight: 700;
+        tracking: tight;
+      }
+
+      .prose h1 {
+        font-size: 2rem;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        border-bottom: 2px solid #333;
+        padding-bottom: 1rem;
+        line-height: 1.3;
+        text-transform: uppercase;
+        letter-spacing: -0.05em;
+      }
+      @media (min-width: 1024px) {
+        .prose h1 {
+          font-size: 2.75rem;
+        }
+      }
+
+      .prose h2 {
+        font-size: 1.5rem;
+        margin-top: 3rem;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid #333;
+        padding-bottom: 0.5rem;
+        letter-spacing: -0.025em;
+      }
+      @media (min-width: 1024px) {
+        .prose h2 {
+          font-size: 1.75rem;
+          margin-top: 4rem;
+        }
+      }
+
+      .prose h3 {
+        font-size: 1.25rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: #e4e4e7;
+      }
+      @media (min-width: 1024px) {
+        .prose h3 {
+          font-size: 1.35rem;
+          margin-top: 2.5rem;
+        }
+      }
+
+      .prose h4 {
+        font-size: 1rem;
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+        color: #d4d4d8;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .prose p {
+        margin-bottom: 1.25rem;
+        color: #a1a1aa;
+        line-height: 1.8;
+        font-size: 0.95rem;
+      }
+      @media (min-width: 1024px) {
+        .prose p {
+          font-size: 1rem;
+        }
+      }
+
+      .prose ul {
+        margin-bottom: 1.5rem;
+        padding-left: 1.5rem;
+        list-style-type: none;
+        color: #a1a1aa;
+        font-size: 0.95rem;
+      }
+      @media (min-width: 1024px) {
+        .prose ul {
+          font-size: 1rem;
+        }
+      }
+
+      .prose li {
+        margin-bottom: 0.75rem;
+        position: relative;
+        line-height: 1.6;
+      }
+      .prose li::before {
+        content: "—";
+        position: absolute;
+        left: -1.25rem;
+        color: #52525b;
+      }
+      .prose strong {
+        color: #fff;
+        font-weight: 600;
+      }
+
+      .table-wrapper {
+        overflow-x: auto;
+        margin: 2rem 0;
+        border: 1px solid #27272a;
+        border-radius: 6px;
+        -webkit-overflow-scrolling: touch;
+      }
+      table {
+        width: 100%;
+        min-width: 600px;
+        text-align: left;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+      }
+      th,
+      td {
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid #27272a;
+      }
+      th {
+        background-color: #09090b;
+        color: #fff;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      tr:nth-child(even) {
+        background-color: #09090b;
+      }
+
+      blockquote {
+        border-left: 2px solid #fff;
+        padding: 1.25rem 1rem 1.25rem 1.5rem;
+        background-color: #09090b;
+        margin: 2rem 0;
+        border-radius: 0 6px 6px 0;
+      }
+      @media (min-width: 1024px) {
+        blockquote {
+          padding: 1.5rem 1.5rem 1.5rem 2rem;
+        }
+      }
+      blockquote p {
+        margin-bottom: 0 !important;
+        color: #e4e4e7;
+        font-size: 0.95rem;
+      }
+      @media (min-width: 1024px) {
+        blockquote p {
+          font-size: 1rem;
+        }
+      }
+
+      pre {
+        background-color: #09090b;
+        padding: 1rem;
+        border-radius: 6px;
+        border: 1px solid #27272a;
+        overflow-x: auto;
+        margin: 1.5rem 0;
+        -webkit-overflow-scrolling: touch;
+      }
+      @media (min-width: 1024px) {
+        pre {
+          padding: 1.5rem;
+          margin: 2rem 0;
+        }
+      }
+      code {
+        font-family: "JetBrains Mono", monospace;
+        color: #d4d4d8;
+        font-size: 0.8rem;
+        line-height: 1.7;
+      }
+      @media (min-width: 1024px) {
+        code {
+          font-size: 0.85rem;
+        }
+      }
+      p code,
+      li code {
+        background-color: #09090b;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        border: 1px solid #27272a;
+        word-break: break-all;
+      }
+
+      .nav-link {
+        display: block;
+        padding: 0.5rem 1.25rem;
+        color: #71717a;
+        border-left: 1px solid #27272a;
+        transition: all 0.2s;
+        font-size: 0.85rem;
+      }
+      .nav-link:hover,
+      .nav-link.active {
+        color: #fff;
+        border-left-color: #fff;
+        background-color: #09090b;
+      }
+    </style>
+  </head>
+  <body class="antialiased pb-24 overflow-x-hidden w-full">
+    <!-- Sidebar -->
+    <aside
+      class="fixed top-0 left-0 h-screen w-72 bg-black border-r border-zinc-800 hidden lg:flex flex-col z-40"
+    >
+      <div class="p-8 pb-6">
+        <h2 class="font-bold text-lg tracking-tight text-white mb-2 uppercase">
+          Guidebook
+        </h2>
+        <p
+          class="text-[0.65rem] text-zinc-500 font-mono tracking-widest uppercase"
+        >
+          Practical Edition 2025
+        </p>
+      </div>
+
+      <nav class="flex-1 overflow-y-auto pt-2 pb-6 space-y-px" id="toc">
+        <a href="#ch0" class="nav-link">Chapter 0: Roadmap</a>
+        <a href="#ch1" class="nav-link">Chapter 1: Foundation</a>
+        <a href="#ch2" class="nav-link">Chapter 2: n8n Mastery</a>
+        <a href="#ch3" class="nav-link">Chapter 3: Other Platforms</a>
+        <a href="#ch4" class="nav-link">Chapter 4: Agentic AI</a>
+        <a href="#ch5" class="nav-link">Chapter 5: Vibe Coding</a>
+        <a href="#ch6" class="nav-link">Chapter 6: Business</a>
+        <a href="#ch7" class="nav-link">Chapter 7: Scaling</a>
+      </nav>
+      <div class="p-6 border-t border-zinc-800 mt-auto">
+        <a
+          href="/"
+          class="flex items-center text-xs uppercase tracking-wider text-zinc-400 font-bold hover:text-white transition-colors"
+          >← Back to Commands</a
+        >
+      </div>
+    </aside>
+
+    <!-- Mobile Header -->
+    <header
+      class="lg:hidden bg-black fixed top-0 w-full z-40 border-b border-zinc-800 px-5 py-4 flex justify-between items-center shadow-md"
+    >
+      <h1 class="font-bold text-white uppercase tracking-tight text-sm">
+        Guidebook
+      </h1>
+      <a
+        href="/"
+        class="text-xs uppercase tracking-widest text-zinc-400 font-bold hover:text-white border border-zinc-700 px-3 py-1.5 rounded-sm"
+        >Back</a
+      >
+    </header>
+
+    <!-- Main Content Area -->
+    <div class="lg:ml-72 pt-24 lg:pt-16 px-6 lg:px-20">
+      <main class="max-w-4xl mx-auto w-full prose">
+        <h1 class="title">
+          THE COMPLETE AGENTIC AI & AUTOMATION <br />COMPANY GUIDEBOOK
+        </h1>
+        <h4>AGENTIC AI &</h4>
+        <h4>AUTOMATION</h4>
+        <h4>COMPANY GUIDEBOOK</h4>
+        <p>Workflow Automation • Agentic AI • Vibe Coding</p>
+        <p>From Zero Knowledge → Running Company</p>
+        <p>Practical Edition | 2025</p>
+        <h4>📌 What This Guidebook Covers</h4>
+        <ul>
+          <li>
+            ✅ Foundation: Architecture thinking, APIs, JSON, Business Process
+            Knowledge
+          </li>
+          <li>
+            ✅ Workflow Automation: n8n (every node), Make.com, Gumloop, Zapier
+            & more
+          </li>
+          <li>
+            ✅ Agentic AI: LangChain, CrewAI, AutoGen — build real AI Sales
+            Agents
+          </li>
+          <li>
+            ✅ Vibe Coding: Cursor, Lovable, Bolt, v0 — build apps using prompts
+            only
+          </li>
+          <li>
+            ✅ Business: How to get clients, price services, scale to SaaS
+          </li>
+          <li>
+            ✅ Real project walkthroughs, prompt examples, YouTube resources
+          </li>
+        </ul>
+        <h2 id="ch0">CHAPTER 0</h2>
+        <h3>Your Master Roadmap</h3>
+        <p>The complete path from beginner to automation agency owner</p>
+        <p>
+          Before diving into individual chapters, internalize this end-to-end
+          learning path. Each phase builds on the previous one. Do NOT skip
+          phases — the foundation is what separates freelancers who charge
+          ₹10,000 from agencies charging ₹2,00,000+.
+        </p>
+        <h4>| PHASE | WHAT TO DO / LEARN |</h4>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Phase 1 (Week 1-2)</th>
+                <th>
+                  Business knowledge, workflow architecture thinking, APIs, JSON
+                  basics
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Phase 2 (Week 3-4)</td>
+                <td>
+                  n8n mastery — every node type, triggers, HTTP, OpenAI node
+                </td>
+              </tr>
+              <tr>
+                <td>Phase 3 (Week 5-6)</td>
+                <td>
+                  Make.com + Gumloop + templates library — build reusable
+                  systems
+                </td>
+              </tr>
+              <tr>
+                <td>Phase 4 (Week 7-8)</td>
+                <td>
+                  Agentic AI — LangChain agents, CrewAI multi-agent systems
+                </td>
+              </tr>
+              <tr>
+                <td>Phase 5 (Week 9-10)</td>
+                <td>
+                  Vibe Coding — Cursor, Lovable, Bolt, v0 for client dashboards
+                </td>
+              </tr>
+              <tr>
+                <td>Phase 6 (Week 11-12)</td>
+                <td>Build demos, choose niche, close first client</td>
+              </tr>
+              <tr>
+                <td>Phase 7 (Month 4+)</td>
+                <td>Scale: retainers, SaaS products, hire team</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <blockquote>
+          <p>
+            <strong>🔥 The One Mental Model That Changes Everything</strong>
+          </p>
+        </blockquote>
+        <p>
+          Stop thinking like a tool user. Start thinking like a SYSTEMS
+          ARCHITECT.
+        </p>
+        <p>Every business problem = an input → process → output flow.</p>
+        <p>Your job is to automate that flow using AI + automation tools.</p>
+        <p>
+          The more businesses you understand, the more problems you can solve.
+        </p>
+        <p>TOOLS ARE INTERCHANGEABLE. Business thinking is your moat.</p>
+        <h2 id="ch1">CHAPTER 1</h2>
+        <h3>Foundation Knowledge</h3>
+        <p>What you MUST know before touching any tool</p>
+        <h3>1.1 — Why Foundation Comes First</h3>
+        <p>
+          Most beginners jump straight into n8n tutorials. They build one
+          workflow, get stuck, and quit. The ones who succeed spend 2 weeks
+          understanding HOW systems think before building anything. This chapter
+          is your competitive advantage.
+        </p>
+        <h3>1.2 — Workflow Architecture Thinking</h3>
+        <p>
+          Workflow architecture means understanding how information flows
+          through a system — from trigger (something happens) to actions (things
+          that happen because of it) to output (the final result delivered to a
+          person or system).
+        </p>
+        <p>The 3-Layer Architecture Model</p>
+        <h4>| LAYER | WHAT IT MEANS |</h4>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Layer 1: Triggers</th>
+                <th>
+                  What starts the workflow? Form submit, webhook, schedule,
+                  email received, CRM update
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Layer 2: Logic & AI</td>
+                <td>
+                  IF conditions, data transformation, AI classification,
+                  enrichment, decision trees
+                </td>
+              </tr>
+              <tr>
+                <td>Layer 3: Actions</td>
+                <td>
+                  Send WhatsApp, create CRM record, book calendar, send email,
+                  update sheet
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          <strong>Practical Exercise:</strong> Draw These 3 Workflows on Paper
+        </p>
+        <ul>
+          <li>Lead → CRM → WhatsApp → Google Calendar Booking</li>
+          <li>
+            E-commerce Order → WhatsApp status update → Review request after 7
+            days
+          </li>
+          <li>
+            Coaching webinar signup → Email sequence → Upsell WhatsApp
+            automation
+          </li>
+        </ul>
+        <blockquote>
+          <p><strong>💡 Pro Tip: The Paper-First Rule</strong></p>
+        </blockquote>
+        <p>
+          NEVER open n8n or Make.com before drawing your workflow on paper
+          first.
+        </p>
+        <p>Draw boxes for each step. Draw arrows showing data flow.</p>
+        <p>Write what data enters each box and what leaves it.</p>
+        <p>
+          Only when you can explain it to someone else on paper — THEN open the
+          tool.
+        </p>
+        <h3>1.3 — APIs and JSON: The Language of Automation</h3>
+        <p>
+          APIs (Application Programming Interfaces) are how software
+          applications talk to each other. Every modern tool — WhatsApp, Stripe,
+          Google Calendar, HubSpot, GPT-4 — exposes an API. When you send a
+          webhook or make an HTTP request, you are calling an API.
+        </p>
+        <p>API Concepts You Must Know</p>
+        <ul>
+          <li>
+            REST API: Most common type. Uses HTTP methods: GET (read), POST
+            (create), PUT (update), DELETE (remove)
+          </li>
+          <li>
+            Endpoint: The URL where you send a request. Example:
+            https://api.openai.com/v1/chat/completions
+          </li>
+          <li>
+            API Key: Your secret password to authenticate. NEVER share it
+            publicly
+          </li>
+          <li>
+            Request Body: Data you send TO the API (usually in JSON format)
+          </li>
+          <li>
+            Response: Data the API sends BACK to you (usually in JSON format)
+          </li>
+          <li>
+            Status Codes: 200 = success, 400 = bad request, 401 = unauthorized,
+            500 = server error
+          </li>
+        </ul>
+        <p>JSON — The Universal Data Language</p>
+        <p>
+          JSON (JavaScript Object Notation) is how data is structured in almost
+          every API call. If you cannot read and write JSON, you cannot do
+          automation professionally.
+        </p>
+        <pre><code>// Example JSON: A lead that comes in from a form
+{
+"name": "Rahul Sharma",
+"email": "rahul@gmail.com",
+"phone": "+91-9876543210",
+"source": "Facebook Ad",
+"budget": 50000,
+"interested_in": "Real Estate",
+"timestamp": "2025-01-15T10:30:00Z"
+}</code></pre>
+        <pre><code>// Accessing nested data
+// In n8n: {{ $json.name }} → Rahul Sharma
+// In n8n: {{ $json.budget }} → 50000</code></pre>
+        <p>JSON Practice Tasks</p>
+        <ul>
+          <li>
+            Read a JSON response from a free API (try:
+            https://jsonplaceholder.typicode.com/users)
+          </li>
+          <li>
+            In n8n, use the Set node to transform JSON from one format to
+            another
+          </li>
+          <li>
+            Build a webhook that receives a form submission and logs the JSON
+          </li>
+        </ul>
+        <h3>1.4 — Business Process Knowledge (CRITICAL MUST-HAVE)</h3>
+        <p>
+          This is the skill 90% of automation builders completely ignore — and
+          it is exactly why they stay stuck charging low rates. If you
+          understand how a business actually runs, you will spot automation
+          opportunities immediately in any sales call.
+        </p>
+        <p>Core Business Processes You Must Understand</p>
+        <h4>| BUSINESS AREA | KEY PROCESSES TO KNOW |</h4>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Sales & Lead Gen</th>
+                <th>
+                  Lead capture → qualification → follow-up → proposal → close →
+                  onboarding
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Marketing Funnels</td>
+                <td>
+                  Ad click → landing page → opt-in → email sequence → offer →
+                  sale
+                </td>
+              </tr>
+              <tr>
+                <td>Operations</td>
+                <td>
+                  Order → fulfillment → delivery → customer service → review →
+                  repeat
+                </td>
+              </tr>
+              <tr>
+                <td>Customer Success</td>
+                <td>
+                  Onboarding → check-in calls → milestone tracking → renewal →
+                  upsell
+                </td>
+              </tr>
+              <tr>
+                <td>Finance</td>
+                <td>
+                  Invoice → payment → reconciliation → reporting → tax
+                  preparation
+                </td>
+              </tr>
+              <tr>
+                <td>HR & Hiring</td>
+                <td>
+                  Job post → applicant tracking → interview scheduling → offer →
+                  onboarding
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The 5-Question Business Audit (Use in Every Client Call)</p>
+        <ul>
+          <li>
+            "Walk me through what happens when a new lead comes in" — maps lead
+            flow
+          </li>
+          <li>
+            "What do you do manually every day that takes more than 30 minutes?"
+            — finds automation pain
+          </li>
+          <li>
+            "How do you follow up with leads who didn't respond?" —
+            WhatsApp/email automation opp
+          </li>
+          <li>
+            "How do you track your customers/orders/bookings?" — CRM opportunity
+          </li>
+          <li>
+            "What happens after someone buys from you?" — post-sale automation
+            opp
+          </li>
+        </ul>
+        <p>
+          🏆 Industry Deep-<strong>Dives:</strong> Know These 4 Industries Cold
+        </p>
+        <ul>
+          <li>
+            REAL ESTATE: Lead from MagicBricks/99acres → WhatsApp qualification
+            → Site visit booking → Follow-up sequences → Deal closed → Referral
+            automation
+          </li>
+          <li>
+            COACHING/EDUCATION: Webinar/workshop signup → Email nurture → Sales
+            call booking → Enrollment → Course delivery → Testimonial collection
+          </li>
+          <li>
+            D2C/E-COMMERCE: Ad → Landing page → Order → Fulfillment WhatsApp →
+            Review request → Win-back sequence → Loyalty program
+          </li>
+          <li>
+            LOCAL SERVICES: Booking → Reminder → Post-service feedback →
+            Rebooking → Referral program
+          </li>
+        </ul>
+        <h2 id="ch2">CHAPTER 2</h2>
+        <h3>n8n Mastery</h3>
+        <p>Every node, every workflow, real data</p>
+        <h3>2.1 — Why n8n is Your Primary Tool</h3>
+        <p>
+          n8n is open-source, self-hostable, and has native AI/LLM nodes built
+          in. Unlike Zapier (expensive per task) or Make.com (limited AI), n8n
+          lets you build enterprise-grade agentic workflows for nearly free when
+          self-hosted. Master this tool first.
+        </p>
+        <h4>📺 YouTube Learning Resource</h4>
+        <ul>
+          <li>
+            Playlist: Search 'n8n complete tutorial 2024 Hindi' on YouTube
+          </li>
+          <li>
+            Best Channel: 'Automation with n8n' and 'Leon van Zyl' (English)
+          </li>
+          <li>Hindi Resource: 'Automation Arena' channel on YouTube</li>
+          <li>
+            Official Docs: https://docs.n8n.io (bookmark this — use it daily)
+          </li>
+          <li>Community: https://community.n8n.io (search before asking)</li>
+        </ul>
+        <h3>2.2 — n8n Installation (Get Running in 10 Minutes)</h3>
+        <p><strong>Option A:</strong> Local (for learning)</p>
+        <pre><code># Install Node.js first (v18+), then:
+npm install n8n -g
+n8n start
+# Open browser → http://localhost:5678</code></pre>
+        <p><strong>Option B:</strong> Cloud (for client work)</p>
+        <ul>
+          <li>n8n.cloud — Official hosted version, free tier available</li>
+          <li>Railway.app — Deploy n8n free with one click</li>
+          <li>Render.com — Another free hosting option</li>
+          <li>
+            DigitalOcean Droplet — $6/month for dedicated server (best for
+            scale)
+          </li>
+        </ul>
+        <h3>2.3 — Every Node Type Explained</h3>
+        <p>
+          n8n has 400+ nodes. Here are the ones you will use for 90% of real
+          work:
+        </p>
+        <p>TRIGGER NODES (How Workflows Start)</p>
+        <h4>| NODE | WHAT IT DOES + USE CASE |</h4>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Webhook Trigger</th>
+                <th>
+                  Receives HTTP POST/GET requests. Use: Form submissions,
+                  payment notifications, CRM webhooks. URL:
+                  yourdomain.com/webhook/abc123
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Schedule Trigger</td>
+                <td>
+                  Runs on cron schedule. Use: Daily reports, weekly emails,
+                  hourly data sync. Set: Every day at 9am, every Monday, every 1
+                  hour
+                </td>
+              </tr>
+              <tr>
+                <td>Email Trigger (IMAP)</td>
+                <td>
+                  Watches inbox for new emails. Use: Auto-reply system, lead
+                  from email, support ticket creation
+                </td>
+              </tr>
+              <tr>
+                <td>Telegram Trigger</td>
+                <td>
+                  Activates when bot receives message. Use: Internal team bot,
+                  customer support bot
+                </td>
+              </tr>
+              <tr>
+                <td>RSS Feed Trigger</td>
+                <td>
+                  Monitors RSS feed for new content. Use: News monitoring,
+                  content aggregation
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>ACTION NODES (Do Things)</p>
+        <h4>| NODE | WHAT IT DOES + USE CASE |</h4>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>HTTP Request</th>
+                <th>
+                  Make ANY API call to ANY service. THE most important node.
+                  Use: WhatsApp API, custom APIs, web scraping
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Send Email (SMTP)</td>
+                <td>
+                  Send emails via Gmail, Outlook, SendGrid. Use: Lead follow-up,
+                  notifications, reports
+                </td>
+              </tr>
+              <tr>
+                <td>Google Sheets</td>
+                <td>
+                  Read/write spreadsheet data. Use: CRM tracking, lead lists,
+                  reporting
+                </td>
+              </tr>
+              <tr>
+                <td>Airtable</td>
+                <td>
+                  Database operations. Use: Project tracking, CRM, inventory
+                </td>
+              </tr>
+              <tr>
+                <td>HubSpot / Salesforce</td>
+                <td>
+                  Native CRM integrations. Use: Create contacts, update deals,
+                  log activities
+                </td>
+              </tr>
+              <tr>
+                <td>Telegram</td>
+                <td>
+                  Send messages, files, photos via Telegram bot. Use: Team
+                  alerts, client updates
+                </td>
+              </tr>
+              <tr>
+                <td>Slack</td>
+                <td>
+                  Send messages to channels. Use: Internal alerts, lead
+                  notifications
+                </td>
+              </tr>
+              <tr>
+                <td>Cal.com / Calendly</td>
+                <td>
+                  Book appointments. Use: Auto-booking when lead qualifies
+                </td>
+              </tr>
+              <tr>
+                <td>WhatsApp (via API)</td>
+                <td>
+                  Send WhatsApp via Twilio/WATI/360Dialog. Use: Lead nurture,
+                  order updates
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>LOGIC & FLOW NODES (Make Decisions)</p>
+        <h4>| NODE | WHAT IT DOES + USE CASE |</h4>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>IF Node</th>
+                <th>
+                  Branch based on condition. Use: IF budget > 50000 → send to
+                  sales team, ELSE → send nurture email
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Switch Node</td>
+                <td>
+                  Multiple branches (like IF-ELSE IF). Use: Route leads by city,
+                  by product, by source
+                </td>
+              </tr>
+              <tr>
+                <td>Merge Node</td>
+                <td>
+                  Combine data from multiple paths. Use: Merge lead data +
+                  enrichment data + AI analysis
+                </td>
+              </tr>
+              <tr>
+                <td>Split In Batches</td>
+                <td>
+                  Process large lists in chunks. Use: Send 1000 emails without
+                  overwhelming API
+                </td>
+              </tr>
+              <tr>
+                <td>Wait Node</td>
+                <td>
+                  Pause workflow for time/event. Use: Wait 2 hours before
+                  follow-up, wait for webhook response
+                </td>
+              </tr>
+              <tr>
+                <td>Code Node (JS)</td>
+                <td>
+                  Write JavaScript for custom logic. Use: Complex data
+                  transformation, calculations, string manipulation
+                </td>
+              </tr>
+              <tr>
+                <td>Set Node</td>
+                <td>
+                  Create/modify data fields. Use: Rename fields, set default
+                  values, build new JSON objects
+                </td>
+              </tr>
+              <tr>
+                <td>Filter Node</td>
+                <td>
+                  Remove items that don't match. Use: Only process leads from
+                  India, only orders above ₹500
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>AI NODES (The Money Nodes)</p>
+        <h4>| NODE | WHAT IT DOES + USE CASE |</h4>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>OpenAI Node</th>
+                <th>
+                  Direct access to GPT-4/GPT-4o. Use: Lead classification, email
+                  writing, sentiment analysis
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>AI Agent Node</td>
+                <td>
+                  Full autonomous agent with tools. Use: Research agent,
+                  customer service agent
+                </td>
+              </tr>
+              <tr>
+                <td>Chat Memory</td>
+                <td>
+                  Store conversation history. Use: Multi-turn chatbot that
+                  remembers context
+                </td>
+              </tr>
+              <tr>
+                <td>Vector Store</td>
+                <td>
+                  Store + search embeddings. Use: Knowledge base, document Q&A,
+                  FAQ bot
+                </td>
+              </tr>
+              <tr>
+                <td>Document Loader</td>
+                <td>
+                  Load PDF/Word/text files. Use: Train custom knowledge base
+                </td>
+              </tr>
+              <tr>
+                <td>Text Splitter</td>
+                <td>
+                  Break long text into chunks. Use: Prepare documents for vector
+                  storage
+                </td>
+              </tr>
+              <tr>
+                <td>Embeddings</td>
+                <td>
+                  Convert text to vectors. Use: Semantic search, similarity
+                  matching
+                </td>
+              </tr>
+              <tr>
+                <td>Output Parser</td>
+                <td>
+                  Force AI to return structured JSON. Use: Get reliable data
+                  from AI instead of free text
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>2.4 — The HTTP Node: Deep Dive</h3>
+        <p>
+          The HTTP Request node is your Swiss Army knife. ANY service with an
+          API can be connected using this node. You do NOT need a dedicated n8n
+          integration — if it has an API, you can connect it.
+        </p>
+        <pre><code>// Example: Sending a WhatsApp message via WATI API
+Method: POST
+URL: https://live-server.wati.io/api/v1/sendTemplateMessage</code></pre>
+        <pre><code>Headers:
+Authorization: Bearer YOUR_WATI_API_KEY
+Content-Type: application/json</code></pre>
+        <pre><code>Body (JSON):
+{
+"template_name": "lead_followup",
+"broadcast_name": "lead_{{ $json.id }}",
+"receivers": [
+{
+"whatsappNumber": "{{ $json.phone }}",
+"customParams": [
+{ "name": "name", "value": "{{ $json.name }}" }
+]
+}
+]
+}</code></pre>
+        <h3>2.5 — n8n Expressions: Dynamic Data</h3>
+        <p>
+          Expressions let you use data from previous nodes dynamically.
+          Everything inside {{ }} is evaluated as code.
+        </p>
+        <h4>| EXPRESSION | WHAT IT DOES |</h4>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>{{ $json.email }}</th>
+                <th>Gets the 'email' field from current item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ $json.name.toUpperCase() }}</td>
+                <td>Converts name to uppercase</td>
+              </tr>
+              <tr>
+                <td>{{ $now.toISO() }}</td>
+                <td>Current timestamp in ISO format</td>
+              </tr>
+              <tr>
+                <td>{{ $node['Set'].json.data }}</td>
+                <td>Gets data from a specific node named 'Set'</td>
+              </tr>
+              <tr>
+                <td>{{ $items().length }}</td>
+                <td>Count of items in current batch</td>
+              </tr>
+              <tr>
+                <td>{{ $json.price * 1.18 }}</td>
+                <td>Calculates price with 18% GST</td>
+              </tr>
+              <tr>
+                <td>{{ $json.phone.replace('+91', '') }}</td>
+                <td>Removes country code from phone</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>2.6 — 5 Workflows to Build Right Now</h3>
+        <p><strong>Workflow 1:</strong> Lead Capture → AI Qualify → WhatsApp</p>
+        <ul>
+          <li>
+            Webhook node: Receive form data (name, phone, budget, requirement)
+          </li>
+          <li>
+            OpenAI node: Classify lead as HOT/WARM/COLD based on budget and
+            requirement
+          </li>
+          <li>IF node: IF hot → branch A, ELSE → branch B</li>
+          <li>
+            Branch A (HOT): HTTP node → Send WhatsApp via WATI + Cal.com → Book
+            call
+          </li>
+          <li>
+            Branch B (WARM/COLD): Google Sheets → Add to nurture list + Send
+            email sequence
+          </li>
+        </ul>
+        <p>
+          <strong>Workflow 2:</strong> Daily Sales Report to WhatsApp/Telegram
+        </p>
+        <ul>
+          <li>Schedule Trigger: Every day at 6 PM</li>
+          <li>Google Sheets node: Read all rows added today</li>
+          <li>
+            Code node: Calculate total leads, hot leads, revenue potential
+          </li>
+          <li>OpenAI node: Write a 3-line summary of today's performance</li>
+          <li>Telegram/WhatsApp node: Send summary to owner</li>
+        </ul>
+        <p><strong>Workflow 3:</strong> E-commerce Order → WhatsApp Updates</p>
+        <ul>
+          <li>Webhook: Receive Shopify/WooCommerce order webhook</li>
+          <li>
+            Set node: Extract order ID, customer phone, product name, amount
+          </li>
+          <li>
+            HTTP node: Send WhatsApp — 'Order confirmed, expected delivery 3-5
+            days'
+          </li>
+          <li>Wait node: Wait 3 days</li>
+          <li>HTTP node: Send WhatsApp — 'Your order is out for delivery'</li>
+          <li>Wait node: Wait 1 day after delivery</li>
+          <li>HTTP node: Send review request message</li>
+        </ul>
+        <p><strong>Workflow 4:</strong> AI Customer Support Bot</p>
+        <ul>
+          <li>Telegram/WhatsApp Trigger: Customer sends message</li>
+          <li>Google Sheets: Look up customer's order history by phone</li>
+          <li>AI Agent node: Give agent customer data + FAQ knowledge base</li>
+          <li>Agent decides: answer question, escalate, or book callback</li>
+          <li>Telegram/WhatsApp: Send agent's response back to customer</li>
+        </ul>
+        <p><strong>Workflow 5:</strong> Content Repurposing Automation</p>
+        <ul>
+          <li>Schedule Trigger: Every day at 9 AM</li>
+          <li>RSS Feed: Get latest blog post from client's website</li>
+          <li>
+            OpenAI: Rewrite as LinkedIn post, Twitter thread, Instagram caption
+          </li>
+          <li>Google Sheets: Log all content with dates</li>
+          <li>Slack: Send to marketing team for approval</li>
+        </ul>
+        <p>⚡ n8n Pro Tips</p>
+        <ul>
+          <li>
+            Use 'sticky notes' in n8n canvas to document each section of your
+            workflow
+          </li>
+          <li>
+            Use subworkflows (Call n8n Workflow node) to keep workflows modular
+            and reusable
+          </li>
+          <li>
+            Always add error handling: Connect error output of critical nodes to
+            a Telegram alert
+          </li>
+          <li>
+            Test with small data first — use 'Execute Once' on trigger nodes
+            during development
+          </li>
+          <li>
+            Use environment variables for API keys — never hardcode them in
+            nodes
+          </li>
+        </ul>
+        <h2 id="ch3">CHAPTER 3</h2>
+        <h3>Other Automation Platforms</h3>
+        <p>Make.com, Gumloop, Zapier & Templates</p>
+        <h3>3.1 — Platform Comparison</h3>
+        <h4>| PLATFORM | BEST FOR + PROS/CONS |</h4>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>n8n</th>
+                <th>
+                  BEST: Complex AI workflows, self-hosted. PRO: Free, flexible,
+                  AI native. CON: Steeper learning curve
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Make.com</td>
+                <td>
+                  BEST: Visual workflows, client-friendly. PRO: Beautiful UI,
+                  1000+ apps. CON: Costs per operation
+                </td>
+              </tr>
+              <tr>
+                <td>Gumloop</td>
+                <td>
+                  BEST: AI-first automation, LLM workflows. PRO: Built for AI,
+                  simple. CON: Newer, fewer integrations
+                </td>
+              </tr>
+              <tr>
+                <td>Zapier</td>
+                <td>
+                  BEST: Quick simple automations. PRO: Easiest to use, most
+                  integrations. CON: Expensive at scale
+                </td>
+              </tr>
+              <tr>
+                <td>Activepieces</td>
+                <td>
+                  BEST: Open-source Zapier alternative. PRO: Free, self-hosted.
+                  CON: Fewer nodes than n8n
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>3.2 — Make.com (Formerly Integromat)</h3>
+        <p>Key Concepts in Make.com</p>
+        <ul>
+          <li>
+            Scenarios: The equivalent of workflows — visual flow of modules
+            connected by lines
+          </li>
+          <li>
+            Modules: Individual steps (like nodes in n8n). Each does one action
+          </li>
+          <li>Bundles: Individual data items flowing through the scenario</li>
+          <li>
+            Operations: Each module execution = 1 operation (Make charges per
+            operation)
+          </li>
+          <li>
+            Connections: Authenticated links to apps (set up once, reuse
+            forever)
+          </li>
+        </ul>
+        <p>Make.com vs n8n: When to Use Which</p>
+        <p>
+          Use Make.com <strong>WHEN:</strong> Client prefers visual tool, budget
+          allows, no need for AI agents
+        </p>
+        <p>
+          <strong>Use n8n WHEN:</strong> AI agents needed, self-hosting
+          required, complex logic, cost-sensitive
+        </p>
+        <p>
+          <strong>Use BOTH:</strong> Offer Make.com setup as a service, migrate
+          complex ones to n8n for cost savings
+        </p>
+        <h3>3.3 — Gumloop</h3>
+        <p>
+          Gumloop is built specifically for AI-first automation. Think of it as
+          n8n but designed from the ground up for LLM workflows. It shines when
+          you need to chain multiple AI calls together with document processing.
+        </p>
+        <p>Best Gumloop Use Cases</p>
+        <ul>
+          <li>
+            Scrape LinkedIn profiles → AI enrichment → personalized cold
+            outreach
+          </li>
+          <li>Upload PDFs → AI extract key data → push to CRM</li>
+          <li>
+            Record meeting audio → AI transcribe → summarize → send action items
+          </li>
+          <li>Research agent: gather web data → synthesize → write report</li>
+        </ul>
+        <h3>3.4 — Template Library: Your Revenue Multiplier</h3>
+        <p>
+          Templates are pre-built workflows you can sell or deploy repeatedly. A
+          good template library is the difference between a freelancer and an
+          agency. Build these templates and sell them as products OR as included
+          services.
+        </p>
+        <p>Must-Build Templates</p>
+        <h4>| TEMPLATE NAME | WHAT IT DOES + TARGET CLIENT |</h4>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Real Estate Lead Machine</th>
+                <th>
+                  Facebook Ad → Form → AI Qualify → WhatsApp → Calendar booking.
+                  Sell to: real estate agents
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>E-commerce WA Bot</td>
+                <td>
+                  Order → WhatsApp updates → review request → win-back. Sell to:
+                  Shopify/WooCommerce stores
+                </td>
+              </tr>
+              <tr>
+                <td>Coaching Sales System</td>
+                <td>
+                  Webinar signup → Email sequence → Call booking → Enrollment.
+                  Sell to: coaches, consultants
+                </td>
+              </tr>
+              <tr>
+                <td>AI Customer Support Bot</td>
+                <td>
+                  WhatsApp bot that answers FAQs, looks up orders, escalates to
+                  human. Sell to: any business
+                </td>
+              </tr>
+              <tr>
+                <td>Daily Report Automation</td>
+                <td>
+                  Collect data from multiple sources → AI summary → send to
+                  owner. Sell to: any business
+                </td>
+              </tr>
+              <tr>
+                <td>Appointment Reminder</td>
+                <td>
+                  Upcoming bookings → WhatsApp reminder 24h + 1h before. Sell
+                  to: clinics, salons, gyms
+                </td>
+              </tr>
+              <tr>
+                <td>Lead Nurture Sequence</td>
+                <td>
+                  Cold lead → 7-day WhatsApp + email sequence → re-engage. Sell
+                  to: sales teams
+                </td>
+              </tr>
+              <tr>
+                <td>Social Media Repurposer</td>
+                <td>
+                  Blog/YouTube → AI rewrite → schedule on LinkedIn/Instagram.
+                  Sell to: content creators
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h4>💰 Template Monetization Strategy</h4>
+        <ul>
+          <li>
+            Option 1: Sell templates as digital products (₹2,000–₹15,000 each on
+            Gumroad/own website)
+          </li>
+          <li>
+            Option 2: Include templates as part of setup + retainer package
+          </li>
+          <li>
+            Option 3: Build 'industry packs' — Real Estate Pack (5 templates)
+            for ₹25,000
+          </li>
+          <li>
+            Option 4: White-label templates for other automation freelancers
+            (B2B2B)
+          </li>
+        </ul>
+        <h2 id="ch4">CHAPTER 4</h2>
+        <h3>Agentic AI</h3>
+        <p>Build AI agents that work autonomously</p>
+        <h3>4.1 — What is an AI Agent?</h3>
+        <p>
+          An AI agent is not just a chatbot. <strong>An agent can:</strong> (1)
+          Understand a goal, (2) Decide which tools to use to achieve it, (3)
+          Execute those tools, (4) Observe the result, (5) Decide the next step
+          — all without human intervention.
+        </p>
+        <h4>| CHATBOT (OLD) | AI AGENT (NEW) |</h4>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Follows fixed script</th>
+                <th>Decides actions dynamically</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cannot use tools</td>
+                <td>Can call APIs, search web, write code</td>
+              </tr>
+              <tr>
+                <td>One-shot response</td>
+                <td>Multi-step reasoning and execution</td>
+              </tr>
+              <tr>
+                <td>Forgets context</td>
+                <td>Maintains memory across sessions</td>
+              </tr>
+              <tr>
+                <td>You define every step</td>
+                <td>Agent decides its own steps</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>4.2 — The Agent Architecture</h3>
+        <p>Core Components</p>
+        <ul>
+          <li>LLM Brain: GPT-4o, Claude 3.5, Gemini — the reasoning engine</li>
+          <li>
+            Tools: Functions the agent can call (search web, send email, query
+            database, call API)
+          </li>
+          <li>
+            Memory: Short-term (conversation history) and long-term (vector
+            database)
+          </li>
+          <li>
+            Planning: Breaking big goals into smaller steps (ReAct,
+            Chain-of-Thought)
+          </li>
+          <li>
+            Observation: Seeing the result of each action to decide next step
+          </li>
+        </ul>
+        <h3>4.3 — LangChain: The Agent Framework</h3>
+        <p>
+          LangChain is the most widely used framework for building AI agents. It
+          provides abstractions for tools, memory, chains, and agents that work
+          with any LLM.
+        </p>
+        <pre><code># Install LangChain
+pip install langchain langchain-openai</code></pre>
+        <pre><code>from langchain_openai import ChatOpenAI
+from langchain.agents import create_react_agent, AgentExecutor
+from langchain.tools import Tool</code></pre>
+        <p># Define tools the agent can use</p>
+        <pre><code>tools = [
+Tool(name='search_crm', func=search_crm_function, description="Search CRM for customer data. Input: customer name or email"),
+Tool(name='send_whatsapp', func=send_whatsapp_function, description="Send WhatsApp message. Input: phone number and message"),
+]</code></pre>
+        <p># Create the agent</p>
+        <pre><code>llm = ChatOpenAI(model='gpt-4o', temperature=0)
+agent = create_react_agent(llm, tools, prompt)
+agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)</code></pre>
+        <p># Run the agent</p>
+        <pre><code>result = agent_executor.invoke({"input": "Qualify this lead..."})</code></pre>
+        <h3>4.4 — CrewAI: Multi-Agent Systems</h3>
+        <p>
+          CrewAI lets you build teams of specialized AI agents that collaborate.
+          <strong>Think:</strong> one agent researches a lead, another writes a
+          personalized email, another schedules a call — all working together
+          automatically.
+        </p>
+        <pre><code>from crewai import Agent, Task, Crew</code></pre>
+        <pre><code>lead_researcher = Agent(role='Lead Research Specialist', goal='Research company', tools=[web_search], llm=llm)
+outreach_writer = Agent(role='Personalization Expert', goal='Write cold email', tools=[email_tool], llm=llm)</code></pre>
+        <pre><code>research_task = Task(description='Research {company} pain points', agent=lead_researcher)
+outreach_task = Task(description='Write personalized cold email', agent=outreach_writer)</code></pre>
+        <pre><code>crew = Crew(agents=[lead_researcher, outreach_writer], tasks=[research_task, outreach_task])
+crew.kickoff(inputs={'company': 'Tata Motors'})</code></pre>
+        <h3>4.5 — Building an AI Sales Agent (Full Example)</h3>
+        <p>What This Agent Does</p>
+        <ul>
+          <li>Reads new lead from Google Sheet / Webhook</li>
+          <li>Researches the company on the web</li>
+          <li>Qualifies based on budget, timeline, fit</li>
+          <li>Writes personalized email/WhatsApp message</li>
+          <li>Sends follow-up automatically if no reply in 48 hours</li>
+          <li>Books a meeting when lead responds positively</li>
+        </ul>
+        <p>Building It in n8n (No-Code Approach)</p>
+        <ul>
+          <li>Webhook: Receive new lead data</li>
+          <li>HTTP node: Search company on Google using SerpAPI</li>
+          <li>
+            OpenAI node with system prompt: 'You are a sales qualification
+            expert...'
+          </li>
+          <li>
+            IF node: IF score >= 7 → send WhatsApp immediately; ELSE → add to
+            weekly nurture
+          </li>
+          <li>
+            Wait 48 hours → Check if lead replied → IF no reply → Send follow-up
+            #2
+          </li>
+          <li>
+            When lead says 'interested' → Cal.com node → Send booking link
+            automatically
+          </li>
+        </ul>
+        <h4>🤖 Agent Use Cases by Industry</h4>
+        <ul>
+          <li>
+            REAL ESTATE: Agent reads lead → searches locality prices online →
+            sends price comparison + site visit booking
+          </li>
+          <li>
+            HR: Agent reads job application → scores resume → sends assessment
+            test → schedules interview if passed
+          </li>
+          <li>
+            LEGAL: Agent reads client query → searches relevant case law →
+            writes initial legal opinion
+          </li>
+          <li>
+            FINANCE: Agent monitors portfolio → alerts on significant changes →
+            suggests rebalancing actions
+          </li>
+          <li>
+            ECOMMERCE: Agent monitors reviews → detects negative ones →
+            generates response → alerts team for severe cases
+          </li>
+        </ul>
+        <h2 id="ch5">CHAPTER 5</h2>
+        <h3>Vibe Coding</h3>
+        <p>Build full apps using AI prompts — zero coding required</p>
+        <h3>5.1 — What is Vibe Coding?</h3>
+        <p>
+          Vibe Coding means building software applications by describing what
+          you want in plain English (or Hindi) to an AI, and the AI writes the
+          code for you. You focus on WHAT to build. The AI handles HOW.
+        </p>
+        <p>
+          This completely changes the game for automation agencies — you can now
+          offer custom dashboards, CRM systems, client portals, and SaaS
+          products WITHOUT hiring developers.
+        </p>
+        <h4>| OLD WAY | VIBE CODING WAY |</h4>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Hire developer (₹50,000–₹2,00,000)</th>
+                <th>Use AI to build in hours</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Weeks to build MVP</td>
+                <td>Hours to first working version</td>
+              </tr>
+              <tr>
+                <td>Pay for every change</td>
+                <td>Prompt to iterate instantly</td>
+              </tr>
+              <tr>
+                <td>Technical knowledge required</td>
+                <td>Business thinking is enough</td>
+              </tr>
+              <tr>
+                <td>Limited by developer capacity</td>
+                <td>Build 10x more deliverables</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>5.2 — The Vibe Coding Toolkit</h3>
+        <h4>| TOOL | BEST FOR + HOW TO USE |</h4>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Cursor</th>
+                <th>
+                  Best for full-stack apps. AI pair programmer inside VS Code.
+                  Use for React, Node.js, Python apps
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Lovable.dev</td>
+                <td>
+                  Best for web apps fast. Describe app in chat → get deployable
+                  React app in minutes
+                </td>
+              </tr>
+              <tr>
+                <td>Bolt.new</td>
+                <td>
+                  Best for instant prototypes. Browser-based, no install. Great
+                  for client demos same-day
+                </td>
+              </tr>
+              <tr>
+                <td>v0 by Vercel</td>
+                <td>
+                  Best for UI components. Describe the UI → get clean
+                  React/Tailwind code instantly
+                </td>
+              </tr>
+              <tr>
+                <td>Replit AI</td>
+                <td>
+                  Best for backend + APIs. Build and host Python/Node backends
+                  with AI assistance
+                </td>
+              </tr>
+              <tr>
+                <td>GitHub Copilot</td>
+                <td>
+                  Best for existing codebase. Autocompletion and chat inside any
+                  editor
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>5.3 — Cursor: The Professional's Tool</h3>
+        <p>
+          Cursor is VS Code with Claude/GPT built in. This is your primary tool
+          for building production-quality client projects. Here is how to use it
+          effectively:
+        </p>
+        <p>Cursor Keyboard Shortcuts</p>
+        <ul>
+          <li>Cmd/Ctrl + K: Inline edit — select code and describe change</li>
+          <li>Cmd/Ctrl + L: Open chat panel — discuss code, ask questions</li>
+          <li>
+            Cmd/Ctrl + I: Composer — build multi-file features from one prompt
+          </li>
+          <li>@ symbol in chat: Reference files, docs, or web URLs</li>
+        </ul>
+        <p>The .cursorrules <strong>File:</strong> Your Secret Weapon</p>
+        <p>
+          Create a .cursorrules file in your project root to give Cursor context
+          about your project. This makes every prompt 10x more accurate.
+        </p>
+        <pre><code>// .cursorrules file example for a CRM project
+You are building a CRM system for a real estate agency.
+Tech stack: React (Vite), Tailwind CSS, Supabase for database, n8n for automation.
+All UI must be in Indian English. Currency in INR.
+Database has these tables: leads, contacts, properties, deals, activities.
+Always write TypeScript. Use shadcn/ui components.
+Every form must have validation. Every table must be sortable and filterable.</code></pre>
+        <h3>5.4 — Vibe Coding Prompts: In-Depth Examples</h3>
+        <p>
+          The quality of your output depends entirely on the quality of your
+          prompt. Here are production-ready prompt examples:
+        </p>
+        <p><strong>Prompt Example 1:</strong> Real Estate CRM Dashboard</p>
+        <h4>
+          📝 FULL PROMPT — Build a Real Estate CRM dashboard using React,
+          Tailwind CSS, and mock data.
+        </h4>
+        <h4>PAGES NEEDED:</h4>
+        <ul>
+          <li>
+            Dashboard: Show KPIs — Total leads this month, Hot leads, Site
+            visits booked, Deals closed, Revenue pipeline. Use cards with icons
+            and trend arrows.
+          </li>
+          <li>
+            Leads Table: Columns — Name, Phone, Source, Budget (INR), Property
+            Type, Status, Assigned Agent, Last Contact Date. Add filters by
+            status and source. Add search.
+          </li>
+          <li>
+            Lead Detail Page: Full lead profile, timeline of all interactions,
+            notes.
+          </li>
+          <li>
+            Add Lead Form: Fields for name, phone, email, source, budget, city,
+            property type, requirement notes.
+          </li>
+        </ul>
+        <p>
+          <strong>DESIGN:</strong> Professional, clean theme, sidebar
+          navigation, responsive.
+        </p>
+        <p><strong>Prompt Example 2:</strong> Automation Agency Website</p>
+        <h4>
+          📝 FULL PROMPT — Build a professional landing page for an AI
+          automation agency targeting Indian businesses.
+        </h4>
+        <h4>SECTIONS:</h4>
+        <ul>
+          <li>
+            Hero: Headline "Automate Your Business. 10x Your Revenue." Two CTAs.
+          </li>
+          <li>
+            Problem section: 3 cards showing pain points — Manual follow-up,
+            Leads falling through gaps, No system.
+          </li>
+          <li>
+            Services: Workflow Automation (n8n/Make), AI Chatbots & Agents,
+            Custom Dashboard & CRM.
+          </li>
+          <li>Case Studies & Pricing tiers.</li>
+        </ul>
+        <p><strong>Prompt Example 3:</strong> WhatsApp Chatbot UI Builder</p>
+        <h4>
+          📝 FULL PROMPT — Build a drag-and-drop chatbot flow builder for
+          WhatsApp automation.
+        </h4>
+        <h4>FEATURES:</h4>
+        <ul>
+          <li>
+            Left sidebar with node types: Send Message, Ask Question, If/Else
+            Branch, Delay, End Flow.
+          </li>
+          <li>
+            Main canvas where nodes can be dragged, dropped, and connected with
+            arrows.
+          </li>
+          <li>Clicking a node opens a right panel to configure it.</li>
+        </ul>
+        <p>Use React Flow library for the canvas. Tailwind for styling.</p>
+        <p><strong>Prompt Example 4:</strong> Iterating on Existing Code</p>
+        <h4>
+          📝 ITERATION PROMPT — The leads table currently shows all leads in a
+          flat list.
+        </h4>
+        <h4>CHANGES NEEDED:</h4>
+        <ul>
+          <li>Add a Kanban view toggle button next to the table view.</li>
+          <li>
+            Kanban view: 4 columns — New, Contacted, Qualified, Closed. Leads
+            are cards showing name, phone, budget.
+          </li>
+          <li>
+            Cards should be draggable between columns. Moving a card updates the
+            lead status.
+          </li>
+        </ul>
+        <h3>5.5 — The Lovable.dev Workflow</h3>
+        <ul>
+          <li>
+            Step 1: Initial Build (5 minutes). Go to lovable.dev → Describe your
+            app → Watch Lovable build.
+          </li>
+          <li>
+            Step 2: Iterate with Chat. Use the chat panel to request changes:
+            'Make the sidebar darker'.
+          </li>
+          <li>
+            Step 3: Connect Backend. Lovable connects directly to Supabase. Add
+            database tables via chat.
+          </li>
+          <li>
+            Step 4: Deploy. Click Deploy → Lovable publishes to a live URL
+            instantly.
+          </li>
+        </ul>
+        <h3>5.6 — Bolt.new for Rapid Prototyping</h3>
+        <p>
+          Bolt.new runs entirely in your browser — no installs. Perfect for
+          same-day client demos. Open bolt.new, describe your app, get a working
+          prototype in 15 minutes.
+        </p>
+        <p>🚀 Vibe Coding Best Practices</p>
+        <ul>
+          <li>
+            ALWAYS start with a detailed context prompt before coding — describe
+            the whole project first
+          </li>
+          <li>ONE change per prompt — don't ask for 10 things at once</li>
+          <li>
+            When something breaks: paste the error message directly into chat
+          </li>
+          <li>Use screenshots: 'Make this section look like [paste image]'</li>
+          <li>
+            Keep a prompt log — reuse prompts that worked well across projects
+          </li>
+          <li>
+            For complex logic: explain WHAT it should do, not HOW to code it
+          </li>
+          <li>
+            Review AI code — don't deploy without understanding what was built
+          </li>
+        </ul>
+        <h2 id="ch6">CHAPTER 6</h2>
+        <h3>Starting Your Company</h3>
+        <p>From zero to first paying client</p>
+        <h3>6.1 — The 4-Step Launch Sequence</h3>
+        <h4>| STEP | WHAT TO DO |</h4>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Step 1: Learn (Month 1-3)</th>
+                <th>
+                  Follow this guidebook. Build all practice projects. Get hands
+                  dirty daily.
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Step 2: Build Demos (Month 2-3)</td>
+                <td>
+                  Build 3 industry demos: Real Estate, E-commerce, Coaching.
+                  Record Loom videos.
+                </td>
+              </tr>
+              <tr>
+                <td>Step 3: Choose Niche (Month 3)</td>
+                <td>
+                  Pick ONE industry to focus on first. Depth > breadth in early
+                  stage.
+                </td>
+              </tr>
+              <tr>
+                <td>Step 4: Get Clients (Month 3+)</td>
+                <td>
+                  Daily outreach: LinkedIn DMs, WhatsApp cold outreach,
+                  referrals, content
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>6.2 — Choosing Your Niche</h3>
+        <p>
+          Niching down feels scary but it is the fastest path to clients. 'I do
+          automation for real estate agents' gets more meetings than 'I do
+          automation for all businesses'.
+        </p>
+        <ul>
+          <li>
+            List industries you have connections in or personal experience with
+          </li>
+          <li>Check which industries are growing fast + have money to spend</li>
+          <li>
+            Evaluate: Do people in this industry talk about their pain?
+            (LinkedIn, Reddit)
+          </li>
+          <li>
+            Start with Real Estate, Coaching, or D2C — highest demand in India
+            currently
+          </li>
+        </ul>
+        <h3>6.3 — Outreach System (Get Clients Without Ads)</h3>
+        <p>LinkedIn Outreach (B2B)</p>
+        <ul>
+          <li>
+            Search: 'Real estate agent Mumbai' or 'Business coach India' on
+            LinkedIn
+          </li>
+          <li>Send connection request — DO NOT pitch in connection message</li>
+          <li>
+            After accept, send value-first DM: 'I noticed you're manually
+            following up with leads...Mind if I share a 2-min demo?'
+          </li>
+          <li>If positive: get on a 20-min discovery call</li>
+        </ul>
+        <p>WhatsApp Cold Outreach (Local Businesses)</p>
+        <ul>
+          <li>
+            Target: local real estate offices, clinics, coaching institutes
+          </li>
+          <li>
+            Message template: 'Hi [Name], I saw your [ad/website/listing]. I
+            help [industry] businesses automate lead follow-up. Takes 5
+            minutes.'
+          </li>
+          <li>Volume: 30 messages per day minimum = 2-3 calls per week</li>
+        </ul>
+        <p>Content-Led Inbound (Long Term)</p>
+        <ul>
+          <li>
+            Post LinkedIn content: '5 WhatsApp automations every real estate
+            agent needs'
+          </li>
+          <li>
+            YouTube: 'How I automated a real estate agent's lead flow in n8n'
+          </li>
+          <li>
+            Instagram Reels: Screen recordings of automations running in
+            real-time
+          </li>
+        </ul>
+        <h3>6.4 — The Discovery Call: Closing ₹50,000+ Deals</h3>
+        <p>Call Structure (20-30 Minutes)</p>
+        <ul>
+          <li>2 min: Brief intro, establish you understand their industry</li>
+          <li>10 min: Ask the 5 Business Audit Questions from Chapter 1</li>
+          <li>
+            5 min: Identify 2-3 automation opportunities in their current
+            process
+          </li>
+          <li>
+            5 min: Show relevant demo (screen share your pre-built template)
+          </li>
+          <li>3 min: Propose custom solution, give ballpark investment</li>
+          <li>
+            2 min: Define next step — proposal within 24 hours, or start
+            immediately
+          </li>
+        </ul>
+        <blockquote>
+          <p><strong>💬 Closing Language That Works</strong></p>
+        </blockquote>
+        <p>
+          "Based on what you told me, you're losing about [X] leads per month to
+          manual follow-up. If we automate this, you'll recover those leads.
+          That alone pays for the system in [X] weeks."
+        </p>
+        <p>
+          "I'll build the first workflow and show you the output. If you love
+          it, we proceed. If not, you owe me nothing. Fair?"
+        </p>
+        <p>
+          "Most clients in real estate see ROI within 30 days — either recovered
+          deals or saved time. My setup fee is ₹X."
+        </p>
+        <h3>6.5 — Pricing Your Services</h3>
+        <h4>| SERVICE | PRICING RANGE |</h4>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Single workflow automation</th>
+                <th>₹10,000 – ₹30,000 setup</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Complete lead automation system (3-5 workflows)</td>
+                <td>₹30,000 – ₹75,000 setup</td>
+              </tr>
+              <tr>
+                <td>Agentic AI chatbot (WhatsApp/web)</td>
+                <td>₹50,000 – ₹1,50,000 setup</td>
+              </tr>
+              <tr>
+                <td>Custom CRM + automations (vibe coding + n8n)</td>
+                <td>₹75,000 – ₹2,00,000 setup</td>
+              </tr>
+              <tr>
+                <td>Full automation audit + build for enterprise</td>
+                <td>₹1,50,000 – ₹5,00,000+</td>
+              </tr>
+              <tr>
+                <td>Monthly retainer (maintenance + new workflows)</td>
+                <td>₹10,000 – ₹50,000/month</td>
+              </tr>
+              <tr>
+                <td>Sell templates (digital products)</td>
+                <td>₹2,000 – ₹25,000 per template</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h4>📌 Pricing Psychology</h4>
+        <ul>
+          <li>
+            Never quote before the discovery call — you don't know their pain
+            yet
+          </li>
+          <li>
+            Anchor high: 'For a full system, clients invest ₹75k–₹2L.' Then show
+            your ₹30k starter
+          </li>
+          <li>
+            Offer 3 tiers in proposal: Basic (₹30k) / Recommended (₹60k) /
+            Complete (₹1L)
+          </li>
+          <li>
+            Monthly retainer = recurring revenue. Always include as an add-on
+          </li>
+          <li>
+            ROI framing: 'This pays for itself if we recover just 2 extra deals
+            this month'
+          </li>
+        </ul>
+        <h2 id="ch7">CHAPTER 7</h2>
+        <h3>Scaling to Agency & SaaS</h3>
+        <p>From freelancer to systems-driven business</p>
+        <h3>7.1 — Phase 1: Stable Freelancer (₹1–3L/month)</h3>
+        <ul>
+          <li>3-5 active retainer clients at ₹15,000–₹40,000/month each</li>
+          <li>
+            Systematize delivery: use templates, standardized discovery call,
+            proposal template
+          </li>
+          <li>Build a portfolio page with case studies and demo videos</li>
+          <li>
+            Automate your own business: CRM, proposals, invoicing, onboarding
+          </li>
+        </ul>
+        <h3>7.2 — Phase 2: Small Agency (₹5–15L/month)</h3>
+        <ul>
+          <li>
+            Hire a virtual assistant (VA) for client communication and basic n8n
+            builds
+          </li>
+          <li>
+            Create SOPs (Standard Operating Procedures) for every service you
+            offer
+          </li>
+          <li>Build a subcontractor network: other n8n/automation builders</li>
+          <li>
+            Offer a productized service: fixed scope, fixed price, fixed
+            timeline
+          </li>
+          <li>Focus on account management, sales, and product direction</li>
+        </ul>
+        <h3>7.3 — Phase 3: SaaS Product (₹20L+/month potential)</h3>
+        <p>
+          <strong>The highest leverage move:</strong> turn your best workflow
+          template into a hosted SaaS product. Instead of building custom every
+          time, clients pay a monthly subscription.
+        </p>
+        <p>SaaS Ideas from Automation Services</p>
+        <ul>
+          <li>
+            Real Estate Lead Bot: WhatsApp AI qualification SaaS — ₹5,000/month
+            per agent
+          </li>
+          <li>
+            Appointment Automation Suite: For clinics/salons — ₹3,000/month per
+            location
+          </li>
+          <li>
+            D2C WhatsApp Suite: Order updates + review + win-back — ₹4,000/month
+            per store
+          </li>
+          <li>
+            Coaching Funnel Automator: Webinar → nurture → close — ₹6,000/month
+            per coach
+          </li>
+        </ul>
+        <h4>🎯 Final 90-Day Action Plan</h4>
+        <ul>
+          <li>
+            DAYS 1-30: Complete this guidebook. Build all 5 n8n workflows. Build
+            2 AI agents. Build 1 vibe-coded CRM dashboard.
+          </li>
+          <li>
+            DAYS 31-60: Build 3 industry demos (Real Estate, Coaching,
+            E-commerce). Start LinkedIn outreach — 20 DMs/day. Land first paid
+            client.
+          </li>
+          <li>
+            DAYS 61-90: Deliver first client project. Ask for referral. Get
+            second client. Build template library. Start posting content.
+          </li>
+          <li>
+            MONTH 4+: 3 retainer clients = ₹1L+/month. Start hiring VA. Build
+            first SaaS prototype.
+          </li>
+          <li>
+            YEAR 1 TARGET: ₹25–50L revenue. 5-10 retainer clients. 1-2 SaaS
+            products launched.
+          </li>
+        </ul>
+        <p>The automation economy is not coming — it is here.</p>
+        <p>The only question is whether you build it or get replaced by it.</p>
+        <p>Now go build. 🚀</p>
+      </main>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const sections = document.querySelectorAll("h2");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        window.addEventListener("scroll", () => {
+          let current = "";
+          sections.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 100) {
+              current = section.getAttribute("id");
+            }
+          });
+
+          navLinks.forEach((li) => {
+            li.classList.remove("active");
+            if (li.getAttribute("href") === `#${current}`) {
+              li.classList.add("active");
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
