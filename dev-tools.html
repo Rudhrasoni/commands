@@ -1,0 +1,2339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Developer Tools — Complete Reference Guide</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #000;
+            color: #a1a1aa;
+            font-family: "Inter", sans-serif;
+            font-size: 15px;
+            line-height: 1.7;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ── SIDEBAR ── */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 288px;
+            min-width: 288px;
+            height: 100vh;
+            background: #000;
+            border-right: 1px solid #27272a;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
+
+        .sidebar-scroll {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 0px 0px;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 2px;
+        }
+
+        .sidebar-brand {
+            padding: 32px 32px 20px;
+            border-bottom: 1px solid #27272a;
+        }
+
+        .sidebar-brand .brand-title {
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-brand .brand-sub {
+            font-size: 10.5px;
+            letter-spacing: 0.18em;
+            color: #71717a;
+            text-transform: uppercase;
+        }
+
+        .nav-section {
+            padding: 20px 0px
+        }
+
+        .nav-section-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: #71717a;
+            text-transform: uppercase;
+            padding: 8px 24px;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 6px 24px;
+            font-size: 0.85rem;
+            color: #71717a;
+            text-decoration: none;
+            transition: all 0.2s;
+            line-height: 1.4;
+            border-left: 1px solid #27272a;
+        }
+
+        .nav-link:hover {
+            color: #fff;
+            background: #09090b;
+            border-left-color: #fff;
+        }
+
+        .nav-link.active {
+            color: #fff;
+            background: #09090b;
+            border-left-color: #fff;
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding: 16px 32px 20px;
+            border-top: 1px solid #27272a;
+            position: sticky;
+            bottom: 0;
+            background: #000;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar-footer a {
+            font-size: 0.95rem;
+            color: #a1a1aa;
+            text-decoration: none;
+            display: block;
+            /* border-left: 1px solid #27272a; */
+            /* padding: 4px 4px; */
+            border-radius: 0;
+            transition: all 0.2s;
+            font-weight: 500;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .sidebar-footer a:hover {
+            color: #fff;
+            background: #09090b;
+            /* border-left-color: #fff; */
+        }
+
+        /* ── MAIN ── */
+        .main {
+            margin-left: 288px;
+            flex: 1;
+            width: 100%;
+            padding: 64px 32px 100px;
+        }
+
+        .main-inner {
+            max-width: 56rem;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            margin-bottom: 60px;
+            padding-bottom: 50px;
+            border-bottom: 1px solid #27272a;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            line-height: 1.15;
+            color: #fff;
+            margin-bottom: 22px;
+            text-transform: uppercase;
+        }
+
+        .hero-divider {
+            width: 100%;
+            height: 1px;
+            background: #222;
+            margin: 22px 0;
+        }
+
+        .hero-meta {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 8px;
+        }
+
+        .hero-meta strong {
+            color: #bbb;
+        }
+
+        .hero-desc {
+            font-size: 14.5px;
+            color: #a1a1aa;
+            margin-top: 24px;
+            margin-bottom: 28px;
+            line-height: 1.8;
+        }
+
+        /* legend */
+        .legend {
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
+            margin-top: 28px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12.5px;
+            color: #777;
+        }
+
+        /* ── CATEGORY SECTION ── */
+        .category {
+            margin-bottom: 70px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: baseline;
+            gap: 14px;
+            margin-bottom: 8px;
+        }
+
+        .category-emoji {
+            font-size: 20px;
+        }
+
+        .category-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .category-desc {
+            font-size: 13.5px;
+            color: #555;
+            margin-bottom: 28px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #27272a;
+            line-height: 1.6;
+            margin-left: 0;
+        }
+
+        /* ── TOOL CARD ── */
+        .tool {
+            margin-bottom: 36px;
+            padding-bottom: 36px;
+            border-bottom: 1px solid #27272a;
+        }
+
+        .tool[open] {
+            padding-bottom: 28px;
+        }
+
+        .tool:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .tool-summary {
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 12px 0 14px;
+            user-select: none;
+        }
+
+        .tool-summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .tool-summary-main {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .tool-summary-title-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tool-summary-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.01em;
+        }
+
+        .tool-summary-copy {
+            margin: 0;
+            color: #a1a1aa;
+            font-size: 0.9rem;
+            line-height: 1.65;
+            max-width: 46rem;
+        }
+
+        .tool-summary-arrow {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            color: #71717a;
+            transition: transform 0.2s ease;
+            margin-top: 2px;
+        }
+
+        .tool[open] .tool-summary-arrow {
+            transform: rotate(180deg);
+        }
+
+        .tool-details {
+            padding-top: 6px;
+        }
+
+        /* badge */
+        .badge {
+            display: inline-block;
+            padding: 2px 9px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .badge-oss {
+            background: #0d2e1a;
+            color: #3dbd74;
+            border: 1px solid #1a5530;
+        }
+
+        .badge-paid {
+            background: #2a1010;
+            color: #e05555;
+            border: 1px solid #5a2020;
+        }
+
+        .badge-both {
+            background: #0f1e35;
+            color: #5599ee;
+            border: 1px solid #1a3a6a;
+        }
+
+        .tool-rows {
+            display: grid;
+            gap: 8px;
+        }
+
+        .tool-row {
+            display: flex;
+            gap: 0;
+            line-height: 1.65;
+        }
+
+        .tool-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #555;
+            min-width: 130px;
+            padding-top: 1px;
+            flex-shrink: 0;
+        }
+
+        .tool-value {
+            font-size: 13.5px;
+            color: #bbb;
+            flex: 1;
+        }
+
+        .tool-value.use-text {
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        .how-to-use {
+            color: #d4d4d8;
+        }
+
+        .tool-value a {
+            color: #777;
+            text-decoration: underline;
+            text-decoration-color: #333;
+            transition: color 0.15s;
+        }
+
+        .tool-value a:hover {
+            color: #bbb;
+        }
+
+        /* pricing highlight */
+        .price-free {
+            color: #3dbd74;
+        }
+
+        .price-paid {
+            color: #e07070;
+        }
+
+        .price-both {
+            color: #5599ee;
+        }
+
+        /* lang tags */
+        .lang-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 2px;
+        }
+
+        .lang-tag {
+            background: #111;
+            border: 1px solid #222;
+            color: #888;
+            font-size: 10.5px;
+            padding: 1px 7px;
+            border-radius: 2px;
+            font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+        }
+
+        /* ── SECTION ANCHOR ── */
+        .section-anchor {
+            scroll-margin-top: 30px;
+        }
+
+        /* ── SCROLLBAR ── */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a2a;
+            border-radius: 3px;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .sidebar {
+                width: 220px;
+                min-width: 220px;
+            }
+
+            .main {
+                margin-left: 220px;
+                padding: 40px 30px 80px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 30px 20px 60px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar">
+        <div class="sidebar-scroll">
+            <div class="sidebar-brand">
+                <div class="brand-title">DEV TOOLS</div>
+                <div class="brand-sub">Complete Reference Guide</div>
+            </div>
+
+            <nav>
+                <div class="nav-section">
+                    <a class="nav-link" href="#error-tracking"> Error Tracking</a>
+                    <a class="nav-link" href="#monitoring"> Monitoring</a>
+                    <a class="nav-link" href="#logging"> Logging</a>
+                    <a class="nav-link" href="#cicd"> DevOps / CI-CD</a>
+                    <a class="nav-link" href="#containers"> Containers</a>
+                    <a class="nav-link" href="#cloud"> Cloud</a>
+                    <a class="nav-link" href="#iac"> IaC</a>
+                    <a class="nav-link" href="#security"> Auth & Security</a>
+                    <a class="nav-link" href="#api"> API & Networking</a>
+                    <a class="nav-link" href="#messaging"> Messaging</a>
+                    <a class="nav-link" href="#testing"> Testing & QA</a>
+                    <a class="nav-link" href="#artifacts"> Artifact Mgmt</a>
+                    <a class="nav-link" href="#proxy"> Proxy & LB</a>
+                    <a class="nav-link" href="#storage"> Storage & CDN</a>
+                    <a class="nav-link" href="#automation"> Automation</a>
+                    <a class="nav-link" href="#databases"> Databases</a>
+                    <a class="nav-link" href="#devenv"> Dev Environment</a>
+                </div>
+            </nav>
+        </div>
+
+        <div class="sidebar-footer">
+            <a href="/">← Back to Commands</a>
+        </div>
+    </aside>
+
+    <!-- ── MAIN ── -->
+    <main class="main">
+        <div class="main-inner">
+
+            <!-- HERO -->
+            <div class="hero">
+                <h1>Developer Tools<br />Complete Reference Guide</h1>
+                <div class="hero-divider"></div>
+                <div class="hero-meta">Every tool a modern developer should know — <strong>pricing, language support,
+                        open
+                        source status, and how to learn.</strong></div>
+                <div class="hero-meta" style="margin-top:6px;">Practical Edition | 2025 &nbsp;·&nbsp; 50+ Tools Covered
+                </div>
+
+                <div class="legend">
+                    <div class="legend-item"><span class="badge badge-oss">OSS</span> Open Source / Free</div>
+                    <div class="legend-item"><span class="badge badge-paid">PAID</span> Commercial Only</div>
+                    <div class="legend-item"><span class="badge badge-both">BOTH</span> OSS Core + Paid Tiers</div>
+                </div>
+            </div>
+
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- 🚨 ERROR TRACKING -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="category section-anchor" id="error-tracking">
+                <div class="category-header">
+                    <span class="category-emoji">🚨</span>
+                    <h2 class="category-title">Error Tracking &amp; Crash Reporting</h2>
+                </div>
+                <p class="category-desc">Detect crashes, capture stack traces, and measure user impact in real time.</p>
+
+                <!-- Sentry -->
+                <details class="tool">
+                    <summary class="tool-summary">
+                        <div class="tool-summary-main">
+                            <div class="tool-summary-title-row">
+                                <span class="tool-summary-title">Sentry</span>
+                                <span class="badge badge-both">BOTH</span>
+                            </div>
+                            <p class="tool-summary-copy">Industry-standard error and crash monitoring for backend,
+                                frontend, and mobile apps.</p>
+                        </div>
+                        <svg class="tool-summary-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </summary>
+                    <div class="tool-details">
+                        <div class="tool-rows">
+                            <div class="tool-row"><span class="tool-label">Use</span><span
+                                    class="tool-value use-text">Industry-standard error &amp; crash monitoring for
+                                    backend,
+                                    frontend, and mobile apps. Captures exceptions with full stack traces, release
+                                    tracking, and
+                                    user context.</span></div>
+                            <div class="tool-row"><span class="tool-label">How to use</span><span
+                                    class="tool-value how-to-use">Start by creating a project in Sentry, install the SDK
+                                    for your stack, and send your first error so you can confirm issue grouping and
+                                    alerting.</span></div>
+                            <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                        class="price-both">Open source self-host: free</span> · Cloud: Free (5K
+                                    errors/mo) →
+                                    Team $26/mo → Business $80/mo</span></div>
+                            <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                    <div class="lang-tags"><span class="lang-tag">JavaScript</span><span
+                                            class="lang-tag">Python</span><span class="lang-tag">Ruby</span><span
+                                            class="lang-tag">Java</span><span class="lang-tag">Go</span><span
+                                            class="lang-tag">PHP</span><span class="lang-tag">C#</span><span
+                                            class="lang-tag">Swift</span><span class="lang-tag">Kotlin</span><span
+                                            class="lang-tag">Rust</span><span class="lang-tag">30+ more</span></div>
+                                </span></div>
+                            <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                        href="https://sentry.io" target="_blank">sentry.io</a> → follow SDK setup guide
+                                    for your
+                                    language</span></div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Bugsnag -->
+                <div class="tool">
+                    <div class="tool-name-row">
+                        <span class="tool-name">Bugsnag</span>
+                        <span class="badge badge-paid">PAID</span>
+                    </div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Application stability monitoring with smart error grouping
+                                and
+                                release health tracking. Focuses on error prioritization by user impact.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-paid">No free tier</span> · Starter $47/mo → Team $119/mo → Enterprise
+                                custom</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">JavaScript</span><span
+                                        class="lang-tag">Python</span><span class="lang-tag">Ruby</span><span
+                                        class="lang-tag">Java</span><span class="lang-tag">Swift</span><span
+                                        class="lang-tag">Kotlin</span><span class="lang-tag">Go</span><span
+                                        class="lang-tag">PHP</span><span class="lang-tag">C#</span><span
+                                        class="lang-tag">React Native</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://docs.bugsnag.com" target="_blank">docs.bugsnag.com</a> → set up SDK
+                                for
+                                your platform</span></div>
+                    </div>
+                </div>
+
+                <!-- Rollbar -->
+                <div class="tool">
+                    <div class="tool-name-row">
+                        <span class="tool-name">Rollbar</span>
+                        <span class="badge badge-both">BOTH</span>
+                    </div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Real-time
+                                error monitoring with automated error grouping and deploy tracking. Links errors to code
+                                changes automatically.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Free tier (5K errors/mo)</span> → Essentials $31/mo → Advanced
+                                $83/mo</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">JavaScript</span><span
+                                        class="lang-tag">Python</span><span class="lang-tag">Ruby</span><span
+                                        class="lang-tag">PHP</span><span class="lang-tag">Java</span><span
+                                        class="lang-tag">Go</span><span class="lang-tag">Swift</span><span
+                                        class="lang-tag">Kotlin</span><span class="lang-tag">.NET</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://docs.rollbar.com" target="_blank">docs.rollbar.com</a> → quickstart
+                                guides</span></div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- 📊 MONITORING -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="category section-anchor" id="monitoring">
+                <div class="category-header">
+                    <span class="category-emoji">📊</span>
+                    <h2 class="category-title">Monitoring &amp; Observability</h2>
+                </div>
+                <p class="category-desc">Track CPU, memory, API latency, and overall system health in real time.</p>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Prometheus</span><span
+                            class="badge badge-oss">OSS</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Open-source metrics collection and time-series database.
+                                Pull-based model using PromQL. The backbone of cloud-native monitoring.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-free">100% free and open source</span> (CNCF project)</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Go</span><span
+                                        class="lang-tag">Java</span><span class="lang-tag">Python</span><span
+                                        class="lang-tag">Ruby</span><span class="lang-tag">Rust</span><span
+                                        class="lang-tag">.NET</span><span class="lang-tag">PHP</span><span
+                                        class="lang-tag">Node.js</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://prometheus.io/docs" target="_blank">prometheus.io/docs</a></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Grafana</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Open-source dashboard and visualization platform. Connects
+                                to
+                                Prometheus, Loki, Elasticsearch, databases, and 150+ other data sources.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Self-host: free</span> · Grafana Cloud: Free tier → Pro
+                                (usage-based)
+                                → Advanced custom</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Language-agnostic</span><span
+                                        class="lang-tag">PromQL</span><span class="lang-tag">SQL</span><span
+                                        class="lang-tag">LogQL</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://grafana.com/tutorials" target="_blank">grafana.com/tutorials</a> · Try
+                                the
+                                live Play demo</span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Datadog</span><span
+                            class="badge badge-paid">PAID</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Full-stack SaaS monitoring — APM, logs, infrastructure,
+                                synthetics in one platform. Widely used in enterprise teams.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-paid">Infrastructure $15/host/mo</span> · APM $31/host/mo · Logs
+                                $0.10/GB ·
+                                Free trial available</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Java</span><span
+                                        class="lang-tag">Python</span><span class="lang-tag">Ruby</span><span
+                                        class="lang-tag">Go</span><span class="lang-tag">Node.js</span><span
+                                        class="lang-tag">.NET</span><span class="lang-tag">PHP</span><span
+                                        class="lang-tag">C++</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://docs.datadoghq.com" target="_blank">docs.datadoghq.com</a> → Agent
+                                install
+                                guide</span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">New Relic</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Full-stack observability with APM, browser monitoring, and
+                                distributed tracing. Strong free tier; excellent for Node.js, Java, Python, .NET.</span>
+                        </div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Free tier (100GB/mo, 1 user)</span> → Pro $0.25/GB +
+                                $349/user/mo</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Java</span><span
+                                        class="lang-tag">Python</span><span class="lang-tag">Ruby</span><span
+                                        class="lang-tag">Node.js</span><span class="lang-tag">Go</span><span
+                                        class="lang-tag">PHP</span><span class="lang-tag">.NET</span><span
+                                        class="lang-tag">C</span><span class="lang-tag">C++</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://docs.newrelic.com" target="_blank">docs.newrelic.com</a> → guided
+                                install</span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">OpenTelemetry</span><span
+                            class="badge badge-oss">OSS</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Vendor-neutral open standard for collecting traces, metrics,
+                                and
+                                logs. Works with Datadog, Grafana, Jaeger. The future of observability.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-free">100% free and open source</span> (CNCF project)</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Java</span><span
+                                        class="lang-tag">Python</span><span class="lang-tag">Go</span><span
+                                        class="lang-tag">JavaScript</span><span class="lang-tag">.NET</span><span
+                                        class="lang-tag">Ruby</span><span class="lang-tag">PHP</span><span
+                                        class="lang-tag">Swift</span><span class="lang-tag">Rust</span><span
+                                        class="lang-tag">Erlang</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://opentelemetry.io/docs"
+                                    target="_blank">opentelemetry.io/docs</a></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- 📜 LOGGING -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="category section-anchor" id="logging">
+                <div class="category-header">
+                    <span class="category-emoji">📜</span>
+                    <h2 class="category-title">Logging Systems</h2>
+                </div>
+                <p class="category-desc">Centralize logs for powerful debugging, search, and alerting.</p>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">ELK Stack</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Elasticsearch + Logstash + Kibana. Industry-standard log
+                                aggregation, search, and visualization pipeline.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Self-host: free</span> · Elastic Cloud: $95/mo (Standard) →
+                                $175/mo
+                                (Gold) → Enterprise custom</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Java</span><span
+                                        class="lang-tag">Python</span><span class="lang-tag">Ruby</span><span
+                                        class="lang-tag">Go</span><span class="lang-tag">.NET</span><span
+                                        class="lang-tag">JavaScript</span><span class="lang-tag">PHP</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://www.elastic.co/guide" target="_blank">elastic.co/guide</a> → ELK Stack
+                                getting started</span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Loki</span><span
+                            class="badge badge-both">BOTH</span>
+                    </div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Prometheus-inspired log aggregation by Grafana Labs. Stores
+                                only
+                                metadata/labels (not full-text index) — highly cost-efficient.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Open source: free</span> · Grafana Cloud: Free tier →
+                                usage-based</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Language-agnostic</span><span
+                                        class="lang-tag">ships via Promtail</span><span
+                                        class="lang-tag">Fluentd</span><span class="lang-tag">Logstash</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://grafana.com/docs/loki"
+                                    target="_blank">grafana.com/docs/loki</a></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Fluentd</span><span
+                            class="badge badge-oss">OSS</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Open-source data collector for unifying log pipelines.
+                                Routes
+                                logs from apps, servers, and containers to Elasticsearch, S3, Datadog, etc.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-free">100% free and open source</span> (CNCF project)</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Ruby core</span><span
+                                        class="lang-tag">Language-agnostic log input</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://docs.fluentd.org" target="_blank">docs.fluentd.org</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Splunk</span><span
+                            class="badge badge-paid">PAID</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Enterprise-grade log management, SIEM, and analytics.
+                                Extremely
+                                powerful for security analytics and compliance in large enterprises.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-paid">~$150/GB/day ingested</span> · Enterprise ~$1,800/GB/day · Free
+                                trial
+                                (500MB/day)</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Python</span><span
+                                        class="lang-tag">Java</span><span class="lang-tag">JavaScript</span><span
+                                        class="lang-tag">C#</span><span class="lang-tag">PHP</span><span
+                                        class="lang-tag">Ruby</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://docs.splunk.com" target="_blank">docs.splunk.com</a> → Splunk
+                                Fundamentals
+                                1 (free course)</span></div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- 🚀 CI-CD -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="category section-anchor" id="cicd">
+                <div class="category-header">
+                    <span class="category-emoji">🚀</span>
+                    <h2 class="category-title">DevOps / CI-CD</h2>
+                </div>
+                <p class="category-desc">Automate build, test, and deployment pipelines.</p>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">GitHub Actions</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Native
+                                CI/CD inside GitHub. YAML-based workflows on push, PR, schedule. 15,000+ community
+                                actions.
+                                Free for public repos.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Free for public repos</span> · Free: 2,000 min/mo · Pro
+                                $4/user/mo
+                                (3,000 min)</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Language-agnostic</span><span
+                                        class="lang-tag">any Docker env</span><span class="lang-tag">YAML config</span>
+                                </div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://docs.github.com/en/actions"
+                                    target="_blank">docs.github.com/actions</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">GitLab CI/CD</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Integrated CI/CD within GitLab. Strong auto DevOps and
+                                security
+                                scanning features. .gitlab-ci.yml based pipeline.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Free (400 CI min/mo)</span> · Premium $29/user/mo · Ultimate
+                                $99/user/mo</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Language-agnostic</span><span
+                                        class="lang-tag">Docker runners</span><span class="lang-tag">YAML config</span>
+                                </div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://docs.gitlab.com/ee/ci"
+                                    target="_blank">docs.gitlab.com/ee/ci</a></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Jenkins</span><span
+                            class="badge badge-oss">OSS</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span class="tool-value use-text">Most
+                                widely deployed open-source automation server. 1,800+ plugins. Extremely flexible but
+                                requires manual setup and maintenance.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-free">100% free and open source</span> (self-hosted only)</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Language-agnostic</span><span
+                                        class="lang-tag">Groovy DSL (Jenkinsfile)</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://www.jenkins.io/doc/tutorials"
+                                    target="_blank">jenkins.io/doc/tutorials</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">CircleCI</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Cloud-native CI/CD optimized for speed. Docker-first with
+                                strong
+                                caching and parallelism. Popular with startups.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Free (6,000 build min/mo)</span> → Performance $15/user/mo →
+                                Scale
+                                custom</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Language-agnostic</span><span
+                                        class="lang-tag">Docker / machine executors</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://circleci.com/docs" target="_blank">circleci.com/docs</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">ArgoCD</span><span
+                            class="badge badge-oss">OSS</span>
+                    </div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">GitOps-based continuous delivery for Kubernetes. Syncs
+                                cluster
+                                state with a Git repo. Visual diff and rollback built in.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-free">100% free and open source</span> (CNCF project)</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Language-agnostic</span><span
+                                        class="lang-tag">YAML manifests</span><span class="lang-tag">Helm</span><span
+                                        class="lang-tag">Kustomize</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://argo-cd.readthedocs.io"
+                                    target="_blank">argo-cd.readthedocs.io</a></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- 🐳 CONTAINERS -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="category section-anchor" id="containers">
+                <div class="category-header">
+                    <span class="category-emoji">🐳</span>
+                    <h2 class="category-title">Containers &amp; Orchestration</h2>
+                </div>
+                <p class="category-desc">Run apps anywhere, scale easily, and manage complex deployments.</p>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Docker</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span class="tool-value use-text">The
+                                standard containerization platform for packaging apps and dependencies. Builds
+                                OCI-compliant
+                                images used everywhere in dev and production.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Docker Engine: free (open source)</span> · Docker Desktop: Free
+                                personal → Pro $9/mo → Team $15/mo</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Language-agnostic</span><span
+                                        class="lang-tag">Dockerfile syntax</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://docs.docker.com/get-started"
+                                    target="_blank">docs.docker.com/get-started</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Docker Compose</span><span
+                            class="badge badge-oss">OSS</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Define
+                                and run multi-container Docker apps with a single YAML file. Ideal for local dev — spins
+                                up
+                                databases, caches, and services with one command.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-free">Free (bundled with Docker Desktop)</span></span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Language-agnostic</span><span
+                                        class="lang-tag">YAML config</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://docs.docker.com/compose"
+                                    target="_blank">docs.docker.com/compose</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Kubernetes (K8s)</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Industry-standard container orchestration — deploying,
+                                scaling,
+                                self-healing, and managing containers at any scale.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Self-host: free</span> · Managed: GKE/EKS $0.10/cluster/hr · AKS
+                                free
+                                control plane</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Language-agnostic</span><span
+                                        class="lang-tag">YAML manifests</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://kubernetes.io/docs/tutorials/kubernetes-basics"
+                                    target="_blank">kubernetes.io/docs/tutorials</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Helm</span><span
+                            class="badge badge-oss">OSS</span>
+                    </div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Package
+                                manager for Kubernetes. Deploy pre-configured apps using "charts". Standard for
+                                distributing
+                                K8s applications.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-free">100% free and open source</span></span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Language-agnostic</span><span
+                                        class="lang-tag">Go templating</span><span class="lang-tag">YAML</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://helm.sh/docs/intro/quickstart" target="_blank">helm.sh/docs</a></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Podman</span><span
+                            class="badge badge-oss">OSS</span>
+                    </div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Daemonless, rootless container engine. Docker CLI-compatible
+                                but
+                                more secure. Great for Red Hat/OpenShift environments.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-free">100% free and open source</span> (Red Hat sponsored)</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Language-agnostic</span><span
+                                        class="lang-tag">Docker-compatible</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://podman.io/get-started"
+                                    target="_blank">podman.io/get-started</a></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- ☁️ CLOUD -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="category section-anchor" id="cloud">
+                <div class="category-header">
+                    <span class="category-emoji">☁️</span>
+                    <h2 class="category-title">Cloud &amp; Infrastructure</h2>
+                </div>
+                <p class="category-desc">Hosting, scaling, networking — the foundation of modern applications.</p>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Amazon Web Services (AWS)</span><span
+                            class="badge badge-paid">PAID</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Largest
+                                cloud platform (32% market share) with 200+ services. EC2, S3, Lambda, RDS, EKS are
+                                most-used.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-paid">Pay-as-you-go</span> · Free tier: 12 months on key services · EC2
+                                t3.micro ~$8.50/mo</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Python (boto3)</span><span
+                                        class="lang-tag">Java</span><span class="lang-tag">JavaScript</span><span
+                                        class="lang-tag">Go</span><span class="lang-tag">Ruby</span><span
+                                        class="lang-tag">.NET</span><span class="lang-tag">PHP</span><span
+                                        class="lang-tag">C++</span><span class="lang-tag">Swift</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://aws.amazon.com/training" target="_blank">aws.amazon.com/training</a> →
+                                Cloud Practitioner Essentials (free)</span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Google Cloud Platform (GCP)</span><span
+                            class="badge badge-paid">PAID</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Google's
+                                cloud — strongest in AI/ML, data analytics, and Kubernetes (GKE). BigQuery, Cloud Run,
+                                Vertex AI are standout services.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-paid">Pay-as-you-go</span> · $300 free credit for new accounts ·
+                                Always-free tier on select services</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Python</span><span
+                                        class="lang-tag">Java</span><span class="lang-tag">Node.js</span><span
+                                        class="lang-tag">Go</span><span class="lang-tag">Ruby</span><span
+                                        class="lang-tag">PHP</span><span class="lang-tag">.NET</span><span
+                                        class="lang-tag">C++</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://cloud.google.com/training"
+                                    target="_blank">cloud.google.com/training</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Microsoft Azure</span><span
+                            class="badge badge-paid">PAID</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Microsoft's cloud — dominant in enterprise, .NET, and hybrid
+                                environments. Deep Active Directory integration and strong compliance
+                                certifications.</span>
+                        </div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-paid">Pay-as-you-go</span> · $200 free credit for 30 days · Always-free
+                                tier on select services</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">.NET (strongest)</span><span
+                                        class="lang-tag">Java</span><span class="lang-tag">Python</span><span
+                                        class="lang-tag">JavaScript</span><span class="lang-tag">Go</span><span
+                                        class="lang-tag">Ruby</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://learn.microsoft.com/en-us/training/azure"
+                                    target="_blank">learn.microsoft.com/azure</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Cloudflare</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span class="tool-value use-text">CDN,
+                                DDoS
+                                protection, DNS, edge computing, and Zero Trust security at global scale. Workers enable
+                                serverless at the edge.</span></div>
+                        <div class="tool-row"><span class="tool-value"><span class="price-both">Free plan (generous
+                                    limits)</span> → Pro $25/mo → Business $200/mo → Enterprise custom</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">JavaScript</span><span
+                                        class="lang-tag">TypeScript</span><span class="lang-tag">Rust (WASM)</span><span
+                                        class="lang-tag">Python (beta)</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://developers.cloudflare.com"
+                                    target="_blank">developers.cloudflare.com</a></span></div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- ⚙️ IaC -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="category section-anchor" id="iac">
+                <div class="category-header">
+                    <span class="category-emoji">⚙️</span>
+                    <h2 class="category-title">Infrastructure as Code (IaC)</h2>
+                </div>
+                <p class="category-desc">Define, version, and manage infrastructure exactly like application code.</p>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Terraform</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span class="tool-value use-text">Most
+                                widely used IaC tool. Declarative HCL syntax. Provisions infra across any cloud with a
+                                massive provider ecosystem.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">CLI open source: free</span> · HCP Terraform: Free (500
+                                resources) →
+                                Plus $20/user/mo</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">HCL (HashiCorp Config
+                                        Language)</span><span class="lang-tag">Go (providers)</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://developer.hashicorp.com/terraform/tutorials"
+                                    target="_blank">developer.hashicorp.com/terraform</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Pulumi</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span class="tool-value use-text">IaC
+                                using
+                                real programming languages instead of DSLs. Better IDE support and testing. Great for
+                                teams
+                                already strong in one language.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">CLI open source: free</span> · Pulumi Cloud: Free (1 project) →
+                                Team
+                                $50/mo → Enterprise custom</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">TypeScript</span><span
+                                        class="lang-tag">JavaScript</span><span class="lang-tag">Python</span><span
+                                        class="lang-tag">Go</span><span class="lang-tag">C#</span><span
+                                        class="lang-tag">Java</span><span class="lang-tag">YAML</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://www.pulumi.com/docs/get-started"
+                                    target="_blank">pulumi.com/docs/get-started</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">AWS CloudFormation</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">AWS-native IaC using JSON/YAML templates. Deep AWS
+                                integration —
+                                no extra tooling needed if you're AWS-only.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Free to use</span> — you only pay for the AWS resources it
+                                provisions</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">YAML</span><span
+                                        class="lang-tag">JSON</span><span class="lang-tag">CDK: TypeScript</span><span
+                                        class="lang-tag">Python</span><span class="lang-tag">Java</span><span
+                                        class="lang-tag">C#</span><span class="lang-tag">Go</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://docs.aws.amazon.com/cloudformation"
+                                    target="_blank">docs.aws.amazon.com/cloudformation</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Ansible</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Agentless
+                                configuration management using YAML playbooks. No agent needed on target hosts — great
+                                for
+                                server provisioning and config management.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Community: free</span> · Red Hat Ansible Automation Platform:
+                                ~$14,000/yr (enterprise)</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">YAML (playbooks)</span><span
+                                        class="lang-tag">Python (modules)</span><span class="lang-tag">SSH-based</span>
+                                </div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://docs.ansible.com/ansible/latest/getting_started"
+                                    target="_blank">docs.ansible.com</a></span></div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- 🔐 SECURITY -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="category section-anchor" id="security">
+                <div class="category-header">
+                    <span class="category-emoji">🔐</span>
+                    <h2 class="category-title">Authentication &amp; Security Tools</h2>
+                </div>
+                <p class="category-desc">Secure apps, manage identities, and protect secrets.</p>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Auth0</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Identity-as-a-service for authentication and authorization.
+                                Easy
+                                social login, MFA, and enterprise SSO via OAuth2, OIDC, SAML.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Free (7,500 active users)</span> → Essentials $35/mo →
+                                Professional
+                                $240/mo → Enterprise custom</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">JavaScript</span><span
+                                        class="lang-tag">Python</span><span class="lang-tag">Java</span><span
+                                        class="lang-tag">Go</span><span class="lang-tag">Ruby</span><span
+                                        class="lang-tag">PHP</span><span class="lang-tag">.NET</span><span
+                                        class="lang-tag">Swift</span><span class="lang-tag">Kotlin</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://auth0.com/docs/get-started"
+                                    target="_blank">auth0.com/docs/get-started</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Okta</span><span
+                            class="badge badge-paid">PAID</span>
+                    </div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Enterprise IAM platform with SSO and workforce identity.
+                                Industry standard in enterprise; integrates with thousands of apps.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-paid">SSO $2/user/mo · MFA $5/user/mo</span> · Developer free tier (100
+                                MAU)</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">JavaScript</span><span
+                                        class="lang-tag">Java</span><span class="lang-tag">Python</span><span
+                                        class="lang-tag">Go</span><span class="lang-tag">.NET</span><span
+                                        class="lang-tag">PHP</span><span class="lang-tag">Swift</span><span
+                                        class="lang-tag">Kotlin</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://developer.okta.com/docs/guides"
+                                    target="_blank">developer.okta.com</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">HashiCorp Vault</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Secrets
+                                management — store and control access to tokens, passwords, certificates, and API keys.
+                                Gold
+                                standard for secrets management.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Community: completely free</span> · HCP Vault: $0.03/hr (dev) →
+                                Plus
+                                custom</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Go</span><span
+                                        class="lang-tag">Python</span><span class="lang-tag">Ruby</span><span
+                                        class="lang-tag">Java</span><span class="lang-tag">C#</span><span
+                                        class="lang-tag">JavaScript</span><span class="lang-tag">PHP</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://developer.hashicorp.com/vault/tutorials"
+                                    target="_blank">developer.hashicorp.com/vault</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Snyk</span><span
+                            class="badge badge-both">BOTH</span>
+                    </div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Developer-first security — finds and fixes vulnerabilities
+                                in
+                                code, dependencies, containers, and IaC. Essential for DevSecOps pipelines.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Free (unlimited OSS tests, 200 private/mo)</span> → Team
+                                $25/dev/mo →
+                                Enterprise custom</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">JavaScript</span><span
+                                        class="lang-tag">Python</span><span class="lang-tag">Java</span><span
+                                        class="lang-tag">Go</span><span class="lang-tag">Ruby</span><span
+                                        class="lang-tag">PHP</span><span class="lang-tag">.NET</span><span
+                                        class="lang-tag">Swift</span><span class="lang-tag">Kotlin</span><span
+                                        class="lang-tag">C/C++</span><span class="lang-tag">Scala</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://docs.snyk.io/getting-started" target="_blank">docs.snyk.io</a></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- 🌐 API & NETWORKING -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="category section-anchor" id="api">
+                <div class="category-header">
+                    <span class="category-emoji">🌐</span>
+                    <h2 class="category-title">API &amp; Networking Tools</h2>
+                </div>
+                <p class="category-desc">Test APIs and manage web traffic efficiently.</p>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Postman</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span class="tool-value use-text">Most
+                                popular API platform for building, testing, and documenting REST, GraphQL, and SOAP
+                                APIs.
+                                Collections, mock servers, and team collaboration built in.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Free (3 collaborators)</span> → Basic $14/user/mo → Professional
+                                $29/user/mo → Enterprise custom</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Tests in JavaScript</span><span
+                                        class="lang-tag">REST</span><span class="lang-tag">GraphQL</span><span
+                                        class="lang-tag">gRPC</span><span class="lang-tag">WebSocket</span><span
+                                        class="lang-tag">SOAP</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://learning.postman.com" target="_blank">learning.postman.com</a></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Insomnia</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Lightweight open-source REST and GraphQL API client. Clean
+                                UI,
+                                Git sync for collections, supports gRPC and WebSockets.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Open source: free</span> · Cloud: Free → Team $12/user/mo →
+                                Enterprise custom</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">REST</span><span
+                                        class="lang-tag">GraphQL</span><span class="lang-tag">gRPC</span><span
+                                        class="lang-tag">WebSocket</span><span class="lang-tag">Tests in
+                                        JavaScript</span>
+                                </div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://docs.insomnia.rest" target="_blank">docs.insomnia.rest</a></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">NGINX</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">High-performance web server, reverse proxy, load balancer,
+                                and
+                                HTTP cache. Powers ~35% of all websites. Handles millions of concurrent
+                                connections.</span>
+                        </div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Open source: free</span> · NGINX Plus ~$4,000/instance/yr
+                                (enterprise
+                                support)</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">NGINX config DSL</span><span
+                                        class="lang-tag">Lua (via OpenResty)</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://nginx.org/en/docs" target="_blank">nginx.org/en/docs</a> → beginner's
+                                guide</span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Apache HTTP Server</span><span
+                            class="badge badge-oss">OSS</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">World's
+                                most-deployed web server. Mature, extensible, and widely supported. .htaccess-based
+                                config;
+                                dominates shared hosting.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-free">100% free and open source</span> (Apache Foundation)</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">C (modules)</span><span
+                                        class="lang-tag">.htaccess config</span><span class="lang-tag">CGI: any
+                                        language</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://httpd.apache.org/docs/current/getting-started.html"
+                                    target="_blank">httpd.apache.org/docs</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Kong</span><span
+                            class="badge badge-both">BOTH</span>
+                    </div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Open-source API gateway and service mesh. Plugin ecosystem
+                                for
+                                rate limiting, auth, logging. Runs on Kubernetes via Kong Ingress Controller.</span>
+                        </div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">OSS: free</span> · Konnect: Free tier → Plus $250/mo → Enterprise
+                                custom</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Lua (plugins)</span><span
+                                        class="lang-tag">Go</span><span class="lang-tag">Python</span><span
+                                        class="lang-tag">JavaScript</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://docs.konghq.com/gateway/latest/get-started"
+                                    target="_blank">docs.konghq.com</a></span></div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- ⚡ MESSAGING -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="category section-anchor" id="messaging">
+                <div class="category-header">
+                    <span class="category-emoji">⚡</span>
+                    <h2 class="category-title">Realtime &amp; Messaging Systems</h2>
+                </div>
+                <p class="category-desc">Build async, event-driven, and highly scalable systems.</p>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Apache Kafka</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Distributed event streaming platform for high-throughput,
+                                fault-tolerant pipelines. Used by 80% of Fortune 100. Ideal for event sourcing and
+                                stream
+                                processing.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Open source: free</span> · Confluent Cloud: $0.11/hr (basic) →
+                                Standard/Dedicated custom</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Java</span><span
+                                        class="lang-tag">Python</span><span class="lang-tag">Go</span><span
+                                        class="lang-tag">.NET</span><span class="lang-tag">Node.js</span><span
+                                        class="lang-tag">C/C++</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://kafka.apache.org/documentation#gettingStarted"
+                                    target="_blank">kafka.apache.org/documentation</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">RabbitMQ</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Traditional message broker supporting AMQP, MQTT, STOMP.
+                                Easier
+                                to set up than Kafka. Best for job queues and microservice decoupling.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Open source: free</span> · CloudAMQP: Free (1M msg/mo) → $19/mo →
+                                custom</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Java</span><span
+                                        class="lang-tag">Python</span><span class="lang-tag">Ruby</span><span
+                                        class="lang-tag">Go</span><span class="lang-tag">.NET</span><span
+                                        class="lang-tag">JavaScript</span><span class="lang-tag">PHP</span><span
+                                        class="lang-tag">Erlang</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://www.rabbitmq.com/tutorials"
+                                    target="_blank">rabbitmq.com/tutorials</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Apache Pulsar</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Cloud-native distributed messaging combining Kafka +
+                                RabbitMQ
+                                features. Multi-tenancy, geo-replication, tiered storage built in.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Open source: free</span> · StreamNative Cloud: Free tier →
+                                usage-based</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Java</span><span
+                                        class="lang-tag">Python</span><span class="lang-tag">Go</span><span
+                                        class="lang-tag">C++</span><span class="lang-tag">Node.js</span><span
+                                        class="lang-tag">C#</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://pulsar.apache.org/docs/next"
+                                    target="_blank">pulsar.apache.org/docs</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Redis</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">In-memory
+                                store for caching, Pub/Sub, session store, leaderboards, and rate limiting.
+                                Sub-millisecond
+                                latency. Redis Streams adds Kafka-like event log.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Community Edition: free</span> · Redis Cloud: Free (30MB) → $7/mo
+                                →
+                                custom</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Python</span><span
+                                        class="lang-tag">Java</span><span class="lang-tag">Node.js</span><span
+                                        class="lang-tag">Go</span><span class="lang-tag">Ruby</span><span
+                                        class="lang-tag">PHP</span><span class="lang-tag">C#</span><span
+                                        class="lang-tag">C/C++</span><span class="lang-tag">Rust</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://redis.io/learn" target="_blank">redis.io/learn</a></span></div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- 🧪 TESTING -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="category section-anchor" id="testing">
+                <div class="category-header">
+                    <span class="category-emoji">🧪</span>
+                    <h2 class="category-title">Testing &amp; QA Tools</h2>
+                </div>
+                <p class="category-desc">Ensure code quality through automated end-to-end and UI testing.</p>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Cypress</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span class="tool-value use-text">Fast,
+                                reliable end-to-end testing for web apps. Real browser testing with time-travel
+                                debugging
+                                and auto-wait. Excellent developer experience.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">OSS runner: free</span> · Cypress Cloud: Free (500 results/mo) →
+                                Team
+                                $67/mo → Business $250/mo</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">JavaScript</span><span
+                                        class="lang-tag">TypeScript</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://docs.cypress.io" target="_blank">docs.cypress.io</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Playwright</span><span
+                            class="badge badge-oss">OSS</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Microsoft's cross-browser automation framework. Tests
+                                Chromium,
+                                Firefox, and WebKit. Supports multiple languages. Faster than Selenium.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-free">100% free and open source</span> (Microsoft)</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">JavaScript</span><span
+                                        class="lang-tag">TypeScript</span><span class="lang-tag">Python</span><span
+                                        class="lang-tag">Java</span><span class="lang-tag">C#</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://playwright.dev/docs/intro"
+                                    target="_blank">playwright.dev/docs/intro</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Selenium</span><span
+                            class="badge badge-oss">OSS</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Original
+                                web browser automation framework. Supports all major browsers. Large ecosystem — widely
+                                used
+                                in enterprise.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-free">100% free and open source</span></span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Java</span><span
+                                        class="lang-tag">Python</span><span class="lang-tag">C#</span><span
+                                        class="lang-tag">Ruby</span><span class="lang-tag">JavaScript</span><span
+                                        class="lang-tag">Kotlin</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://www.selenium.dev/documentation/webdriver/getting_started"
+                                    target="_blank">selenium.dev/documentation</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Jest</span><span
+                            class="badge badge-oss">OSS</span>
+                    </div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">JavaScript unit and integration testing framework by Meta.
+                                The
+                                standard for React apps. Zero-config setup, snapshot testing, mocking built in.</span>
+                        </div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-free">100% free and open source</span></span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">JavaScript</span><span
+                                        class="lang-tag">TypeScript</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://jestjs.io/docs/getting-started"
+                                    target="_blank">jestjs.io/docs/getting-started</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">k6</span><span
+                            class="badge badge-both">BOTH</span>
+                    </div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Open-source load testing for APIs and microservices.
+                                Developer-friendly, integrates with Grafana dashboards, great for CI performance
+                                testing.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">OSS: completely free</span> · Grafana Cloud k6: Free (50
+                                VU-hours/mo)
+                                → Pro $49/mo</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">JavaScript</span><span
+                                        class="lang-tag">TypeScript</span><span class="lang-tag">tests any HTTP/WS/gRPC
+                                        endpoint</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://grafana.com/docs/k6/latest/get-started"
+                                    target="_blank">grafana.com/docs/k6</a></span></div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- 📦 ARTIFACTS -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="category section-anchor" id="artifacts">
+                <div class="category-header">
+                    <span class="category-emoji">📦</span>
+                    <h2 class="category-title">Package / Artifact Management</h2>
+                </div>
+                <p class="category-desc">Store, version, and distribute build artifacts and packages.</p>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Nexus Repository</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Universal
+                                artifact repository manager. Proxies public registries and hosts private ones. Essential
+                                for
+                                enterprise artifact governance.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">OSS: free</span> · Pro: $1,500/yr · Lifecycle bundle: custom
+                                pricing</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Maven (Java)</span><span
+                                        class="lang-tag">npm
+                                        (JS)</span><span class="lang-tag">PyPI (Python)</span><span
+                                        class="lang-tag">NuGet
+                                        (.NET)</span><span class="lang-tag">Go</span><span
+                                        class="lang-tag">Docker</span>
+                                </div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://help.sonatype.com/repomanager3/getting-started"
+                                    target="_blank">help.sonatype.com/repomanager3</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">JFrog Artifactory</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Enterprise-grade universal artifact repository with deep
+                                CI/CD
+                                integration. Supports 30+ package formats.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">OSS: free (limited)</span> · Pro: $98/user/mo · Enterprise+:
+                                custom</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Maven</span><span
+                                        class="lang-tag">Gradle</span><span class="lang-tag">npm</span><span
+                                        class="lang-tag">PyPI</span><span class="lang-tag">NuGet</span><span
+                                        class="lang-tag">Docker</span><span class="lang-tag">Go</span><span
+                                        class="lang-tag">Helm</span><span class="lang-tag">Conan (C/C++)</span><span
+                                        class="lang-tag">RubyGems</span><span class="lang-tag">25+ more</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://jfrog.com/start-free" target="_blank">jfrog.com</a> → JFrog Academy
+                                (free
+                                courses)</span></div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- 🔄 PROXY & LB -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="category section-anchor" id="proxy">
+                <div class="category-header">
+                    <span class="category-emoji">🔄</span>
+                    <h2 class="category-title">Reverse Proxy &amp; Load Balancing</h2>
+                </div>
+                <p class="category-desc">Distribute traffic, improve reliability, and hide backend complexity.</p>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">HAProxy</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">High-performance TCP/HTTP load balancer. Used by GitHub and
+                                Stack Overflow. Handles millions of requests/second with minimal resources.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Community: completely free</span> · Enterprise:
+                                ~$15,000/yr</span>
+                        </div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Language-agnostic proxy</span><span
+                                        class="lang-tag">HAProxy config syntax</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://www.haproxy.org/documentation.html"
+                                    target="_blank">haproxy.org/documentation</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Traefik</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Modern
+                                cloud-native reverse proxy for containers. Auto-discovers Docker/K8s services. Automatic
+                                SSL
+                                via Let's Encrypt. Built-in dashboard.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Traefik Proxy: completely free</span> · Traefik Hub: Free tier →
+                                Pro
+                                $15/gateway/mo</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Language-agnostic</span><span
+                                        class="lang-tag">YAML / TOML config</span><span class="lang-tag">dynamic
+                                        discovery</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://doc.traefik.io/traefik"
+                                    target="_blank">doc.traefik.io/traefik</a></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- 📁 STORAGE & CDN -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="category section-anchor" id="storage">
+                <div class="category-header">
+                    <span class="category-emoji">📁</span>
+                    <h2 class="category-title">Storage &amp; CDN</h2>
+                </div>
+                <p class="category-desc">Store files reliably and deliver content fast globally.</p>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Amazon S3</span><span
+                            class="badge badge-paid">PAID</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">World's
+                                most-used object storage. Stores files, backups, static sites, and data lakes.
+                                99.999999999%
+                                durability. Lifecycle policies and versioning built in.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-paid">~$0.023/GB/mo</span> · Requests $0.0004/1K GET · Free tier: 5GB
+                                for
+                                12 months</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Python</span><span
+                                        class="lang-tag">Java</span><span class="lang-tag">JavaScript</span><span
+                                        class="lang-tag">Go</span><span class="lang-tag">Ruby</span><span
+                                        class="lang-tag">.NET</span><span class="lang-tag">PHP</span><span
+                                        class="lang-tag">C++</span><span class="lang-tag">S3-compatible API</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://docs.aws.amazon.com/s3"
+                                    target="_blank">docs.aws.amazon.com/s3</a></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Cloudflare CDN</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Global
+                                CDN that caches and accelerates website assets at the edge. 300+ PoPs worldwide. DDoS
+                                protection and WAF included.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Free (unlimited bandwidth)</span> → Pro $25/mo → Business $200/mo
+                                →
+                                Enterprise custom</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Language-agnostic static
+                                        content</span><span class="lang-tag">Workers: JS/TS/Rust</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://developers.cloudflare.com/cache"
+                                    target="_blank">developers.cloudflare.com/cache</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">MinIO</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Open-source S3-compatible object storage. Self-hostable on
+                                any
+                                infrastructure. Drop-in replacement for AWS S3 APIs.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Community: completely free</span> (AGPL) · Enterprise: custom
+                                pricing</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Go</span><span
+                                        class="lang-tag">Python</span><span class="lang-tag">Java</span><span
+                                        class="lang-tag">JavaScript</span><span class="lang-tag">.NET</span><span
+                                        class="lang-tag">any S3 SDK</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://min.io/docs/minio/linux/index.html"
+                                    target="_blank">min.io/docs</a></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- 🧠 AUTOMATION -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="category section-anchor" id="automation">
+                <div class="category-header">
+                    <span class="category-emoji">🧠</span>
+                    <h2 class="category-title">Workflow / Automation</h2>
+                </div>
+                <p class="category-desc">Automate tasks, integrate tools, and build no-code/low-code workflows.</p>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">n8n</span><span
+                            class="badge badge-both">BOTH</span>
+                    </div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Open-source self-hostable workflow automation with 400+
+                                integrations. Visual flow builder; built for developers who want data control.</span>
+                        </div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Self-hosted: completely free</span> (fair-code license) · n8n
+                                Cloud:
+                                $20/mo (Starter) → $50/mo (Pro)</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Node.js core</span><span
+                                        class="lang-tag">JavaScript (code nodes)</span><span class="lang-tag">Python
+                                        (code
+                                        nodes)</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://docs.n8n.io/try-it-out" target="_blank">docs.n8n.io</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Zapier</span><span
+                            class="badge badge-paid">PAID</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">No-code
+                                automation connecting 6,000+ apps. Easiest to use; best for non-technical teams and
+                                marketing/sales automation.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-paid">Free (100 tasks/mo)</span> → Professional $19.99/mo (750 tasks) →
+                                Team $69/mo → Company custom</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">No-code</span><span class="lang-tag">Code
+                                        by
+                                        Zapier: JavaScript</span><span class="lang-tag">Python</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://zapier.com/learn" target="_blank">zapier.com/learn</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">Temporal</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Durable
+                                workflow engine for long-running, fault-tolerant business logic as code. Handles
+                                retries,
+                                timeouts, and state automatically. Used by Stripe and Coinbase.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">OSS: completely free</span> · Temporal Cloud: $0.00042/action +
+                                storage</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Go</span><span
+                                        class="lang-tag">Java</span><span class="lang-tag">Python</span><span
+                                        class="lang-tag">TypeScript</span><span class="lang-tag">PHP</span><span
+                                        class="lang-tag">.NET</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://docs.temporal.io/getting-started"
+                                    target="_blank">docs.temporal.io</a></span></div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- 🗄️ DATABASES -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="category section-anchor" id="databases">
+                <div class="category-header">
+                    <span class="category-emoji">🗄️</span>
+                    <h2 class="category-title">Databases &amp; Data Tools</h2>
+                </div>
+                <p class="category-desc">Store, query, and move data reliably.</p>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">PostgreSQL</span><span
+                            class="badge badge-oss">OSS</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span class="tool-value use-text">The
+                                world's most advanced open-source relational database. ACID-compliant; supports JSON,
+                                full-text search, and extensions like PostGIS and pgvector.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-free">Completely free</span> · Managed: Supabase (free tier), AWS RDS
+                                (~$15/mo), Neon (free tier)</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Python (psycopg2)</span><span
+                                        class="lang-tag">Java (JDBC)</span><span class="lang-tag">JavaScript
+                                        (pg)</span><span class="lang-tag">Go</span><span
+                                        class="lang-tag">Ruby</span><span class="lang-tag">.NET</span><span
+                                        class="lang-tag">PHP</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://www.postgresql.org/docs/current/tutorial.html"
+                                    target="_blank">postgresql.org/docs/tutorial</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">dbt (data build tool)</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">SQL-based
+                                transformation layer for analytics. Turns raw warehouse data into analysis-ready models.
+                                Integrates with Snowflake, BigQuery, Redshift, and more.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">dbt Core: completely free</span> · dbt Cloud: Developer free →
+                                Team
+                                $100/seat/mo → Enterprise custom</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">SQL (primary)</span><span
+                                        class="lang-tag">Jinja templating</span><span class="lang-tag">Python models
+                                        (v1.3+)</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://docs.getdbt.com/guides"
+                                    target="_blank">docs.getdbt.com/guides</a></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ══════════════════════════════════════════ -->
+            <!-- 🔧 DEV ENVIRONMENT -->
+            <!-- ══════════════════════════════════════════ -->
+            <section class="category section-anchor" id="devenv">
+                <div class="category-header">
+                    <span class="category-emoji">🔧</span>
+                    <h2 class="category-title">Developer Environment &amp; Productivity</h2>
+                </div>
+                <p class="category-desc">Improve local development speed, consistency, and code quality.</p>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">VS Code</span><span
+                            class="badge badge-oss">OSS</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span class="tool-value use-text">Most
+                                popular code editor. Lightweight but powerful with thousands of extensions. Built-in
+                                Git,
+                                debugger, terminal, and remote development.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-free">Completely free and open source</span> (Microsoft, MIT
+                                license)</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Every language via extensions</span><span
+                                        class="lang-tag">Best: JS/TS, Python, Go, Java, C#</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://code.visualstudio.com/docs"
+                                    target="_blank">code.visualstudio.com/docs</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">DevContainers</span><span
+                            class="badge badge-both">BOTH</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Reproducible, containerized dev environments in VS Code or
+                                GitHub Codespaces. Eliminates "works on my machine" issues via .devcontainer
+                                config.</span>
+                        </div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-both">Spec: completely free</span> · GitHub Codespaces: 60hr/mo free →
+                                $0.18/hr (2-core)</span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Language-agnostic</span><span
+                                        class="lang-tag">any Docker environment</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://containers.dev" target="_blank">containers.dev</a></span></div>
+                    </div>
+                </div>
+
+                <div class="tool">
+                    <div class="tool-name-row"><span class="tool-name">pre-commit</span><span
+                            class="badge badge-oss">OSS</span></div>
+                    <div class="tool-rows">
+                        <div class="tool-row"><span class="tool-label">Use</span><span
+                                class="tool-value use-text">Framework
+                                for managing Git pre-commit hooks. Runs linters, formatters, and security checks
+                                automatically before every commit.</span></div>
+                        <div class="tool-row"><span class="tool-label">Pricing</span><span class="tool-value"><span
+                                    class="price-free">100% free and open source</span></span></div>
+                        <div class="tool-row"><span class="tool-label">Languages</span><span class="tool-value">
+                                <div class="lang-tags"><span class="lang-tag">Python</span><span
+                                        class="lang-tag">JavaScript</span><span class="lang-tag">Go</span><span
+                                        class="lang-tag">Ruby</span><span class="lang-tag">Java</span><span
+                                        class="lang-tag">shell scripts</span></div>
+                            </span></div>
+                        <div class="tool-row"><span class="tool-label">Learn</span><span class="tool-value"><a
+                                    href="https://pre-commit.com" target="_blank">pre-commit.com</a></span></div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- FOOTER -->
+            <div style="margin-top:60px; padding-top:28px; border-top:1px solid #1a1a1a; font-size:12px; color:#333;">
+                Developer Tools Reference · Practical Edition 2025 · 50+ tools covered
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        // Highlight active nav link on scroll
+        const links = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.section-anchor');
+
+        const tools = Array.from(document.querySelectorAll('.tool'));
+
+        const summarize = (text, limit = 140) => {
+            const compact = text.replace(/\s+/g, ' ').trim();
+            if (compact.length <= limit) return compact;
+            return `${compact.slice(0, limit - 1).trimEnd()}…`;
+        };
+
+        tools.forEach((tool) => {
+            if (tool.tagName.toLowerCase() === 'details') return;
+
+            const title = tool.querySelector('.tool-name')?.textContent.trim();
+            const badge = tool.querySelector('.badge')?.cloneNode(true);
+            const useValue = tool.querySelector('.tool-value.use-text');
+            const learnLink = tool.querySelector('.tool-row a[href]');
+            const rows = tool.querySelector('.tool-rows');
+
+            if (!title || !rows) return;
+
+            const summary = document.createElement('summary');
+            summary.className = 'tool-summary';
+            summary.innerHTML = `
+                            <div class="tool-summary-main">
+                                <div class="tool-summary-title-row"></div>
+                                <p class="tool-summary-copy"></p>
+                            </div>
+                            <svg class="tool-summary-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        `;
+
+            const titleRow = summary.querySelector('.tool-summary-title-row');
+            const titleSpan = document.createElement('span');
+            titleSpan.className = 'tool-summary-title';
+            titleSpan.textContent = title;
+            titleRow.appendChild(titleSpan);
+            if (badge) titleRow.appendChild(badge);
+
+            const summaryCopy = summary.querySelector('.tool-summary-copy');
+            summaryCopy.textContent = summarize(useValue?.textContent || 'Open for usage, pricing, and setup details.');
+
+            const howToUse = document.createElement('div');
+            howToUse.className = 'tool-row';
+            const learnTarget = learnLink?.getAttribute('href') || 'the official docs';
+            howToUse.innerHTML = `<span class="tool-label">How to use</span><span class="tool-value how-to-use">Start with ${title}'s official docs, install the recommended SDK or CLI for your stack, and complete the quickstart before integrating it into production.</span>`;
+
+            const useRow = rows.querySelector('.tool-row');
+            if (useRow) {
+                useRow.insertAdjacentElement('afterend', howToUse);
+            } else {
+                rows.insertBefore(howToUse, rows.firstChild);
+            }
+
+            const details = document.createElement('details');
+            details.className = 'tool';
+            details.appendChild(summary);
+            const detailsWrap = document.createElement('div');
+            detailsWrap.className = 'tool-details';
+            detailsWrap.appendChild(rows);
+            details.appendChild(detailsWrap);
+
+            tool.replaceWith(details);
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    links.forEach(l => l.classList.remove('active'));
+                    const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+                    if (active) active.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-20% 0px -70% 0px' });
+
+        sections.forEach(s => observer.observe(s));
+    </script>
+</body>
+
+</html>
