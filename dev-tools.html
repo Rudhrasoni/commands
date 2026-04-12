@@ -151,6 +151,49 @@
             /* border-left-color: #fff; */
         }
 
+        .mobile-header {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 120;
+            border-bottom: 1px solid #27272a;
+            background: #000;
+            padding: 16px 20px;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+        }
+
+        .mobile-header-title {
+            margin: 0;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .mobile-header-back {
+            color: #a1a1aa;
+            text-decoration: none;
+            border: 1px solid #3f3f46;
+            padding: 6px 10px;
+            border-radius: 2px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            transition: color 0.2s, border-color 0.2s, background-color 0.2s;
+        }
+
+        .mobile-header-back:hover {
+            color: #fff;
+            border-color: #71717a;
+            background: #09090b;
+        }
+
         /* ── MAIN ── */
         .main {
             margin-left: 288px;
@@ -167,7 +210,7 @@
 
         /* ── HERO ── */
         .hero {
-            margin-bottom: 60px;
+            /* margin-bottom: 60px; */
             padding-bottom: 50px;
             border-bottom: 1px solid #27272a;
         }
@@ -225,7 +268,8 @@
 
         /* ── CATEGORY SECTION ── */
         .category {
-            margin-bottom: 70px;
+            margin-top: 30px;
+            margin-bottom: 60px;
         }
 
         .category-header {
@@ -472,22 +516,51 @@
                 margin-left: 220px;
                 padding: 40px 30px 80px;
             }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .category-title {
+                font-size: 20px;
+            }
         }
 
         @media (max-width: 650px) {
+            .mobile-header {
+                display: flex;
+            }
+
             .sidebar {
                 display: none;
             }
 
             .main {
                 margin-left: 0;
-                padding: 30px 20px 60px;
+                padding: 92px 20px 60px;
+            }
+
+            .hero h1 {
+                font-size: 24px;
+            }
+
+            .nav-section {
+                padding: 12px 0px;
+            }
+
+            .category-title {
+                font-size: 18px;
             }
         }
     </style>
 </head>
 
 <body>
+
+    <header class="mobile-header">
+        <h1 class="mobile-header-title">Dev Tools</h1>
+        <a href="/" class="mobile-header-back">Back</a>
+    </header>
 
     <!-- ── SIDEBAR ── -->
     <aside class="sidebar">
@@ -536,8 +609,8 @@
                 <div class="hero-meta">Every tool a modern developer should know — <strong>pricing, language support,
                         open
                         source status, and how to learn.</strong></div>
-                <div class="hero-meta" style="margin-top:6px;">Practical Edition | 2025 &nbsp;·&nbsp; 50+ Tools Covered
-                </div>
+                <!-- <div class="hero-meta" style="margin-top:6px;">Practical Edition | 2025 &nbsp;·&nbsp; 50+ Tools Covered
+                </div> -->
 
                 <div class="legend">
                     <div class="legend-item"><span class="badge badge-oss">OSS</span> Open Source / Free</div>
@@ -552,7 +625,7 @@
             <!-- ══════════════════════════════════════════ -->
             <section class="category section-anchor" id="error-tracking">
                 <div class="category-header">
-                    <span class="category-emoji">🚨</span>
+                    <span class="category-emoji">#</span>
                     <h2 class="category-title">Error Tracking &amp; Crash Reporting</h2>
                 </div>
                 <p class="category-desc">Detect crashes, capture stack traces, and measure user impact in real time.</p>
@@ -668,7 +741,7 @@
             <!-- ══════════════════════════════════════════ -->
             <section class="category section-anchor" id="monitoring">
                 <div class="category-header">
-                    <span class="category-emoji">📊</span>
+                    <span class="category-emoji">#</span>
                     <h2 class="category-title">Monitoring &amp; Observability</h2>
                 </div>
                 <p class="category-desc">Track CPU, memory, API latency, and overall system health in real time.</p>
@@ -800,7 +873,7 @@
             <!-- ══════════════════════════════════════════ -->
             <section class="category section-anchor" id="logging">
                 <div class="category-header">
-                    <span class="category-emoji">📜</span>
+                    <span class="category-emoji">#</span>
                     <h2 class="category-title">Logging Systems</h2>
                 </div>
                 <p class="category-desc">Centralize logs for powerful debugging, search, and alerting.</p>
@@ -903,7 +976,7 @@
             <!-- ══════════════════════════════════════════ -->
             <section class="category section-anchor" id="cicd">
                 <div class="category-header">
-                    <span class="category-emoji">🚀</span>
+                    <span class="category-emoji">#</span>
                     <h2 class="category-title">DevOps / CI-CD</h2>
                 </div>
                 <p class="category-desc">Automate build, test, and deployment pipelines.</p>
@@ -1025,7 +1098,7 @@
             <!-- ══════════════════════════════════════════ -->
             <section class="category section-anchor" id="containers">
                 <div class="category-header">
-                    <span class="category-emoji">🐳</span>
+                    <span class="category-emoji">#</span>
                     <h2 class="category-title">Containers &amp; Orchestration</h2>
                 </div>
                 <p class="category-desc">Run apps anywhere, scale easily, and manage complex deployments.</p>
@@ -1145,7 +1218,7 @@
             <!-- ══════════════════════════════════════════ -->
             <section class="category section-anchor" id="cloud">
                 <div class="category-header">
-                    <span class="category-emoji">☁️</span>
+                    <span class="category-emoji">#</span>
                     <h2 class="category-title">Cloud &amp; Infrastructure</h2>
                 </div>
                 <p class="category-desc">Hosting, scaling, networking — the foundation of modern applications.</p>
@@ -1250,7 +1323,7 @@
             <!-- ══════════════════════════════════════════ -->
             <section class="category section-anchor" id="iac">
                 <div class="category-header">
-                    <span class="category-emoji">⚙️</span>
+                    <span class="category-emoji">#</span>
                     <h2 class="category-title">Infrastructure as Code (IaC)</h2>
                 </div>
                 <p class="category-desc">Define, version, and manage infrastructure exactly like application code.</p>
@@ -1354,7 +1427,7 @@
             <!-- ══════════════════════════════════════════ -->
             <section class="category section-anchor" id="security">
                 <div class="category-header">
-                    <span class="category-emoji">🔐</span>
+                    <span class="category-emoji">#</span>
                     <h2 class="category-title">Authentication &amp; Security Tools</h2>
                 </div>
                 <p class="category-desc">Secure apps, manage identities, and protect secrets.</p>
@@ -1467,7 +1540,7 @@
             <!-- ══════════════════════════════════════════ -->
             <section class="category section-anchor" id="api">
                 <div class="category-header">
-                    <span class="category-emoji">🌐</span>
+                    <span class="category-emoji">#</span>
                     <h2 class="category-title">API &amp; Networking Tools</h2>
                 </div>
                 <p class="category-desc">Test APIs and manage web traffic efficiently.</p>
@@ -1596,7 +1669,7 @@
             <!-- ══════════════════════════════════════════ -->
             <section class="category section-anchor" id="messaging">
                 <div class="category-header">
-                    <span class="category-emoji">⚡</span>
+                    <span class="category-emoji">#</span>
                     <h2 class="category-title">Realtime &amp; Messaging Systems</h2>
                 </div>
                 <p class="category-desc">Build async, event-driven, and highly scalable systems.</p>
@@ -1704,7 +1777,7 @@
             <!-- ══════════════════════════════════════════ -->
             <section class="category section-anchor" id="testing">
                 <div class="category-header">
-                    <span class="category-emoji">🧪</span>
+                    <span class="category-emoji">#</span>
                     <h2 class="category-title">Testing &amp; QA Tools</h2>
                 </div>
                 <p class="category-desc">Ensure code quality through automated end-to-end and UI testing.</p>
@@ -1827,7 +1900,7 @@
             <!-- ══════════════════════════════════════════ -->
             <section class="category section-anchor" id="artifacts">
                 <div class="category-header">
-                    <span class="category-emoji">📦</span>
+                    <span class="category-emoji">#</span>
                     <h2 class="category-title">Package / Artifact Management</h2>
                 </div>
                 <p class="category-desc">Store, version, and distribute build artifacts and packages.</p>
@@ -1892,7 +1965,7 @@
             <!-- ══════════════════════════════════════════ -->
             <section class="category section-anchor" id="proxy">
                 <div class="category-header">
-                    <span class="category-emoji">🔄</span>
+                    <span class="category-emoji">#</span>
                     <h2 class="category-title">Reverse Proxy &amp; Load Balancing</h2>
                 </div>
                 <p class="category-desc">Distribute traffic, improve reliability, and hide backend complexity.</p>
@@ -1950,7 +2023,7 @@
             <!-- ══════════════════════════════════════════ -->
             <section class="category section-anchor" id="storage">
                 <div class="category-header">
-                    <span class="category-emoji">📁</span>
+                    <span class="category-emoji">#</span>
                     <h2 class="category-title">Storage &amp; CDN</h2>
                 </div>
                 <p class="category-desc">Store files reliably and deliver content fast globally.</p>
@@ -2035,7 +2108,7 @@
             <!-- ══════════════════════════════════════════ -->
             <section class="category section-anchor" id="automation">
                 <div class="category-header">
-                    <span class="category-emoji">🧠</span>
+                    <span class="category-emoji">#</span>
                     <h2 class="category-title">Workflow / Automation</h2>
                 </div>
                 <p class="category-desc">Automate tasks, integrate tools, and build no-code/low-code workflows.</p>
@@ -2116,7 +2189,7 @@
             <!-- ══════════════════════════════════════════ -->
             <section class="category section-anchor" id="databases">
                 <div class="category-header">
-                    <span class="category-emoji">🗄️</span>
+                    <span class="category-emoji">#</span>
                     <h2 class="category-title">Databases &amp; Data Tools</h2>
                 </div>
                 <p class="category-desc">Store, query, and move data reliably.</p>
@@ -2175,7 +2248,7 @@
             <!-- ══════════════════════════════════════════ -->
             <section class="category section-anchor" id="devenv">
                 <div class="category-header">
-                    <span class="category-emoji">🔧</span>
+                    <span class="category-emoji">#</span>
                     <h2 class="category-title">Developer Environment &amp; Productivity</h2>
                 </div>
                 <p class="category-desc">Improve local development speed, consistency, and code quality.</p>
